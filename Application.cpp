@@ -9,6 +9,9 @@
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleDeath.h"
+#include "ModuleWin.h"
+#include "ModuleTitle.h"
 #include "Application.h"
 
 Application::Application()
@@ -19,7 +22,10 @@ Application::Application()
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
 	player = new ModulePlayer(this);
-	scene_intro = new ModuleSceneIntro(this);
+	title = new ModuleTitle(this);
+	scene_intro = new ModuleSceneIntro(this, false);
+	win = new ModuleWin(this, false);
+	death = new ModuleDeath(this, false);
 	physics = new ModulePhysics(this);
 	fade = new ModuleFadeToBlack(this, true);
 
@@ -36,10 +42,13 @@ Application::Application()
 	AddModule(audio);
 	
 	// Scenes
+	AddModule(title);
 	AddModule(scene_intro);
 	
 	// Player
 	AddModule(player);
+	AddModule(win);
+	AddModule(death);
 	AddModule(fade);
 }
 

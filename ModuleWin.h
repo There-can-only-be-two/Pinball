@@ -11,7 +11,7 @@ class ModuleWin : public Module
 public:
 
 	// Constructors & Destructors
-	ModuleWin(Application* app, bool start_enabled = true);
+	ModuleWin(Application* app, bool start_enabled);
 	~ModuleWin();
 
 	// Main module steps

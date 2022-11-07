@@ -11,7 +11,7 @@ class ModuleDeath : public Module
 public:
 
 	// Constructors & Destructors
-	ModuleDeath(Application* app, bool start_enabled = true);
+	ModuleDeath(Application* app, bool start_enabled);
 	~ModuleDeath();
 
 	// Main module steps

@@ -13,6 +13,9 @@ class ModulePlayer;
 class ModuleSceneIntro;
 class ModulePhysics;
 class ModuleFadeToBlack;
+class ModuleTitle;
+class ModuleWin;
+class ModuleDeath;
 
 class Application
 {
@@ -26,6 +29,10 @@ public:
 	ModuleSceneIntro* scene_intro;
 	ModulePhysics* physics;
 	ModuleFadeToBlack* fade;
+	ModuleTitle* title;
+	ModuleWin* win;
+	ModuleDeath* death;
+
 private:
 
 	p2List<Module*> list_modules;
