@@ -29,7 +29,7 @@ bool ModuleDeath::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load textures
-	img = App->textures->Load("pinball/wheel.png");
+	img = App->textures->Load("pinball/death.png");
 
 
 	return ret;
@@ -44,7 +44,7 @@ bool ModuleDeath::CleanUp()
 
 update_status ModuleDeath::Update()
 {
-	//App->renderer->draw
+	App->renderer->Blit(img, 0, 0);
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{

@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleFadeToBlack.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -64,6 +65,9 @@ update_status ModuleSceneIntro::Update()
 		// Origin point of the raycast is be the mouse current position now (will not change)
 		ray.x = App->input->GetMouseX();
 		ray.y = App->input->GetMouseY();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
 	}
 
 	// If user presses 1, create a new circle object

@@ -29,7 +29,7 @@ bool ModuleTitle::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load textures
-	img = App->textures->Load("pinball/wheel.png");
+	img = App->textures->Load("pinball/rick_head.png");
 
 
 	return ret;
@@ -44,7 +44,7 @@ bool ModuleTitle::CleanUp()
 
 update_status ModuleTitle::Update()
 {
-	//App->renderer->draw
+	App->renderer->Blit(img, 0, 0);
 	// If user presses SPACE, enable RayCast
 	
 
