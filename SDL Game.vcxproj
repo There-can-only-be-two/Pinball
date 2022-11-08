@@ -73,6 +73,7 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleDeath.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
+    <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModulePhysics.h" />
     <ClInclude Include="ModuleTitle.h" />
     <ClInclude Include="ModuleWin.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleDeath.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
+    <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePhysics.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
