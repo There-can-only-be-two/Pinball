@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
-
+#include "ModuleSceneIntro.h"
 ModuleTitle::ModuleTitle(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
@@ -46,11 +46,18 @@ update_status ModuleTitle::Update()
 {
 	//App->renderer->draw
 	// If user presses SPACE, enable RayCast
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-  		App->fade->FadeBlack(this,(Module*)App->scene_intro, 1);
-	}
+	
 
 	// Keep playing
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleTitle::PostUpdate()
+{
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+  		App->fade->FadeBlack(this,(Module*)App->scene_intro, 50);
+		
+	}
 	return UPDATE_CONTINUE;
 }
