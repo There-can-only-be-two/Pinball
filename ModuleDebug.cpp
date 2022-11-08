@@ -17,16 +17,16 @@
 
 #include <string>
 
-Debug::Debug(Application* app, bool start_enabled) : Module(app, start_enabled) { debug = false; }
-Debug::~Debug() {}
+ModuleDebug::ModuleDebug(Application* app, bool start_enabled) : Module(app, start_enabled) { debug = false; }
+ModuleDebug::~ModuleDebug() {}
 
-bool Debug::Start()
+bool ModuleDebug::Start()
 {
 	debug = false;
 	return true;
 }
 
-update_status Debug::Update()
+update_status ModuleDebug::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		debug = !debug;
@@ -85,7 +85,7 @@ update_status Debug::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status Debug::PostUpdate()
+update_status ModuleDebug::PostUpdate()
 {
 	if (debug)
 		DrawDebug();
@@ -93,7 +93,7 @@ update_status Debug::PostUpdate()
 	return UPDATE_CONTINUE;
 }
 
-void Debug::DrawDebug()
+void ModuleDebug::DrawDebug()
 {
 	//int scale = App->win->GetScale();
 

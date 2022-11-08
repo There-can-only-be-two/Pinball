@@ -4,12 +4,12 @@
 
 #define DEBUG_BOX 225
 
-class Debug : public Module
+class ModuleDebug : public Module
 {
 public:
 
-	Debug(Application* app, bool start_enabled = true);
-	virtual ~Debug();
+	ModuleDebug(Application* app, bool start_enabled = true);
+	virtual ~ModuleDebug();
 
 	bool Start();
 	update_status Update();	// Switch debug on/off

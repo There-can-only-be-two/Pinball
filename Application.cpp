@@ -21,13 +21,15 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
-	
+	fonts = new ModuleFonts(this, true);
+	physics = new ModulePhysics(this);
+
 	title = new ModuleTitle(this, true);
 	player = new ModulePlayer(this);
 	scene_intro = new ModuleSceneIntro(this, false);
 	win = new ModuleWin(this, false);
 	death = new ModuleDeath(this, false);
-	physics = new ModulePhysics(this);
+
 	debug = new ModuleDebug(this, false);
 	fade = new ModuleFadeToBlack(this, true);
 	renderer = new ModuleRender(this);
@@ -39,21 +41,24 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
-	AddModule(physics);
-	
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
+	AddModule(fonts);
+	AddModule(physics);
 	
 	// Scenes
 	AddModule(title);
 	AddModule(scene_intro);
-	
-	// Player
-	AddModule(player);
 	AddModule(win);
 	AddModule(death);
+
+	// Player
+	AddModule(player);
+	
+
 	AddModule(fade);
+	AddModule(debug);
 	AddModule(renderer);
 }
 
