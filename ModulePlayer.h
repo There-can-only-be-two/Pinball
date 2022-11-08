@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "SDL/include/SDL.h"
 
 class ModulePlayer : public Module
 {
@@ -13,6 +14,11 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-public:
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+private:
+	SDL_Texture* texture;
+	const char* texturePath;
+
+	PhysBody* pbody;
 };
