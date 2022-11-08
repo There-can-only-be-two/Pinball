@@ -30,5 +30,20 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-
+void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	/*switch ()
+	{
+	case ColliderType::WALL:
+		LOG("Collision WALL");
+		
+		break;
+	case ColliderType::FLIPPERS:
+		LOG("Collision FLIPPERS");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	}*/
+}
 
