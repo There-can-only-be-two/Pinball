@@ -48,7 +48,7 @@ update_status ModuleTitle::Update()
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		//App->fade->FadeBlack(this,(Module*), 90);
+  		App->fade->FadeBlack(this,(Module*)App->scene_intro, 1);
 	}
 
 	// Keep playing

@@ -21,8 +21,9 @@ Application::Application()
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
+	
+	title = new ModuleTitle(this, true);
 	player = new ModulePlayer(this);
-	title = new ModuleTitle(this);
 	scene_intro = new ModuleSceneIntro(this, false);
 	win = new ModuleWin(this, false);
 	death = new ModuleDeath(this, false);
