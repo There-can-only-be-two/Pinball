@@ -4,11 +4,11 @@
 #include "Globals.h"
 
 class Module;
-class ModuleRender;
 class ModuleWindow;
 class ModuleTextures;
 class ModuleInput;
 class ModuleAudio;
+class ModuleFonts;
 class ModulePlayer;
 class ModuleSceneIntro;
 class ModulePhysics;
@@ -16,15 +16,18 @@ class ModuleFadeToBlack;
 class ModuleTitle;
 class ModuleWin;
 class ModuleDeath;
+class ModuleDebug;
+class ModuleRender;
+
 
 class Application
 {
 public:
-	ModuleRender* renderer;
 	ModuleWindow* window;
 	ModuleTextures* textures;
 	ModuleInput* input;
 	ModuleAudio* audio;
+	ModuleFonts* fonts;
 	ModulePlayer* player;
 	ModuleSceneIntro* scene_intro;
 	ModulePhysics* physics;
@@ -32,6 +35,8 @@ public:
 	ModuleTitle* title;
 	ModuleWin* win;
 	ModuleDeath* death;
+	ModuleDebug* debug;
+	ModuleRender* renderer;
 
 private:
 
