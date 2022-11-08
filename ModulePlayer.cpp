@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModulePlayer.h"
 
-ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModulePlayer::ModulePlayer() :Entity(EntityType::FLIPPERS)
 {
 }
 
@@ -25,9 +25,9 @@ bool ModulePlayer::CleanUp()
 }
 
 // Update: draw background
-update_status ModulePlayer::Update()
+bool ModulePlayer::Update()
 {
-	return UPDATE_CONTINUE;
+	return true;
 }
 
 void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
