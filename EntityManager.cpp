@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Flippers.h"
+#include "Ball.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleScene.h"
@@ -87,6 +88,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	case EntityType::FLIPPERS:
 		entity = new Flippers(App);
+		break;
+
+	case EntityType::BALL:
+		entity = new Ball(App);
 		break;
 
 	default: break;
