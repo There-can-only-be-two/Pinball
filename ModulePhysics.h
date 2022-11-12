@@ -65,18 +65,20 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
+	b2World* world = nullptr;
+
 private:
 
 	// Debug mode
 	bool debug;
 
 	// Box2D World
-	b2World* world;
 
 	// Main ground
-	b2Body* ground;
+	b2Body* ground = nullptr;
 
 	// Mouse joint
-	b2MouseJoint* mouse_joint;
-	b2Body* mouse_body;
+	b2MouseJoint* mouse_joint = nullptr;
+	b2Body* mouse_body = nullptr;
+	//b2RevoluteJoint* joint = nullptr;
 };
