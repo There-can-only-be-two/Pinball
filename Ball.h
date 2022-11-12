@@ -17,4 +17,10 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+
+public:
+	PhysBody* ball = nullptr;
+
+private:
+	SDL_Texture* texture = nullptr;
 };

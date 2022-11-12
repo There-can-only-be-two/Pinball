@@ -7,7 +7,7 @@
 #include "Box2D/Box2D/Box2D.h"
 #include "SDL/include/SDL.h"
 
-class Flippers : public Entity	
+class Flippers : public Entity
 {
 public:
 	Flippers();

@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="ModuleDebug.cpp" />
     <ClCompile Include="log.cpp" />
