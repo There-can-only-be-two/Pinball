@@ -19,7 +19,7 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-	PhysBody* ball = nullptr;
+	PhysBody* ballBody = nullptr;
 
 private:
 	SDL_Texture* texture = nullptr;
