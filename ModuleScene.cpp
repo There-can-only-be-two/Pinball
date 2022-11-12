@@ -30,12 +30,20 @@ bool ModuleScene::Start()
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	CreateColliders();
+
 	// Load textures
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
 	img = App->textures->Load("pinball/background.png");
+
+	//Audio
+	//App->audio->PlayMusic("Assets/Audio/", 0);
+	Mix_VolumeMusic(10);
+	//App->audio->LoadFx("Assets/Audio/");
+
 	// Create a big red sensor on the bottom of the screen.
 	// This sensor will not make other objects collide with it, but it can tell if it is "colliding" with something else
 	lower_ground_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -212,9 +220,12 @@ update_status ModuleScene::Update()
 void ModuleScene::CreateColliders()
 {
 	//Map
-	int BG[150] =
+	int BG[8] =
 	{
-		
+		0, 0,
+		200, 0,
+		200, 200,
+		0, 200
 	};
 	int WALL_LEFT[40] =
 	{
@@ -226,14 +237,14 @@ void ModuleScene::CreateColliders()
 	};
 
 
-	bg = App->physics->CreateChain(0, 0, BG, 150);
+	bg = App->physics->CreateChain(0, 0, BG, 8);
 	bg->body->SetType(b2BodyType::b2_staticBody);
 
-	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 40);
+	/*wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 40);
 	wallLeft->body->SetType(b2BodyType::b2_staticBody);
 
 	wallRight = App->physics->CreateChain(300, 0, WALL_RIGHT, 40);
-	wallRight->body->SetType(b2BodyType::b2_staticBody);
+	wallRight->body->SetType(b2BodyType::b2_staticBody);*/
 
 	
 

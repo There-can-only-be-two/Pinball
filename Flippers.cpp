@@ -2,9 +2,9 @@
 #include "Application.h"
 #include "Flippers.h"
 
-Flippers::Flippers() : Entity(EntityType::FLIPPERS)
+Flippers::Flippers() : Entity(EntityType::FLIPPERS, App)
 {
-	name.Create("Flippers");
+	name.Create("Flippers"); 
 }
 
 Flippers::~Flippers()
@@ -14,6 +14,8 @@ Flippers::~Flippers()
 bool Flippers::Start()
 {
 	LOG("Loading player");
+
+
 	return true;
 }
 
@@ -22,12 +24,17 @@ bool Flippers::CleanUp()
 {
 	LOG("Unloading player");
 
+	
+
 	return true;
 }
 
 // Update: draw background
 bool Flippers::Update()
 {
+
+
+
 	return true;
 }
 

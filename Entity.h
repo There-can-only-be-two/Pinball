@@ -5,6 +5,7 @@
 #include "SString.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "Application.h"
 
 class PhysBody;
 
@@ -19,7 +20,7 @@ class Entity
 {
 public:
 
-	Entity(EntityType type) : type(type), active(true) {}
+	Entity(EntityType type, Application* App = nullptr) : type(type), active(true) {}
 
 	virtual bool Awake()
 	{
@@ -74,6 +75,8 @@ public:
 	};
 
 public:
+
+	Application* App = nullptr;
 
 	SString name;
 	EntityType type;
