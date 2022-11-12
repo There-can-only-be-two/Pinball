@@ -8,6 +8,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "EntityManager.h"
 
 
 Flippers::Flippers() : Entity(EntityType::FLIPPERS, App)
@@ -25,7 +26,10 @@ bool Flippers::Start()
 	
 	flipperLeft = App->physics->CreateRectangle(550, 550, 100, 100);
 	flipperLeft->body->SetType(b2_staticBody);
-	App->scene_intro->boxes.add(flipperLeft);
+
+	//App->scene_intro->boxes.add(flipperLeft);
+	//flipperLeft->listener = this;
+	flipperLeft->ctype = ColliderType::FLIPPERS;
 
 	sqr1 = App->physics->CreateRectangle(550, 550, 200, 200);
 	sqr1->body->SetType(b2_staticBody);
@@ -39,6 +43,7 @@ bool Flippers::Start()
 	revoluteJointDef.localAnchorB.Set(100, 100);//center of the circle
 
 	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.referenceAngle = 0;
 	revoluteJointDef.lowerAngle = -45 * DEGTORAD;
 	revoluteJointDef.upperAngle = 45 * DEGTORAD;
 	joint1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&revoluteJointDef);

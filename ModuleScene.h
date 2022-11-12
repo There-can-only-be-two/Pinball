@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "Entity.h"
 
 class PhysBody;
 
@@ -35,9 +36,12 @@ public:
 	PhysBody* wallLeft;
 	PhysBody* wallRight;
 	PhysBody* ball;
-	PhysBody* flipperLeft;
-	PhysBody* flipperRight;
+	/*PhysBody* flipperLeft;
+	PhysBody* flipperRight;*/
 
+	//Entities
+	Entity* flipperL;
+	Entity* flipperR;
 
 	// Lower ground sensor (will kill all objects passig through it)
 	PhysBody* lower_ground_sensor;

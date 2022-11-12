@@ -7,6 +7,8 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
+#include "Flippers.h"
+#include "EntityManager.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -26,6 +28,8 @@ bool ModuleScene::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
+
+	flipperL = (Flippers*)App->entityManager->CreateEntity(EntityType::FLIPPERS);
 
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
