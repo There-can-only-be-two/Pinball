@@ -1,14 +1,14 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRender.h"
-#include "ModuleSceneIntro.h"
+#include "ModuleScene.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
 
-ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
 	// Initialise all the internal class variables, at least to NULL pointer
@@ -17,12 +17,12 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	sensed = false;
 }
 
-ModuleSceneIntro::~ModuleSceneIntro()
+ModuleScene::~ModuleScene()
 {
 	// You should do some memory cleaning here, if required
 }
 
-bool ModuleSceneIntro::Start()
+bool ModuleScene::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
@@ -47,14 +47,14 @@ bool ModuleSceneIntro::Start()
 	return ret;
 }
 
-bool ModuleSceneIntro::CleanUp()
+bool ModuleScene::CleanUp()
 {
 	LOG("Unloading Intro scene");
 
 	return true;
 }
 
-update_status ModuleSceneIntro::Update()
+update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 0, 0);
 	// If user presses SPACE, enable RayCast
@@ -209,7 +209,47 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void ModuleScene::CreateColliders()
+{
+	//Map
+	int BG[150] =
+	{
+		
+	};
+	int WALL_LEFT[40] =
+	{
+		
+	};
+	int WALL_RIGHT[40] =
+	{
+
+	};
+
+
+	bg = App->physics->CreateChain(0, 0, BG, 150);
+	bg->body->SetType(b2BodyType::b2_staticBody);
+
+	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 40);
+	wallLeft->body->SetType(b2BodyType::b2_staticBody);
+
+	wallRight = App->physics->CreateChain(300, 0, WALL_RIGHT, 40);
+	wallRight->body->SetType(b2BodyType::b2_staticBody);
+
+	
+
+	// Bounce
+	int A[6] =
+	{
+
+	};
+	int B[6] =
+	{
+
+	};
+
+}
+
+void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	// Play Audio FX on every collision, regardless of who is colliding
 	App->audio->PlayFx(bonus_fx);

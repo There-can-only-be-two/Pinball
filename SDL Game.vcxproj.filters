@@ -47,7 +47,7 @@
     <ClInclude Include="ModuleAudio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneIntro.h">
+    <ClInclude Include="ModuleScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="p2List.h">
@@ -115,7 +115,7 @@
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneIntro.cpp">
+    <ClCompile Include="ModuleScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModulePhysics.cpp">

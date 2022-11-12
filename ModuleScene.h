@@ -6,18 +6,20 @@
 
 class PhysBody;
 
-class ModuleSceneIntro : public Module
+class ModuleScene : public Module
 {
 public:
 
 	// Constructors & Destructors
-	ModuleSceneIntro(Application* app, bool start_enabled);
-	~ModuleSceneIntro();
+	ModuleScene(Application* app, bool start_enabled);
+	~ModuleScene();
 
 	// Main module steps
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+
+	void CreateColliders();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
@@ -26,6 +28,15 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
+	
+	//Map
+	PhysBody* bg;
+	PhysBody* wallLeft;
+	PhysBody* wallRight;
+	PhysBody* ball;
+	PhysBody* flipperLeft;
+	PhysBody* flipperRight;
+
 
 	// Lower ground sensor (will kill all objects passig through it)
 	PhysBody* lower_ground_sensor;
