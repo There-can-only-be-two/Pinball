@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "Entity.h"
 #include "Globals.h"
 #include "Box2D/Box2D/Box2D.h"
 
@@ -35,7 +36,7 @@ public:
 public:
 	int width, height;
 	b2Body* body;
-	Module* listener;
+	Entity* listener;
 	ColliderType ctype;
 };
 

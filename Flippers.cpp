@@ -11,9 +11,10 @@
 #include "EntityManager.h"
 
 
-Flippers::Flippers() : Entity(EntityType::FLIPPERS, App)
+Flippers::Flippers(Application* app) : Entity(EntityType::FLIPPERS, app)
 {
 	name.Create("Flippers"); 
+	this->app = app;
 }
 
 Flippers::~Flippers()
@@ -24,16 +25,16 @@ bool Flippers::Start()
 {
 	LOG("Loading player");
 	
-	flipperLeft = App->physics->CreateRectangle(550, 550, 100, 100);
+	flipperLeft = app->physics->CreateRectangle(550, 550, 100, 100);
 	flipperLeft->body->SetType(b2_staticBody);
 
 	//App->scene_intro->boxes.add(flipperLeft);
 	//flipperLeft->listener = this;
 	flipperLeft->ctype = ColliderType::FLIPPERS;
 
-	sqr1 = App->physics->CreateRectangle(550, 550, 200, 200);
+	sqr1 = app->physics->CreateRectangle(550, 550, 200, 200);
 	sqr1->body->SetType(b2_staticBody);
-	App->scene_intro->boxes.add(sqr1);
+	app->scene_intro->boxes.add(sqr1);
 
 	b2RevoluteJointDef revoluteJointDef;
 	revoluteJointDef.bodyA = (b2Body*)flipperLeft;
@@ -46,7 +47,7 @@ bool Flippers::Start()
 	revoluteJointDef.referenceAngle = 0;
 	revoluteJointDef.lowerAngle = -45 * DEGTORAD;
 	revoluteJointDef.upperAngle = 45 * DEGTORAD;
-	joint1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&revoluteJointDef);
+	//joint1 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef);
 		
 	return true;
 }

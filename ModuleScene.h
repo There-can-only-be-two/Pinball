@@ -41,7 +41,7 @@ public:
 
 	//Entities
 	Entity* flipperL;
-	Entity* flipperR;
+	//Entity* flipperR;
 
 	// Lower ground sensor (will kill all objects passig through it)
 	PhysBody* lower_ground_sensor;

@@ -10,7 +10,7 @@
 class Flippers : public Entity	
 {
 public:
-	Flippers();
+	Flippers(Application* App);
 	virtual ~Flippers();
 
 	bool Start();
@@ -20,6 +20,7 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
+
 	PhysBody* flipperLeft = nullptr;
 	PhysBody* flipperRight = nullptr;
 	PhysBody* sqr1 = nullptr;
