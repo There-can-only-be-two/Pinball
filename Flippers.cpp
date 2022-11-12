@@ -23,31 +23,38 @@ Flippers::~Flippers()
 // Load assets
 bool Flippers::Start()
 {
-	LOG("Loading player");
-	
-	flipperLeft = app->physics->CreateRectangle(550, 550, 100, 100);
-	flipperLeft->body->SetType(b2_staticBody);
+	LOG("Loading flippers");
+	int fLeft[8] =
+	{
+		171, 697,
+		237, 748,
+		231, 756,
+		160, 721
+	};
+
+	flipperLeft = app->physics->CreateChain(0, 0, fLeft, 8);
+	//flipperLeft->body->SetType(b2_staticBody);
 
 	//App->scene_intro->boxes.add(flipperLeft);
 	//flipperLeft->listener = this;
 	flipperLeft->ctype = ColliderType::FLIPPERS;
 
-	sqr1 = app->physics->CreateRectangle(550, 550, 200, 200);
+	sqr1 = app->physics->CreateRectangle(171, 697, 10, 10);
 	sqr1->body->SetType(b2_staticBody);
 	app->scene_intro->boxes.add(sqr1);
 
 	b2RevoluteJointDef revoluteJointDef;
-	revoluteJointDef.bodyA = (b2Body*)flipperLeft;
-	revoluteJointDef.bodyB = (b2Body*)sqr1;
+	revoluteJointDef.bodyA = sqr1->body;
+	revoluteJointDef.bodyB = flipperLeft->body;
 	revoluteJointDef.collideConnected = false;
-	revoluteJointDef.localAnchorA.Set(50, 50);//the top right corner of the box
-	revoluteJointDef.localAnchorB.Set(100, 100);//center of the circle
+	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(5), PIXEL_TO_METERS(5));	//the top right corner of the box
+	revoluteJointDef.localAnchorB.Set(PIXEL_TO_METERS(5), PIXEL_TO_METERS(0));	//center of the circle
 
 	revoluteJointDef.enableLimit = true;
 	revoluteJointDef.referenceAngle = 0;
-	revoluteJointDef.lowerAngle = -45 * DEGTORAD;
-	revoluteJointDef.upperAngle = 45 * DEGTORAD;
-	//joint1 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef);
+	revoluteJointDef.lowerAngle = -40 * DEGTORAD;
+	revoluteJointDef.upperAngle = 26 * DEGTORAD;
+	joint1 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef);
 		
 	return true;
 }
