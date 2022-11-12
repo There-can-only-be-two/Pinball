@@ -17,15 +17,15 @@ public:
 	bool Update();
 	bool CleanUp();
 
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+
 public:
 
 	PhysBody* flipperLeft = nullptr;
 	PhysBody* flipperRight = nullptr;
 	PhysBody* sqr1 = nullptr;
-	PhysBody* sqr2 = nullptr;
 
-	b2RevoluteJoint* joint1 = nullptr;
-	b2RevoluteJoint* joint2 = nullptr;
+	b2RevoluteJoint* joint1;
 private:
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;	
