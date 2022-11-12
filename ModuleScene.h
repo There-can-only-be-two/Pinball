@@ -35,7 +35,7 @@ public:
 	PhysBody* bg;
 	PhysBody* wallLeft;
 	PhysBody* wallRight;
-	PhysBody* ball;
+	PhysBody* ballBody;
 	/*PhysBody* flipperLeft;
 	PhysBody* flipperRight;*/
 
