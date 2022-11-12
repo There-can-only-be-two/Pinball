@@ -76,6 +76,8 @@ public:
 
 public:
 
+	Application* App = nullptr;
+
 	SString name;
 	EntityType type;
 	bool active = true;

@@ -12,7 +12,7 @@
 
 Flippers::Flippers() : Entity(EntityType::FLIPPERS, App)
 {
-	name.Create("Flippers");
+	name.Create("Flippers"); 
 }
 
 Flippers::~Flippers()
@@ -43,7 +43,6 @@ bool Flippers::Start()
 	revoluteJointDef.upperAngle = 45 * DEGTORAD;
 	joint1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&revoluteJointDef);
 		
-	
 	return true;
 }
 
@@ -51,13 +50,15 @@ bool Flippers::Start()
 bool Flippers::CleanUp()
 {
 	LOG("Unloading player");
-	
+
 	return true;
 }
 
 // Update: draw background
 bool Flippers::Update()
 {
+
+
 	return true;
 }
 

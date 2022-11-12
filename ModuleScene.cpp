@@ -30,12 +30,20 @@ bool ModuleScene::Start()
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	CreateColliders();
+
 	// Load textures
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
 	img = App->textures->Load("pinball/background.png");
+
+	//Audio
+	//App->audio->PlayMusic("Assets/Audio/", 0);
+	Mix_VolumeMusic(10);
+	//App->audio->LoadFx("Assets/Audio/");
+
 	// Create a big red sensor on the bottom of the screen.
 	// This sensor will not make other objects collide with it, but it can tell if it is "colliding" with something else
 	lower_ground_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -212,9 +220,64 @@ update_status ModuleScene::Update()
 void ModuleScene::CreateColliders()
 {
 	//Map
-	int BG[150] =
+	int BG[112] =
 	{
-		
+		491, 240,
+		496, 266,
+		497, 295,
+		497, 936,
+		534, 936,
+		534, 216,
+		523, 186,
+		501, 152,
+		469, 118,
+		424, 83,
+		364, 56,
+		282, 45,
+		204, 54,
+		135, 81,
+		80, 127,
+		51, 164,
+		24, 214,
+		24, 314,
+		31, 361,
+		44, 399,
+		64, 436,
+		79, 456,
+		81, 468,
+		77, 482,
+		60, 500,
+		40, 524,
+		24, 553,
+		24, 753,
+		62, 753,
+		253, 850,
+		449, 751,
+		484, 751,
+		484, 488,
+		469, 464,
+		475, 447,
+		449, 418,
+		432, 428,
+		420, 411,
+		418, 393,
+		430, 362,
+		445, 329,
+		450, 312,
+		452, 292,
+		450, 269,
+		444, 247,
+		431, 220,
+		407, 193,
+		370, 163,
+		361, 149,
+		363, 130,
+		379, 122,
+		402, 129,
+		427, 146,
+		447, 165,
+		472, 197,
+		483, 217
 	};
 	int WALL_LEFT[40] =
 	{
@@ -226,14 +289,14 @@ void ModuleScene::CreateColliders()
 	};
 
 
-	bg = App->physics->CreateChain(0, 0, BG, 150);
+	bg = App->physics->CreateChain(0, 0, BG, 112);
 	bg->body->SetType(b2BodyType::b2_staticBody);
 
-	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 40);
+	/*wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 40);
 	wallLeft->body->SetType(b2BodyType::b2_staticBody);
 
 	wallRight = App->physics->CreateChain(300, 0, WALL_RIGHT, 40);
-	wallRight->body->SetType(b2BodyType::b2_staticBody);
+	wallRight->body->SetType(b2BodyType::b2_staticBody);*/
 
 	
 
