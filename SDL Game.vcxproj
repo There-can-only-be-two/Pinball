@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="Defs.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
