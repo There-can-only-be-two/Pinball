@@ -42,6 +42,13 @@ bool Ball::CleanUp()
 bool Ball::Update()
 {
 
+	//Update player position in pixels
+	position.x = METERS_TO_PIXELS(ball->body->GetTransform().p.x);
+	position.y = METERS_TO_PIXELS(ball->body->GetTransform().p.y);
+
+	SDL_Rect rect = { position.x, position.y, 31, 29 };
+	App->renderer->Blit(texture, 139, 187, &rect);
+
 
 	return true;
 }

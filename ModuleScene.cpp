@@ -58,6 +58,7 @@ bool ModuleScene::Start()
 
 	App->entityManager->Enable();
 
+
 	return ret;
 }
 
