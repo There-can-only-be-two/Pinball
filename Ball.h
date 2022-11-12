@@ -7,11 +7,10 @@
 #include "Box2D/Box2D/Box2D.h"
 #include "SDL/include/SDL.h"
 
-class Flippers : public Entity
-{
+class Ball : public Entity {
 public:
-	Flippers(Application* App);
-	virtual ~Flippers();
+	Ball();
+	virtual ~Ball();
 
 	bool Start();
 	bool Update();
@@ -20,13 +19,8 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
+	PhysBody* ball = nullptr;
 
-	PhysBody* flipperLeft = nullptr;
-	PhysBody* flipperRight = nullptr;
-	PhysBody* sqr1 = nullptr;
-
-	b2RevoluteJoint* joint1;
 private:
 	SDL_Texture* texture = nullptr;
-	const char* texturePath;	
 };

@@ -38,6 +38,7 @@ public:
 	b2Body* body;
 	Entity* listener;
 	ColliderType ctype;
+
 };
 
 // Module --------------------------------------

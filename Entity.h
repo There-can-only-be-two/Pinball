@@ -14,6 +14,7 @@ enum class EntityType
 {
 	FLIPPERS,
 	ITEM,
+	BALL,
 	UNKNOWN
 };
 
