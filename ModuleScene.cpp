@@ -85,7 +85,7 @@ update_status ModuleScene::Update()
 		ray.y = App->input->GetMouseY();
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->fade->FadeBlack(this, (Module*)App->win, 90);
 	}
 
 	// If user presses 1, create a new circle object

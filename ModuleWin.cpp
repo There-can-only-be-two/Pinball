@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleFonts.h"
 
 ModuleWin::ModuleWin(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -30,7 +31,8 @@ bool ModuleWin::Start()
 
 	// Load textures
 	img = App->textures->Load("pinball/win.png");
-
+	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
+	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 
 	return ret;
 }
@@ -44,7 +46,8 @@ bool ModuleWin::CleanUp()
 
 update_status ModuleWin::Update()
 {
-	App->renderer->Blit(img, 0, 0);
+	//App->renderer->Blit(img, 0, 0);
+	App->fonts->BlitText(130, 75, font, "THIS IS A TEST");
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
