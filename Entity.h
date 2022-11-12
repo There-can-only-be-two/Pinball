@@ -81,6 +81,7 @@ public:
 	SString name;
 	EntityType type;
 	bool active = true;
+	Application* App = nullptr;
 	//pugi::xml_node parameters;
 
 	// Possible properties, it depends on how generic we

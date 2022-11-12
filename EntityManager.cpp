@@ -85,9 +85,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	switch (type)
 	{
 
-	/*case EntityType::PLAYER:
-		entity = new ModulePlayer();
-		break;*/
+	case EntityType::FLIPPERS:
+		entity = new Flippers();
+		break;
 
 	default: break;
 	}
