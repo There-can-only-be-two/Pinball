@@ -19,7 +19,7 @@ public:
 
 	// Called at the middle of the application loop
 	// Updates the fade logic
-	update_status Update(float dt);
+	update_status Update();
 
 	// Called at the end of the application loop
 	// Performs the render call of a black rectangle with transparency

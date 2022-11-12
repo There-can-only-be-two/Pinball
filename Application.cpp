@@ -1,34 +1,42 @@
-
+#include "Application.h"
 #include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 #include "ModulePlayer.h"
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
 #include "EntityManager.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleDebug.h"
 #include "ModuleDeath.h"
 #include "ModuleWin.h"
 #include "ModuleTitle.h"
-#include "Application.h"
 
 Application::Application()
 {
-	renderer = new ModuleRender(this);
 	window = new ModuleWindow(this);
 	textures = new ModuleTextures(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
-	title = new ModuleTitle(this);
+	fonts = new ModuleFonts(this, true);
+	physics = new ModulePhysics(this);
+
+	title = new ModuleTitle(this, true);
+	player = new ModulePlayer(this);
+
 	scene_intro = new ModuleSceneIntro(this, false);
 	entityManager = new EntityManager(this, false);
 	win = new ModuleWin(this, false);
 	death = new ModuleDeath(this, false);
-	physics = new ModulePhysics(this);
+
+	debug = new ModuleDebug(this, false);
 	fade = new ModuleFadeToBlack(this, true);
+	renderer = new ModuleRender(this);
+
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -36,22 +44,27 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
-	AddModule(physics);
-	AddModule(renderer);
 	AddModule(textures);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(entityManager);
+	
 
-
+	AddModule(fonts);
+	AddModule(physics);
+	
 	// Scenes
 	AddModule(title);
 	AddModule(scene_intro);
-	
-	// Player
 	AddModule(win);
 	AddModule(death);
+AddModule(entityManager);
+	// Player
+	AddModule(player);
+	
+
 	AddModule(fade);
+	AddModule(debug);
+	AddModule(renderer);
 }
 
 Application::~Application()

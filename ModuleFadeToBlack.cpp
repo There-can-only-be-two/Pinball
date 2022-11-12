@@ -27,7 +27,7 @@ bool ModuleFadeToBlack::Start()
 	return true;
 }
 
-update_status ModuleFadeToBlack::Update(float dt)
+update_status ModuleFadeToBlack::Update()
 {
 	// Exit this function if we are not performing a fade
 	if (currentStep == Fade_Step::NONE) return UPDATE_CONTINUE;
@@ -65,7 +65,7 @@ update_status ModuleFadeToBlack::PostUpdate()
 	SDL_SetRenderDrawColor(App->renderer->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(App->renderer->renderer, &screenRect);
 
-	return UPDATE_CONTINUE;;
+	return UPDATE_CONTINUE;
 }
 
 bool ModuleFadeToBlack::FadeBlack(Module* moduleToDisable, Module* moduleToEnable, float frames)

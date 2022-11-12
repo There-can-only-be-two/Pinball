@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleFadeToBlack.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -33,8 +34,8 @@ bool ModuleSceneIntro::Start()
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-
+	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
+	img = App->textures->Load("pinball/background.png");
 	// Create a big red sensor on the bottom of the screen.
 	// This sensor will not make other objects collide with it, but it can tell if it is "colliding" with something else
 	lower_ground_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -55,6 +56,7 @@ bool ModuleSceneIntro::CleanUp()
 
 update_status ModuleSceneIntro::Update()
 {
+	App->renderer->Blit(img, 0, 0);
 	// If user presses SPACE, enable RayCast
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -64,6 +66,9 @@ update_status ModuleSceneIntro::Update()
 		// Origin point of the raycast is be the mouse current position now (will not change)
 		ray.x = App->input->GetMouseX();
 		ray.y = App->input->GetMouseY();
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
 	}
 
 	// If user presses 1, create a new circle object

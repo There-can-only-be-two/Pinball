@@ -26,7 +26,7 @@ public:
 
 	void Enable()
 	{
-		if(enabled == false)
+ 		if(enabled == false)
 		{
 			enabled = true;
 			Start();

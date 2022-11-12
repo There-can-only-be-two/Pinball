@@ -29,7 +29,7 @@ bool ModuleWin::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load textures
-	img = App->textures->Load("pinball/wheel.png");
+	img = App->textures->Load("pinball/win.png");
 
 
 	return ret;
@@ -44,10 +44,11 @@ bool ModuleWin::CleanUp()
 
 update_status ModuleWin::Update()
 {
+	App->renderer->Blit(img, 0, 0);
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		//App->fade->FadeBlack(this,(Module*), 90);
+		App->fade->FadeBlack(this, (Module*)App->title, 90);
 	}
 
 	// Keep playing

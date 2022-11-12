@@ -11,7 +11,7 @@ class ModuleSceneIntro : public Module
 public:
 
 	// Constructors & Destructors
-	ModuleSceneIntro(Application* app, bool start_enabled = true);
+	ModuleSceneIntro(Application* app, bool start_enabled);
 	~ModuleSceneIntro();
 
 	// Main module steps
@@ -35,6 +35,7 @@ public:
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+	SDL_Texture* img;
 
 	// FX
 	uint bonus_fx;

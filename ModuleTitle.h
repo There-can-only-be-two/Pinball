@@ -17,6 +17,7 @@ public:
 	// Main module steps
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 
 public:
@@ -27,8 +28,6 @@ public:
 	// Textures
 	SDL_Texture* img;
 
-	// FX
-	uint highscore, currentscore;
 
 	// Raycast
 	p2Point<int> ray;
