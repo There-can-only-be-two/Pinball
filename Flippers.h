@@ -7,7 +7,7 @@
 #include "Box2D/Box2D/Box2D.h"
 #include "SDL/include/SDL.h"
 
-class Flippers : public Entity	
+class Flippers : public Entity
 {
 public:
 	Flippers(Application* App);
@@ -28,5 +28,5 @@ public:
 	b2RevoluteJoint* joint2 = nullptr;
 private:
 	SDL_Texture* texture = nullptr;
-	const char* texturePath;	
+	const char* texturePath;
 };
