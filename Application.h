@@ -10,7 +10,7 @@ class ModuleInput;
 class ModuleAudio;
 class ModuleFonts;
 class ModulePlayer;
-class ModuleSceneIntro;
+class ModuleScene;
 class EntityManager;
 class ModulePhysics;
 class ModuleFadeToBlack;
@@ -31,7 +31,7 @@ public:
 	ModuleFonts* fonts;
 	ModulePlayer* player;
 
-	ModuleSceneIntro* scene_intro;
+	ModuleScene* scene_intro;
 	EntityManager* entityManager;
 	ModulePhysics* physics;
 	ModuleFadeToBlack* fade;

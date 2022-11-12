@@ -87,7 +87,7 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="Flippers.h" />
     <ClInclude Include="ModuleRender.h" />
-    <ClInclude Include="ModuleSceneIntro.h" />
+    <ClInclude Include="ModuleScene.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2DynArray.h" />
@@ -108,7 +108,7 @@
     <ClCompile Include="ModulePhysics.cpp" />
     <ClCompile Include="Flippers.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
-    <ClCompile Include="ModuleSceneIntro.cpp" />
+    <ClCompile Include="ModuleScene.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleTitle.cpp" />
     <ClCompile Include="ModuleWin.cpp" />

@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
 #include "ModulePhysics.h"
-#include "ModuleSceneIntro.h"
+#include "ModuleScene.h"
 #include "EntityManager.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleDebug.h"
@@ -26,7 +26,7 @@ Application::Application()
 
 	title = new ModuleTitle(this, true);
 
-	scene_intro = new ModuleSceneIntro(this, false);
+	scene_intro = new ModuleScene(this, false);
 	entityManager = new EntityManager(this, false);
 	win = new ModuleWin(this, false);
 	death = new ModuleDeath(this, false);
