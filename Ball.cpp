@@ -24,6 +24,8 @@ bool Ball::Start()
 	LOG("Loading player");
 
 	ballBody = app->physics->CreateCircle(100, 100, 20);
+	ballBody->body->SetType(b2_dynamicBody);
+	ballBody->ctype = ColliderType::BALL;
 	ballBody->listener = this;
 	texture = app->textures->Load("pinball/assets.png");
 

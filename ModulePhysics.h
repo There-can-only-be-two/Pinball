@@ -15,7 +15,7 @@
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
 enum class ColliderType {
-	PLAYER,
+	BALL,
 	FLIPPERS,
 	WALL,
 	UNKNOWN
