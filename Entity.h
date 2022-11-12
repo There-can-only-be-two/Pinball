@@ -1,6 +1,7 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include "Module.h"
 #include "p2Point.h"
 #include "SString.h"
 #include "ModuleInput.h"
@@ -77,8 +78,7 @@ public:
 
 public:
 
-	Application* App = nullptr;
-
+	Application* app;
 	SString name;
 	EntityType type;
 	bool active = true;

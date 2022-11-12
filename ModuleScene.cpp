@@ -7,6 +7,8 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
+#include "Flippers.h"
+#include "EntityManager.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -26,6 +28,8 @@ bool ModuleScene::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
+
+	flipperL = (Flippers*)App->entityManager->CreateEntity(EntityType::FLIPPERS);
 
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
@@ -50,7 +54,9 @@ bool ModuleScene::Start()
 
 	// Add this module (ModuleSceneIntro) as a listener for collisions with the sensor.
 	// In ModulePhysics::PreUpdate(), we iterate over all sensors and (if colliding) we call the function ModuleSceneIntro::OnCollision()
-	lower_ground_sensor->listener = this;
+	//lower_ground_sensor->listener = this;
+
+	App->entityManager->Enable();
 
 	return ret;
 }
@@ -86,7 +92,7 @@ update_status ModuleScene::Update()
 
 		// Add this module (ModuleSceneIntro) as a "listener" interested in collisions with circles.
 		// If Box2D detects a collision with this last generated circle, it will automatically callback the function ModulePhysics::BeginContact()
-		circles.getLast()->data->listener = this;
+		//circles.getLast()->data->listener = this;
 	}
 
 	// If user presses 2, create a new box object

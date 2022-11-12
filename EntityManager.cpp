@@ -86,7 +86,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	{
 
 	case EntityType::FLIPPERS:
-		entity = new Flippers();
+		entity = new Flippers(App);
 		break;
 
 	default: break;
