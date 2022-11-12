@@ -6,7 +6,6 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
-#include "ModulePlayer.h"
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
 #include "EntityManager.h"
@@ -26,7 +25,6 @@ Application::Application()
 	physics = new ModulePhysics(this);
 
 	title = new ModuleTitle(this, true);
-	player = new ModulePlayer(this);
 
 	scene_intro = new ModuleSceneIntro(this, false);
 	entityManager = new EntityManager(this, false);
@@ -57,9 +55,7 @@ Application::Application()
 	AddModule(scene_intro);
 	AddModule(win);
 	AddModule(death);
-AddModule(entityManager);
-	// Player
-	AddModule(player);
+	AddModule(entityManager);
 	
 
 	AddModule(fade);

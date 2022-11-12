@@ -5,11 +5,11 @@
 #include "Entity.h"
 #include "SDL/include/SDL.h"
 
-class ModulePlayer : public Entity	
+class Flippers : public Entity	
 {
 public:
-	ModulePlayer();
-	virtual ~ModulePlayer();
+	Flippers();
+	virtual ~Flippers();
 
 	bool Start();
 	bool Update();

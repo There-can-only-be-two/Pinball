@@ -1,23 +1,24 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModulePlayer.h"
+#include "Flippers.h"
 
-ModulePlayer::ModulePlayer() :Entity(EntityType::FLIPPERS)
+Flippers::Flippers() : Entity(EntityType::FLIPPERS)
 {
+	name.Create("Flippers");
 }
 
-ModulePlayer::~ModulePlayer()
+Flippers::~Flippers()
 {}
 
 // Load assets
-bool ModulePlayer::Start()
+bool Flippers::Start()
 {
 	LOG("Loading player");
 	return true;
 }
 
 // Unload assets
-bool ModulePlayer::CleanUp()
+bool Flippers::CleanUp()
 {
 	LOG("Unloading player");
 
@@ -25,12 +26,12 @@ bool ModulePlayer::CleanUp()
 }
 
 // Update: draw background
-bool ModulePlayer::Update()
+bool Flippers::Update()
 {
 	return true;
 }
 
-void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void Flippers::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	/*switch ()
 	{

@@ -41,7 +41,7 @@
     <ClInclude Include="p2DynArray.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
+    <ClInclude Include="Flippers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModuleAudio.h">
@@ -81,7 +81,7 @@
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="ModuleDebug.h">
-     <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFonts.h">
       <Filter>Header Files</Filter>
@@ -109,7 +109,7 @@
     <ClCompile Include="ModuleInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
+    <ClCompile Include="Flippers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
@@ -134,7 +134,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EntityManager.cpp">
-          <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
       <Filter>Source Files</Filter>
