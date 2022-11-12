@@ -47,7 +47,7 @@ bool ModuleWin::CleanUp()
 update_status ModuleWin::Update()
 {
 	//App->renderer->Blit(img, 0, 0);
-	App->fonts->BlitText(130, 75, font, "THIS IS A TEST");
+	App->fonts->BlitText(130, 75, font, "THIS IS A TEST: GUANYAR");
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
