@@ -2,16 +2,17 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "Entity.h"
 #include "SDL/include/SDL.h"
 
-class ModulePlayer : public Module
+class ModulePlayer : public Entity	
 {
 public:
-	ModulePlayer(Application* app, bool start_enabled = true);
+	ModulePlayer();
 	virtual ~ModulePlayer();
 
 	bool Start();
-	update_status Update();
+	bool Update();
 	bool CleanUp();
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);

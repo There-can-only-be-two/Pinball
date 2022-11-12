@@ -68,6 +68,18 @@
     <ClInclude Include="ModuleWin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SString.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Defs.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
     <ClInclude Include="ModuleDebug.h">
      <Filter>Header Files</Filter>
     </ClInclude>
@@ -120,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="ModuleWin.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+          <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
       <Filter>Source Files</Filter>

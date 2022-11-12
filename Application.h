@@ -11,6 +11,7 @@ class ModuleAudio;
 class ModuleFonts;
 class ModulePlayer;
 class ModuleSceneIntro;
+class EntityManager;
 class ModulePhysics;
 class ModuleFadeToBlack;
 class ModuleTitle;
@@ -29,7 +30,9 @@ public:
 	ModuleAudio* audio;
 	ModuleFonts* fonts;
 	ModulePlayer* player;
+
 	ModuleSceneIntro* scene_intro;
+	EntityManager* entityManager;
 	ModulePhysics* physics;
 	ModuleFadeToBlack* fade;
 	ModuleTitle* title;

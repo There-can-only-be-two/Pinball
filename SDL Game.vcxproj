@@ -70,6 +70,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Defs.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="ModuleDebug.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleDeath.h" />
@@ -89,9 +92,11 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="p2Point.h" />
+    <ClInclude Include="SString.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="ModuleDebug.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
