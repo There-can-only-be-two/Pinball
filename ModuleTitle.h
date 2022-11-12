@@ -28,8 +28,6 @@ public:
 	// Textures
 	SDL_Texture* img;
 
-	// FX
-	uint highscore, currentscore;
 
 	// Raycast
 	p2Point<int> ray;
