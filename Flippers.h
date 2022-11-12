@@ -28,5 +28,5 @@ public:
 	b2RevoluteJoint* joint1;
 private:
 	SDL_Texture* texture = nullptr;
-	const char* texturePath;	
+	const char* texturePath;
 };

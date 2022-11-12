@@ -13,7 +13,7 @@
 
 Flippers::Flippers(Application* app) : Entity(EntityType::FLIPPERS, app)
 {
-	name.Create("Flippers"); 
+	name.Create("Flippers");
 	this->app = app;
 }
 
