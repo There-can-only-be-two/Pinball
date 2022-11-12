@@ -8,6 +8,7 @@
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
 #include "Flippers.h"
+#include "Ball.h"
 #include "EntityManager.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -30,6 +31,7 @@ bool ModuleScene::Start()
 	bool ret = true;
 
 	flipperL = (Flippers*)App->entityManager->CreateEntity(EntityType::FLIPPERS);
+	ball = (Ball*)App->entityManager->CreateEntity(EntityType::BALL);
 
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;

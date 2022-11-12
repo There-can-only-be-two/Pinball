@@ -9,7 +9,7 @@
 
 class Ball : public Entity {
 public:
-	Ball();
+	Ball(Application* App);
 	virtual ~Ball();
 
 	bool Start();

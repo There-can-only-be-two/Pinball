@@ -9,9 +9,10 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 
-Ball::Ball() : Entity(EntityType::BALL, App)
+Ball::Ball(Application* app) : Entity(EntityType::BALL, app)
 {
 	name.Create("Ball");
+	this->app = app;
 }
 
 Ball::~Ball()
@@ -22,9 +23,9 @@ bool Ball::Start()
 {
 	LOG("Loading player");
 
-	ball = App->physics->CreateCircle(100, 100, 20);
+	ball = app->physics->CreateCircle(100, 100, 20);
 	ball->listener = this;
-	texture = App->textures->Load("pinball/assets.png");
+	texture = app->textures->Load("pinball/assets.png");
 
 	return true;
 }
@@ -47,7 +48,7 @@ bool Ball::Update()
 	position.y = METERS_TO_PIXELS(ball->body->GetTransform().p.y);
 
 	SDL_Rect rect = { position.x, position.y, 31, 29 };
-	App->renderer->Blit(texture, 139, 187, &rect);
+	app->renderer->Blit(texture, 139, 187, &rect);
 
 
 	return true;
