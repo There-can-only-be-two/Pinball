@@ -593,6 +593,10 @@ void ModuleScene::DeleteMap() {
 
 	delete ballBody;
 	ballBody = nullptr;
-	/*delete ball;
-	ball = nullptr;*/
+	
+	delete springSensor;
+	springSensor = nullptr;
+
+	delete scorex10sensor;
+	scorex10sensor = nullptr;
 }

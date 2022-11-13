@@ -40,7 +40,7 @@ bool ModuleDeath::Start()
 	// Ranking text
 	ofstream myfile;
 	myfile.open("RANKING.txt");
-	myfile << "Highscore: " << App->scene_intro->highScore << "\n";
+	myfile << "YOU: " << App->scene_intro->highScore << "\n";
 	myfile.close();
 	return ret;
 }
@@ -55,7 +55,7 @@ bool ModuleDeath::CleanUp()
 update_status ModuleDeath::Update()
 {
 	App->renderer->Blit(img, 0, 0);
-	App->fonts->BlitText(430, 75, font, "RANKING");
+	App->fonts->BlitText(420, 75, font, "RANKING");
 
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)

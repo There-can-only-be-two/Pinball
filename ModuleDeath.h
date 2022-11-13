@@ -27,10 +27,11 @@ public:
 	// Textures
 	SDL_Texture* img;
 	int font;
-
+	
 	// FX
 	uint highScore, currentScore, previousScore;
-
+	// to store each highscore
+	uint* ranks;
 	// Raycast
 	p2Point<int> ray;
 	bool ray_on;
