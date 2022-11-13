@@ -77,6 +77,11 @@ bool Flippers::Start()
 bool Flippers::CleanUp()
 {
 	LOG("Unloading player");
+	delete flipperLeft;
+	flipperLeft = nullptr;
+
+	delete flipperRight;
+	flipperRight = nullptr;
 
 	return true;
 }

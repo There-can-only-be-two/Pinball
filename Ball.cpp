@@ -39,7 +39,8 @@ bool Ball::Start()
 bool Ball::CleanUp()
 {
 	LOG("Unloading player");
-
+	delete ballBody;
+	ballBody = nullptr;
 	return true;
 }
 

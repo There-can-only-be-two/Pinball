@@ -560,7 +560,8 @@ void ModuleScene::DeleteMap() {
 	delete yellow;
 	yellow = nullptr;
 
-	
-
-	
+	delete ballBody;
+	ballBody = nullptr;
+	/*delete ball;
+	ball = nullptr;*/
 }

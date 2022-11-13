@@ -29,9 +29,9 @@ bool ModuleDeath::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load textures
-	img = App->textures->Load("pinball/death.png");
+	img = App->textures->Load("pinball/title1.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
-	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
+	font = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
 
 	return ret;
 }
@@ -45,7 +45,7 @@ bool ModuleDeath::CleanUp()
 
 update_status ModuleDeath::Update()
 {
-	//App->renderer->Blit(img, 0, 0);
+	App->renderer->Blit(img, 0, 0);
 	App->fonts->BlitText(130, 75, font, "THIS IS A TEST: PERDRE");
 
 	// If user presses SPACE, enable RayCast

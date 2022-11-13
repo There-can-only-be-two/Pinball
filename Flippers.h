@@ -22,9 +22,6 @@ public:
 	PhysBody* flipperLeft = nullptr;
 	PhysBody* flipperRight = nullptr;
 
-	PhysBody* sqr1 = nullptr;
-	PhysBody* sqr2 = nullptr;
-
 	b2RevoluteJoint* joint1 = nullptr;
 	b2RevoluteJoint* joint2 = nullptr;
 
