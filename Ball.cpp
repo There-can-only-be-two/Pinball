@@ -55,9 +55,9 @@ bool Ball::Update()
 {
 
 	if (bounce) {
-		int vectorx = position.x - bounceCenter.x;
-		int vectory = -(position.y - bounceCenter.y);
-		ballBody->body->ApplyForce(b2Vec2(vectorx, vectory), ballBody->body->GetWorldCenter(), true);
+		b2Vec2 bounceDirection = { ballBody->body->GetWorldCenter() - bounceCenter };
+		bounceDirection.Normalize();
+		ballBody->body->ApplyForce(50*bounceDirection, ballBody->body->GetWorldCenter(), true);
 		bounce = false;
 	}
 
@@ -74,7 +74,7 @@ bool Ball::Update()
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP && app->scene_intro->springSensed && springForce > 30)
 	{
-		ballBody->body->ApplyForce(b2Vec2(0, -springForce), ballBody->body->GetWorldCenter(), true);
+		ballBody->body->ApplyForceToCenter(b2Vec2(0, -springForce), true);
 		springForce = 0;
 		app->scene_intro->springSensed = false;
 		LOG("RELEASE BALL");
@@ -97,19 +97,19 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
 		app->scene_intro->currentScore += 25;
-		bounceCenter = { 227, 235 };
+		bounceCenter = app->scene_intro->blue->body->GetWorldCenter();
 		bounce = true;
 		break;
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
 		app->scene_intro->currentScore += 50;
-		bounceCenter = { 339, 235 };
+		bounceCenter = app->scene_intro->yellow->body->GetWorldCenter();
 		bounce = true;
 		break;
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
 		app->scene_intro->currentScore += 100;
-		bounceCenter = { 283, 331 };
+		bounceCenter = app->scene_intro->red->body->GetWorldCenter();
 		bounce = true;
 		break;
 	case ColliderType::DIAMOND:
