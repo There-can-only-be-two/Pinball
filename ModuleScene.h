@@ -34,7 +34,8 @@ public:
 	//Map
 	PhysBody* bg;
 	PhysBody* wallLeft;
-	PhysBody* wallRight;
+	PhysBody* platformLeft;
+	PhysBody* platformRight;
 	PhysBody* ballBody;
 	/*PhysBody* flipperLeft;
 	PhysBody* flipperRight;*/
