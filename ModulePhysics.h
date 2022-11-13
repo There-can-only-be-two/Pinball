@@ -78,10 +78,11 @@ public:
 
 	b2World* world = nullptr;
 
-private:
-
+public:
 	// Debug mode
 	bool debug;
+
+private:
 
 	// Box2D World
 

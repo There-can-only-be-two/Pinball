@@ -19,12 +19,8 @@ public:
 
 public:
 	//flags
-	bool debug;
+	bool drawDebug;
 	bool variables = false;
-	bool camLimits = false;
-	bool godMode = false;
-	bool freeCam = false;
-	bool teleport = false;
 
 private:
 
