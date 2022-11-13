@@ -97,6 +97,12 @@
     <ClInclude Include="Module.h">
       <Filter>Source\App</Filter>
     </ClInclude>
+    <ClInclude Include="CircleBounce.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyBounce.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityManager.cpp">
@@ -155,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="ModuleWin.cpp">
       <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleBounce.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyBounce.cpp">
+      <Filter>Source\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

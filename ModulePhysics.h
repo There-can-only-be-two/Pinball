@@ -18,6 +18,12 @@ enum class ColliderType {
 	BALL,
 	FLIPPERS,
 	WALL,
+	BLUE_25,
+	YELLOW_50,
+	RED_100,
+	DIAMOND,
+	TRIANGLE,
+	FRANKFURT,
 	UNKNOWN
 	// ..
 };

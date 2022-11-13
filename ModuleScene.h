@@ -37,6 +37,16 @@ public:
 	PhysBody* platformLeft;
 	PhysBody* platformRight;
 	PhysBody* ballBody;
+	
+	// Bounce
+	PhysBody* diamond;
+	PhysBody* triangle_left;
+	PhysBody* triangle_right;
+	PhysBody* frankfurt_left;
+	PhysBody* frankfurt_right;
+	PhysBody* blue;
+	PhysBody* yellow;
+	PhysBody* red;
 	/*PhysBody* flipperLeft;
 	PhysBody* flipperRight;*/
 

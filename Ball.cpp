@@ -8,6 +8,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleScene.h"
 
 Ball::Ball(Application* app) : Entity(EntityType::BALL, app)
 {
@@ -59,17 +60,41 @@ bool Ball::Update()
 
 void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	/*switch ()
+	switch (bodyB->ctype)
 	{
-	case ColliderType::WALL:
-		LOG("Collision WALL");
-
-		break;
 	case ColliderType::FLIPPERS:
 		LOG("Collision FLIPPERS");
+		
+		break;
+	case ColliderType::WALL:
+		LOG("Collision WALL");
+		break;
+	case ColliderType::BLUE_25:
+		LOG("Collision BLUE_25");
+		app->scene_intro->currentScore += 25;
+		break;
+	case ColliderType::YELLOW_50:
+		LOG("Collision YELLOW_50");
+		app->scene_intro->currentScore += 50;
+		break;
+	case ColliderType::RED_100:
+		LOG("Collision RED_100");
+		app->scene_intro->currentScore += 100;
+		break;
+	case ColliderType::DIAMOND:
+		LOG("Collision DIAMOND");
+
+		break;
+	case ColliderType::TRIANGLE:
+		LOG("Collision TRIANGLE");
+
+		break;
+	case ColliderType::FRANKFURT:
+		LOG("Collision FRANKFURT");
+
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
-	}*/
+	}
 }
