@@ -60,7 +60,7 @@ bool ModuleScene::Start()
 
 	// Create a big red sensor on the bottom of the screen.
 	// This sensor will not make other objects collide with it, but it can tell if it is "colliding" with something else
-	lower_ground_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+	//lower_ground_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	// Add this module (ModuleSceneIntro) as a listener for collisions with the sensor.
 	// In ModulePhysics::PreUpdate(), we iterate over all sensors and (if colliding) we call the function ModuleSceneIntro::OnCollision()
@@ -258,8 +258,8 @@ void ModuleScene::CreateColliders()
 		491, 240,
 		496, 266,
 		497, 295,
-		497, 936,
-		534, 936,
+		497, 806,
+		534, 806,
 		534, 216,
 		523, 186,
 		501, 152,

@@ -1,152 +1,160 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Source">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Containers">
+    <Filter Include="Source\Containers">
       <UniqueIdentifier>{97c4111e-b102-4ba8-9053-6f07ccbbe3d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core Modules">
+      <UniqueIdentifier>{5cb17544-0243-4826-a564-a61022802c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\App">
+      <UniqueIdentifier>{b2937ce5-046c-4f15-b333-0effaf9bb881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Entities">
+      <UniqueIdentifier>{d73f9c09-ef8d-49aa-b064-41696491e535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scenes">
+      <UniqueIdentifier>{b13e59cb-ddca-47a3-8cfa-d3b8cc866919}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Module.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="p2Point.h">
-      <Filter>Header Files\Containers</Filter>
+      <Filter>Source\Containers</Filter>
     </ClInclude>
     <ClInclude Include="p2DynArray.h">
-      <Filter>Header Files\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Flippers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source\Containers</Filter>
     </ClInclude>
     <ClInclude Include="p2List.h">
-      <Filter>Header Files\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePhysics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTitle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleDeath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source\Containers</Filter>
     </ClInclude>
     <ClInclude Include="SString.h">
-      <Filter>Header Files\Containers</Filter>
+      <Filter>Source\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Defs.h">
-      <Filter>Header Files\Containers</Filter>
+      <Filter>Source\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Source\Core Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleDebug.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Source\Core Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFonts.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePhysics.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Source\App</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Flippers.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleDeath.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTitle.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWin.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Source\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Source\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRender.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTextures.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Flippers.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source\Core Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePhysics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTitle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleDeath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source\Core Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDebug.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Source\Core Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFonts.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePhysics.cpp">
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Source\Core Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source\App</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>Source\App</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Flippers.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleDeath.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTitle.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWin.cpp">
+      <Filter>Source\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
