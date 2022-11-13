@@ -57,7 +57,7 @@ bool Ball::Update()
 	if (bounce) {
 		b2Vec2 bounceDirection = { ballBody->body->GetWorldCenter() - bounceCenter };
 		bounceDirection.Normalize();
-		ballBody->body->ApplyForce(50*bounceDirection, ballBody->body->GetWorldCenter(), true);
+		ballBody->body->ApplyForce(100*bounceDirection, ballBody->body->GetWorldCenter(), true);
 		bounce = false;
 	}
 
