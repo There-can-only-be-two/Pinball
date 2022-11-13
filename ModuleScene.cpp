@@ -19,7 +19,7 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	circle = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
-	highScore = 10000;
+	highScore = 1000;
 	currentScore = 0;
 	previousScore = 0;
 }
@@ -54,7 +54,7 @@ bool ModuleScene::Start()
 	img = App->textures->Load("pinball/pinball_composition.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
-
+	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
 	//Audio
 	//App->audio->PlayMusic("Assets/Audio/", 0);
 	Mix_VolumeMusic(10);
@@ -68,7 +68,7 @@ bool ModuleScene::Start()
 	// In ModulePhysics::PreUpdate(), we iterate over all sensors and (if colliding) we call the function ModuleSceneIntro::OnCollision()
 	//lower_ground_sensor->listener = this;
 
-	//previousScore = currentScore;
+	previousScore = currentScore;
 	currentScore = 0;
 
 	App->entityManager->Enable();
@@ -99,11 +99,23 @@ update_status ModuleScene::Update()
 
 	App->renderer->Blit(img, 0, 0);
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
-	App->fonts->BlitText(700, 130, font, high);
+
 	App->fonts->BlitText(600, 175, font, "CURRENT SCORE:");
-	App->fonts->BlitText(700, 230, font, current);
+
 	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
 	App->fonts->BlitText(700, 330, font, previous);
+
+	if (highScore > currentScore) {
+		App->fonts->BlitText(700, 130, font, high);
+		
+		App->fonts->BlitText(700, 230, font, current);
+		
+	}
+	else {
+		highScore = currentScore;
+		App->fonts->BlitText(700, 130, fontHype, high);
+		App->fonts->BlitText(700, 230, fontHype, current);
+	}
 
 	// If user presses SPACE, enable RayCast
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)

@@ -71,7 +71,7 @@ public:
 
 
 	//scores
-	int font;
+	int font, fontHype;
 	char high[10] = { "\0" };
 	uint highScore = 0;
 	char current[10] = { "\0" };
