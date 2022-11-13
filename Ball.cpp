@@ -56,11 +56,11 @@ bool Ball::Update()
 	SDL_Rect rect = { 229, 106, 31, 31 };
 	app->renderer->Blit(texture, position.x, position.y, &rect);
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && app->scene_intro->springSensed)
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && app->scene_intro->springSensed && springForce < 400 )
 	{
 		springForce += 3.0;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && app->scene_intro->springSensed && springForce > 30)
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_UP && app->scene_intro->springSensed && springForce > 30)
 	{
 		ballBody->body->ApplyForce(b2Vec2(0, -springForce), ballBody->body->GetWorldCenter(), true);
 		springForce = 0;
@@ -106,6 +106,10 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::SPRING_SENSOR:
 		LOG("Collision SPRING_SENSOR");
 		app->scene_intro->springSensed = true;
+		break;
+	case ColliderType::SCORE_X10:
+		LOG("Collision SCOREX10");
+		app->scene_intro->scorex10sensed = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
