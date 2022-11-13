@@ -59,9 +59,10 @@ public:
 	//Sensors
 	PhysBody* lower_ground_sensor; // Lower ground sensor (will kill all objects passig through it)
 	bool sensed;
-
 	PhysBody* springSensor;
 	bool springSensed;
+	PhysBody* scorex10sensor;
+	bool scorex10sensed;
 
 	// Textures
 	SDL_Texture* circle;

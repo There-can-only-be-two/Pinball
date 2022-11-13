@@ -309,8 +309,8 @@ void ModuleScene::CreateColliders()
 		484, 751,
 		484, 488,
 		469, 464,
-		475, 447,
-		449, 418,
+		483, 440,//
+		454, 411,
 		432, 428,
 		420, 411,
 		418, 393,
@@ -533,6 +533,17 @@ void ModuleScene::CreateSensors()
 {
 	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
 	springSensor->ctype = ColliderType::SPRING_SENSOR;
+
+	int SCOREX10SENSOR[8]
+	{
+		455, 414,
+		452, 417,
+		480, 443,
+		483, 439
+	};
+	scorex10sensor = App->physics->CreateChainSensor(0, 0, SCOREX10SENSOR, 8);
+	scorex10sensor->body->SetType(b2_staticBody);
+	scorex10sensor->ctype = ColliderType::SCORE_X10;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)

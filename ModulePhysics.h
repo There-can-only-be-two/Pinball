@@ -25,6 +25,7 @@ enum class ColliderType {
 	TRIANGLE,
 	FRANKFURT,
 	SPRING_SENSOR,
+	SCORE_X10,
 	UNKNOWN
 	// ..
 };
@@ -72,6 +73,7 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
+	PhysBody* CreateChainSensor(int x, int y, int* points, int size);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
