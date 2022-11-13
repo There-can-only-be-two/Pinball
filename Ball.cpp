@@ -64,7 +64,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 	case ColliderType::FLIPPERS:
 		LOG("Collision FLIPPERS");
-		
 		break;
 	case ColliderType::WALL:
 		LOG("Collision WALL");
@@ -83,15 +82,12 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 	case ColliderType::DIAMOND:
 		LOG("Collision DIAMOND");
-
 		break;
 	case ColliderType::TRIANGLE:
 		LOG("Collision TRIANGLE");
-
 		break;
 	case ColliderType::FRANKFURT:
 		LOG("Collision FRANKFURT");
-
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
