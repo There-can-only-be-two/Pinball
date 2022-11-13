@@ -20,6 +20,8 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	ray_on = false;
 	sensed = false;
 	highScore = 10000;
+	currentScore = 0;
+	previousScore = 43;
 }
 
 ModuleScene::~ModuleScene()
