@@ -71,6 +71,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
 		app->scene_intro->currentScore += 25;
+		ballBody->body->ApplyForce(b2Vec2(position.x-bodyB->body->GetWorldCenter().x, position.y - bodyB->body->GetWorldCenter().y), ballBody->body->GetWorldCenter(), true);
 		break;
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
