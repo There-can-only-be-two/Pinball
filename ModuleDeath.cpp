@@ -16,7 +16,7 @@ ModuleDeath::ModuleDeath(Application* app, bool start_enabled) : Module(app, sta
 {
 
 	// Initialise all the internal class variables, at least to NULL pointer
-	ranking.
+	//ranking.
 }
 
 ModuleDeath::~ModuleDeath()
