@@ -88,6 +88,10 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(img, 0, 0);
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
 	App->fonts->BlitText(700, 130, font, high);
+	App->fonts->BlitText(600, 175, font, "CURRENT SCORE:");
+	App->fonts->BlitText(700, 230, font, current);
+	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
+	App->fonts->BlitText(700, 330, font, previous);
 
 	// If user presses SPACE, enable RayCast
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
