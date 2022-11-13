@@ -21,7 +21,7 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	sensed = false;
 	highScore = 10000;
 	currentScore = 0;
-	previousScore = 43;
+	previousScore = 0;
 }
 
 ModuleScene::~ModuleScene()
@@ -66,6 +66,9 @@ bool ModuleScene::Start()
 	// In ModulePhysics::PreUpdate(), we iterate over all sensors and (if colliding) we call the function ModuleSceneIntro::OnCollision()
 	//lower_ground_sensor->listener = this;
 
+	//previousScore = currentScore;
+	currentScore = 0;
+
 	App->entityManager->Enable();
 
 
@@ -80,6 +83,8 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(rick);
 	App->textures->Unload(img);
 	App->fonts->UnLoad(font);
+	DeleteMap();
+	
 	return true;
 }
 
@@ -109,7 +114,8 @@ update_status ModuleScene::Update()
 		ray.y = App->input->GetMouseY();
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		App->fade->FadeBlack(this, (Module*)App->win, 90);
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->entityManager->Disable();
 	}
 
 	// If user presses 1, create a new circle object
@@ -515,4 +521,46 @@ void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	//App->audio->PlayFx(bonus_fx);
 
 	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
+}
+
+void ModuleScene::DeleteMap() {
+	delete bg;
+	bg = nullptr;
+
+	delete wallLeft;
+	wallLeft = nullptr;
+
+	delete platformLeft;
+	platformLeft = nullptr;
+	
+	delete platformRight;
+	platformRight = nullptr;
+
+	delete diamond;
+	diamond = nullptr;
+
+	delete triangle_left;
+	triangle_left = nullptr;
+
+	delete triangle_right;
+	triangle_right = nullptr;
+
+	delete frankfurt_left;
+	frankfurt_left = nullptr;
+
+	delete frankfurt_right;
+	frankfurt_right = nullptr;
+
+	delete blue;
+	blue = nullptr;
+
+	delete red;
+	red = nullptr;
+
+	delete yellow;
+	yellow = nullptr;
+
+	
+
+	
 }

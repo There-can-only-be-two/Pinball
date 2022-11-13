@@ -22,7 +22,7 @@ public:
 
 	void CreateColliders();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
-
+	void DeleteMap();
 public:
 
 	// Lists of physics objects

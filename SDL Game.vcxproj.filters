@@ -85,9 +85,6 @@
     <ClInclude Include="ModuleTitle.h">
       <Filter>Source\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleWin.h">
-      <Filter>Source\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Source\App</Filter>
     </ClInclude>
@@ -157,9 +154,6 @@
       <Filter>Source\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleTitle.cpp">
-      <Filter>Source\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWin.cpp">
       <Filter>Source\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="CircleBounce.cpp">

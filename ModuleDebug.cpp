@@ -12,7 +12,6 @@
 #include "ModuleScene.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleDeath.h"
-#include "ModuleWin.h"
 #include "ModuleTitle.h"
 
 #include <string>

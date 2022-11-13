@@ -82,7 +82,6 @@
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModulePhysics.h" />
     <ClInclude Include="ModuleTitle.h" />
-    <ClInclude Include="ModuleWin.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
@@ -116,7 +115,6 @@
     <ClCompile Include="ModuleScene.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleTitle.cpp" />
-    <ClCompile Include="ModuleWin.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="PolyBounce.cpp" />
   </ItemGroup>
