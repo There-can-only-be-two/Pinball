@@ -12,7 +12,6 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleDebug.h"
 #include "ModuleDeath.h"
-#include "ModuleWin.h"
 #include "ModuleTitle.h"
 
 Application::Application()
@@ -28,7 +27,6 @@ Application::Application()
 
 	scene_intro = new ModuleScene(this, false);
 	entityManager = new EntityManager(this, false);
-	win = new ModuleWin(this, false);
 	death = new ModuleDeath(this, false);
 
 	debug = new ModuleDebug(this, false);
@@ -53,7 +51,6 @@ Application::Application()
 	// Scenes
 	AddModule(title);
 	AddModule(scene_intro);
-	AddModule(win);
 	AddModule(death);
 	AddModule(entityManager);
 	

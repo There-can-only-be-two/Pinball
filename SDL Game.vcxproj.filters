@@ -85,9 +85,6 @@
     <ClInclude Include="ModuleTitle.h">
       <Filter>Source\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleWin.h">
-      <Filter>Source\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Source\App</Filter>
     </ClInclude>
@@ -96,6 +93,12 @@
     </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Source\App</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleBounce.h">
+      <Filter>Source\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyBounce.h">
+      <Filter>Source\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,8 +156,11 @@
     <ClCompile Include="ModuleTitle.cpp">
       <Filter>Source\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWin.cpp">
-      <Filter>Source\Scenes</Filter>
+    <ClCompile Include="CircleBounce.cpp">
+      <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyBounce.cpp">
+      <Filter>Source\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

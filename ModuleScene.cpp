@@ -21,7 +21,7 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	sensed = false;
 	highScore = 10000;
 	currentScore = 0;
-	previousScore = 43;
+	previousScore = 0;
 }
 
 ModuleScene::~ModuleScene()
@@ -66,6 +66,9 @@ bool ModuleScene::Start()
 	// In ModulePhysics::PreUpdate(), we iterate over all sensors and (if colliding) we call the function ModuleSceneIntro::OnCollision()
 	//lower_ground_sensor->listener = this;
 
+	//previousScore = currentScore;
+	currentScore = 0;
+
 	App->entityManager->Enable();
 
 
@@ -80,6 +83,8 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(rick);
 	App->textures->Unload(img);
 	App->fonts->UnLoad(font);
+	DeleteMap();
+	
 	return true;
 }
 
@@ -109,7 +114,8 @@ update_status ModuleScene::Update()
 		ray.y = App->input->GetMouseY();
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		App->fade->FadeBlack(this, (Module*)App->win, 90);
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->entityManager->Disable();
 	}
 
 	// If user presses 1, create a new circle object
@@ -393,21 +399,168 @@ void ModuleScene::CreateColliders()
 
 
 	// Bounce
-	int A[6] =
+	int DIAMOND[34] =
 	{
-
+		205, 440,
+		246, 420,
+		251, 418,
+		256, 418,
+		261, 418,
+		266, 419,
+		308, 438,
+		313, 442,
+		314, 448,
+		314, 454,
+		309, 460,
+		268, 480,
+		257, 482,
+		247, 480,
+		204, 461,
+		199, 454,
+		199, 445
 	};
-	int B[6] =
+	diamond = App->physics->CreateChain(0, 0, DIAMOND, 34);
+	diamond->body->SetType(b2BodyType::b2_staticBody);
+	diamond->ctype = ColliderType::DIAMOND;
+
+	int REBOUND_LEFT[28] =
 	{
-
+		107, 529,
+		100, 533,
+		97, 540,
+		97, 603,
+		98, 609,
+		101, 614,
+		145, 639,
+		154, 640,
+		160, 637,
+		165, 632,
+		166, 624,
+		164, 616,
+		123, 534,
+		115, 529
 	};
+	triangle_left = App->physics->CreateChain(0, 0, REBOUND_LEFT, 28);
+	triangle_left->body->SetType(b2BodyType::b2_staticBody);
+	triangle_left->ctype = ColliderType::TRIANGLE;
+	
+	int REBOUND_RIGHT[28] =
+	{
+		394, 529,
+		388, 533,
+		383, 540,
+		344, 620,
+		343, 628,
+		347, 636,
+		354, 640,
+		365, 639,
+		404, 618,
+		410, 612,
+		413, 604,
+		413, 540,
+		409, 532,
+		402, 529
+	};
+	triangle_right = App->physics->CreateChain(0, 0, REBOUND_RIGHT, 28);
+	triangle_right->body->SetType(b2BodyType::b2_staticBody);
+	triangle_right->ctype = ColliderType::TRIANGLE;
 
+	int FRANKFURT_LEFT[24] =
+	{
+		180, 335,
+		203, 379,
+		204, 386,
+		202, 392,
+		195, 397,
+		187, 397,
+		180, 391,
+		159, 349,
+		158, 342,
+		161, 335,
+		167, 331,
+		174, 331
+	};
+	frankfurt_left = App->physics->CreateChain(0, 0, FRANKFURT_LEFT, 24);
+	frankfurt_left->body->SetType(b2BodyType::b2_staticBody);
+	frankfurt_left->ctype = ColliderType::FRANKFURT;
+	
+	int FRANKFURT_RIGHT[22] =
+	{
+		380, 332,
+		375, 335,
+		352, 380,
+		351, 386,
+		353, 392,
+		358, 396,
+		365, 397,
+		372, 394,
+		397, 347,
+		396, 339,
+		390, 332
+	};
+	frankfurt_right = App->physics->CreateChain(0, 0, FRANKFURT_RIGHT, 22);
+	frankfurt_right->body->SetType(b2BodyType::b2_staticBody);
+	frankfurt_right->ctype = ColliderType::FRANKFURT;
+
+	blue = App->physics->CreateCircle(190+37, 196+39, 38);
+	blue->body->SetType(b2BodyType::b2_staticBody);
+	blue->ctype = ColliderType::BLUE_25;
+
+	red = App->physics->CreateCircle(300+39, 196 + 39, 38);
+	red->body->SetType(b2BodyType::b2_staticBody);
+	red->ctype = ColliderType::RED_100;
+
+	yellow = App->physics->CreateCircle(246 + 37, 294 + 37, 37);
+	yellow->body->SetType(b2BodyType::b2_staticBody);
+	yellow->ctype = ColliderType::YELLOW_50;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	// Play Audio FX on every collision, regardless of who is colliding
-	App->audio->PlayFx(bonus_fx);
+	//App->audio->PlayFx(bonus_fx);
 
 	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
+}
+
+void ModuleScene::DeleteMap() {
+	delete bg;
+	bg = nullptr;
+
+	delete wallLeft;
+	wallLeft = nullptr;
+
+	delete platformLeft;
+	platformLeft = nullptr;
+	
+	delete platformRight;
+	platformRight = nullptr;
+
+	delete diamond;
+	diamond = nullptr;
+
+	delete triangle_left;
+	triangle_left = nullptr;
+
+	delete triangle_right;
+	triangle_right = nullptr;
+
+	delete frankfurt_left;
+	frankfurt_left = nullptr;
+
+	delete frankfurt_right;
+	frankfurt_right = nullptr;
+
+	delete blue;
+	blue = nullptr;
+
+	delete red;
+	red = nullptr;
+
+	delete yellow;
+	yellow = nullptr;
+
+	
+
+	
 }

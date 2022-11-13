@@ -29,7 +29,7 @@ public:
 	int font;
 
 	// FX
-	uint highscore, currentscore;
+	uint highScore, currentScore, previousScore;
 
 	// Raycast
 	p2Point<int> ray;
