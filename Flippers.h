@@ -30,5 +30,5 @@ public:
 
 private:
 	SDL_Texture* texture = nullptr;
-	const char* texturePath;
+
 };

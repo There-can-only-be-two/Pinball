@@ -25,6 +25,8 @@ bool Flippers::Start()
 {
 	LOG("Loading player");
 
+	texture = app->textures->Load("pinball/Assets.png");
+
 	//FLIPPER LEFT
 	flipperLeft = app->physics->CreateRectangle(171, 697, 90, 30);
 	flipperLeft->listener = this;
@@ -71,8 +73,6 @@ bool Flippers::Start()
 	return true;
 }
 
-
-
 // Unload assets
 bool Flippers::CleanUp()
 {
@@ -84,20 +84,31 @@ bool Flippers::CleanUp()
 // Update: draw background
 bool Flippers::Update()
 {
+	double angle;
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		flipperLeft->body->SetAngularVelocity(-15.0f);
+		flipperLeft->body->SetAngularVelocity(-1200.0f * DEGTORAD);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
-		flipperLeft->body->SetAngularVelocity(10.0f);
+		flipperLeft->body->SetAngularVelocity(1200.0f * DEGTORAD);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		flipperRight->body->SetAngularVelocity(15.0f);
+		flipperRight->body->SetAngularVelocity(1200.0f * DEGTORAD);
 	}
-	else flipperRight->body->SetAngularVelocity(-10.0f);
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	{
+		flipperRight->body->SetAngularVelocity(-1200.0f * DEGTORAD);
+	}
+	SDL_Rect rectL = { 4, 86, 86, 60 };
+	/*SDL_Point* pointSDL = { 0};
+	SDL_RenderCopyEx(app->renderer->renderer, texture, &rectL, (double)flipperLeft->body->GetAngle(), pointSDL*, SDL_FLIP_VERTICAL);*/
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 36, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 34, &rectL, 10.0f, (double)(flipperLeft->body->GetAngle() * DEGTORAD));
+
+	SDL_Rect rectR = { 118, 86, 86, 60 };
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 45, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 34, &rectR, 10.0f, (double)(flipperRight->body->GetAngle() * DEGTORAD));
 
 	return true;
 }
