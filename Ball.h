@@ -21,6 +21,8 @@ public:
 public:
 	PhysBody* ballBody = nullptr;
 
+	float springForce;
+
 private:
 	SDL_Texture* texture = nullptr;
 };

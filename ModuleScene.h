@@ -21,6 +21,7 @@ public:
 	bool CleanUp();
 
 	void CreateColliders();
+	void CreateSensors();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void DeleteMap();
 public:
@@ -55,9 +56,12 @@ public:
 	//Entity* flipperR;
 	Entity* ball;
 
-	// Lower ground sensor (will kill all objects passig through it)
-	PhysBody* lower_ground_sensor;
+	//Sensors
+	PhysBody* lower_ground_sensor; // Lower ground sensor (will kill all objects passig through it)
 	bool sensed;
+
+	PhysBody* springSensor;
+	bool springSensed;
 
 	// Textures
 	SDL_Texture* circle;
