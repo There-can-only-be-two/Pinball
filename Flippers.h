@@ -17,8 +17,6 @@ public:
 	bool Update();
 	bool CleanUp();
 
-	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
-
 public:
 
 	PhysBody* flipperLeft = nullptr;

@@ -25,58 +25,48 @@ bool Flippers::Start()
 {
 	LOG("Loading player");
 
-
 	//FLIPPER LEFT
-	sqr1 = app->physics->CreateRectangle(150, 705, 20, 20);
-	sqr1->body->SetType(b2_staticBody);
-
 	flipperLeft = app->physics->CreateRectangle(171, 697, 90, 30);
 	flipperLeft->listener = this;
 	flipperLeft->ctype = ColliderType::FLIPPERS;
 	b2RevoluteJointDef revoluteJointDef1;
-	revoluteJointDef1.bodyA = sqr1->body;
+	revoluteJointDef1.bodyA = app->scene_intro->platformLeft->body;
 	revoluteJointDef1.bodyB = flipperLeft->body;
 	revoluteJointDef1.collideConnected = false;
-	revoluteJointDef1.localAnchorA.Set(PIXEL_TO_METERS(5), PIXEL_TO_METERS(5));//the top right corner of the box
-	revoluteJointDef1.localAnchorB.Set(PIXEL_TO_METERS(-45), PIXEL_TO_METERS(0));//center of the circle
+	revoluteJointDef1.localAnchorA.Set(PIXEL_TO_METERS(152), PIXEL_TO_METERS(712));
+	revoluteJointDef1.localAnchorB.Set(PIXEL_TO_METERS(-45), PIXEL_TO_METERS(7.5));
 
 	revoluteJointDef1.enableMotor = false;
 	revoluteJointDef1.motorSpeed = 1000.0;
 	revoluteJointDef1.maxMotorTorque = 10.0f;
 
 	revoluteJointDef1.enableLimit = true;
-	revoluteJointDef1.referenceAngle = 0;
+	revoluteJointDef1.referenceAngle = 10 * DEGTORAD;
 	revoluteJointDef1.lowerAngle = -45 * DEGTORAD;
 	revoluteJointDef1.upperAngle = 25 * DEGTORAD;
 	joint1 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef1);
 
-
 	// FLIPPER RIGHT
-	sqr2 = app->physics->CreateRectangle(360, 705, 20, 20);
-	sqr2->body->SetType(b2_staticBody);
-
 	flipperRight = app->physics->CreateRectangle(360, 697, 90, 30);
 	flipperRight->listener = this;
 	flipperRight->ctype = ColliderType::FLIPPERS;
 
 	b2RevoluteJointDef revoluteJointDef2;
-	revoluteJointDef2.bodyA = sqr2->body;
+	revoluteJointDef2.bodyA = app->scene_intro->platformRight->body;
 	revoluteJointDef2.bodyB = flipperRight->body;
 	revoluteJointDef2.collideConnected = false;
-	revoluteJointDef2.localAnchorA.Set(PIXEL_TO_METERS(-5), PIXEL_TO_METERS(5));//the top right corner of the box
-	revoluteJointDef2.localAnchorB.Set(PIXEL_TO_METERS(45), PIXEL_TO_METERS(0));//center of the circle
+	revoluteJointDef2.localAnchorA.Set(PIXEL_TO_METERS(358), PIXEL_TO_METERS(712));
+	revoluteJointDef2.localAnchorB.Set(PIXEL_TO_METERS(45), PIXEL_TO_METERS(7.5));
 
 	revoluteJointDef2.enableMotor = false;
 	revoluteJointDef2.motorSpeed = 1000.0;
 	revoluteJointDef2.maxMotorTorque = 10.0f;
 
-	revoluteJointDef2.enableLimit = true;
-	revoluteJointDef2.referenceAngle = 0;
+	revoluteJointDef2.referenceAngle = -10 * DEGTORAD;
 	revoluteJointDef2.lowerAngle = -25 * DEGTORAD;
 	revoluteJointDef2.upperAngle = 45 * DEGTORAD;
+	revoluteJointDef2.enableLimit = true;
 	joint2 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef2);
-
-
 		
 	return true;
 }
@@ -98,7 +88,10 @@ bool Flippers::Update()
 	{
 		flipperLeft->body->SetAngularVelocity(-15.0f);
 	}
-	else flipperLeft->body->SetAngularVelocity(10.0f);
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	{
+		flipperLeft->body->SetAngularVelocity(10.0f);
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
@@ -109,20 +102,4 @@ bool Flippers::Update()
 	return true;
 }
 
-void Flippers::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
-{
-	/*switch ()
-	{
-	case ColliderType::WALL:
-		LOG("Collision WALL");
-		
-		break;
-	case ColliderType::FLIPPERS:
-		LOG("Collision FLIPPERS");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-	}*/
-}
 
