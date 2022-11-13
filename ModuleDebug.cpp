@@ -16,69 +16,29 @@
 
 #include <string>
 
-ModuleDebug::ModuleDebug(Application* app, bool start_enabled) : Module(app, start_enabled) { debug = false; }
+ModuleDebug::ModuleDebug(Application* app, bool start_enabled) : Module(app, start_enabled) { drawDebug = false; }
 ModuleDebug::~ModuleDebug() {}
 
 bool ModuleDebug::Start()
 {
-	debug = false;
+	drawDebug = false;
 	return true;
 }
 
 update_status ModuleDebug::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
-		debug = !debug;
+		drawDebug = !drawDebug;
 
-	if (debug)
+	if (drawDebug)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 			variables = !variables;
-
-		if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
-			camLimits = !camLimits;
-
-		if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
-			teleport = !teleport;
-	}
-
-	// F1/F2: Start from the first/second level
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-
-	}
-
-	// F3: Start from the beginning of the current level
-	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-
-	}
-
-	// F5: Save the current game state
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
-		//App->SaveGameRequest();
-	}
-
-	// F6: Load the previous state (even across levels)
-	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
-		//App->LoadGameRequest();
 	}
 
 	// F9: View colliders / logic
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
-		//App->physics->debug = !App->physics->debug;
-	}
-
-	// F10: God Mode (fly around, cannot be killed, etc)
-	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
-		godMode = !godMode;
-	}
-
-	// F11: Free camera
-	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
-		freeCam = !freeCam;
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		App->physics->debug = !App->physics->debug;
 	}
 
 	return UPDATE_CONTINUE;
@@ -86,7 +46,7 @@ update_status ModuleDebug::Update()
 
 update_status ModuleDebug::PostUpdate()
 {
-	if (debug)
+	if (drawDebug)
 		DrawDebug();
 
 	return UPDATE_CONTINUE;
@@ -94,72 +54,34 @@ update_status ModuleDebug::PostUpdate()
 
 void ModuleDebug::DrawDebug()
 {
-	//int scale = App->win->GetScale();
-
-	//int debugX = App->render->camera.w / scale * 0.7;
-	//int debugY = App->render->camera.h / scale * 0.1;
-
-	//App->fonts->BlitText(debugX, debugY, 0, "variables (v)");
-	////Camera Limits
-	//if (camLimits)
-	//	App->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  on");
-	//else
-	//	App->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  off");
+	int debugX = App->renderer->camera.w * 0.6;
+	int debugY = App->renderer->camera.h * 0.1;
 
 
-	////Variables
-	//if (variables)
-	//{
-	//	//God Mode
-	//	if (godMode)
-	//		App->fonts->BlitText(debugX, debugY + 30, 0, "#god mode (f10)  on");
-	//	else
-	//		App->fonts->BlitText(debugX, debugY + 30, 0, "#god mode (f10)  off");
+	App->fonts->BlitText(debugX, debugY + 300, 0, "#DEBUG MODE (TAB)  ON/OFF");
 
-	//	//Free Camera
-	//	if (freeCam)
-	//		app->fonts->BlitText(debugX, debugY + 40, 0, "#free cam (f11)  on");
-	//	else
-	//		app->fonts->BlitText(debugX, debugY + 40, 0, "#free cam (f11)  off");
+	//Colliders
+	/*if (App->physics->debug)
+		App->fonts->BlitText(debugX, debugY + 40, 0, "#COLLIDERS (F1)  ON");
+	else
+		App->fonts->BlitText(debugX, debugY + 40, 0, "#COLLIDERS (F1)  OFF");*/
 
-	//	//Player x, y
-	//	app->fonts->BlitText(debugX, debugY + 55, 0, "player.x =");
-	//	app->fonts->BlitText(debugX + 88, debugY + 55, 0, std::to_string(app->scene->player->position.x).c_str());
+	if (variables)
+	{
+		//Ball x, y
+		App->fonts->BlitText(debugX, debugY + 340, 0, "BALL.X : ");		//26, 33
+		App->fonts->BlitText(debugX + 234, debugY + 340, 0, std::to_string(App->scene_intro->ball->position.x).c_str());
 
-	//	app->fonts->BlitText(debugX, debugY + 65, 0, "player.y =");
-	//	app->fonts->BlitText(debugX + 88, debugY + 65, 0, std::to_string(app->scene->player->position.y).c_str());
+		App->fonts->BlitText(debugX, debugY + 380, 0, "BALL.Y : ");
+		App->fonts->BlitText(debugX + 234, debugY + 380, 0, std::to_string(App->scene_intro->ball->position.y).c_str());
 
-	//	//Camera x, y
-	//	app->fonts->BlitText(debugX, debugY + 80, 0, "camera.x =");
-	//	app->fonts->BlitText(debugX + 88, debugY + 80, 0, std::to_string(app->render->camera.x).c_str());
 
-	//	app->fonts->BlitText(debugX, debugY + 90, 0, "camera.y =");
-	//	app->fonts->BlitText(debugX + 88, debugY + 90, 0, std::to_string(app->render->camera.y).c_str());
 
-	//	//Player alive
-	//	if (app->scene->player->alive)
-	//		app->fonts->BlitText(debugX, debugY + 105, 0, "player.alive = true");
-	//	else
-	//		app->fonts->BlitText(debugX, debugY + 105, 0, "player.alive = false");
-	//}
 
-	////Camera limits
-	//if (camLimits)
-	//{
-	//	App->scene->rectCamera.x = app->render->camera.w * 0.4;
-	//	App->scene->rectCamera.y = app->render->camera.h * 0.4;
-	//	App->scene->rectCamera.w = app->render->camera.w * 0.2;
-	//	App->scene->rectCamera.h = app->render->camera.h * 0.2;
-	//	App->render->DrawRectangle(app->scene->rectCamera, 0, 255, 0, 255, false, false);
-	//}
-
-	////Teleport
-	//if (teleport)
-	//{
-	//	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	//	{
-	//		app->scene->player->position.x = 2120;
-	//		app->scene->player->position.y = 385;
-	//	}
-	//}
+		//Player alive
+		/*if (App->scene->player->alive)
+			App->fonts->BlitText(debugX, debugY + 105, 0, "player.alive = true");
+		else
+			App->fonts->BlitText(debugX, debugY + 105, 0, "player.alive = false");*/
+	}	
 }

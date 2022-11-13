@@ -29,7 +29,7 @@ Application::Application()
 	entityManager = new EntityManager(this, false);
 	death = new ModuleDeath(this, false);
 
-	debug = new ModuleDebug(this, false);
+	debug = new ModuleDebug(this, true);
 	fade = new ModuleFadeToBlack(this, true);
 	renderer = new ModuleRender(this);
 
