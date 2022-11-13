@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
-
+#include "ModuleFonts.h"
 ModuleDeath::ModuleDeath(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
@@ -30,7 +30,8 @@ bool ModuleDeath::Start()
 
 	// Load textures
 	img = App->textures->Load("pinball/death.png");
-
+	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
+	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 
 	return ret;
 }
@@ -44,7 +45,9 @@ bool ModuleDeath::CleanUp()
 
 update_status ModuleDeath::Update()
 {
-	App->renderer->Blit(img, 0, 0);
+	//App->renderer->Blit(img, 0, 0);
+	App->fonts->BlitText(130, 75, font, "THIS IS A TEST: PERDRE");
+
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{

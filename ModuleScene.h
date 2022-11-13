@@ -55,6 +55,16 @@ public:
 	SDL_Texture* rick;
 	SDL_Texture* img;
 
+
+	//scores
+	int font;
+	char high[10] = { "\0" };
+	uint highScore = 0;
+	char current[10] = { "\0" };
+	uint currentScore = 0;
+	char previous[10] = { "\0" };
+	uint previousScore = 0;
+
 	// FX
 	uint bonus_fx;
 

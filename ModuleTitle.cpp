@@ -31,7 +31,7 @@ bool ModuleTitle::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load textures
-	img = App->textures->Load("pinball/rick_head.png");
+	img = App->textures->Load("pinball/title1.png");
 
 
 	return ret;

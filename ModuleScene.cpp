@@ -10,6 +10,7 @@
 #include "Flippers.h"
 #include "Ball.h"
 #include "EntityManager.h"
+#include "ModuleFonts.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -18,6 +19,9 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	circle = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
+	highScore = 10000;
+	currentScore = 0;
+	previousScore = 43;
 }
 
 ModuleScene::~ModuleScene()
@@ -43,8 +47,11 @@ bool ModuleScene::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
-	//img = App->textures->Load("pinball/background.png");
+
+  //img = App->textures->Load("pinball/background.png");
 	img = App->textures->Load("pinball/pinball_composition.png");
+	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
+	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 
 	//Audio
 	//App->audio->PlayMusic("Assets/Audio/", 0);
@@ -68,13 +75,29 @@ bool ModuleScene::Start()
 bool ModuleScene::CleanUp()
 {
 	LOG("Unloading Intro scene");
-
+	App->textures->Unload(circle);
+	App->textures->Unload(box);
+	App->textures->Unload(rick);
+	App->textures->Unload(img);
+	App->fonts->UnLoad(font);
 	return true;
 }
 
 update_status ModuleScene::Update()
 {
+	//Draws variables
+	sprintf_s(high, 10, "%7d", highScore);
+	sprintf_s(current, 10, "%7d", currentScore);
+	sprintf_s(previous, 10, "%7d", previousScore);
+
 	App->renderer->Blit(img, 0, 0);
+	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
+	App->fonts->BlitText(700, 130, font, high);
+	App->fonts->BlitText(600, 175, font, "CURRENT SCORE:");
+	App->fonts->BlitText(700, 230, font, current);
+	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
+	App->fonts->BlitText(700, 330, font, previous);
+
 	// If user presses SPACE, enable RayCast
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -86,7 +109,7 @@ update_status ModuleScene::Update()
 		ray.y = App->input->GetMouseY();
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->fade->FadeBlack(this, (Module*)App->win, 90);
 	}
 
 	// If user presses 1, create a new circle object

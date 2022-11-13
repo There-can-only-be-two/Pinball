@@ -26,7 +26,7 @@ public:
 
 	// Textures
 	SDL_Texture* img;
-
+	int font;
 	// FX
 	uint highscore, currentscore;
 
