@@ -24,6 +24,7 @@ enum class ColliderType {
 	DIAMOND,
 	TRIANGLE,
 	FRANKFURT,
+	SPRING_SENSOR,
 	UNKNOWN
 	// ..
 };

@@ -37,10 +37,12 @@ bool ModuleScene::Start()
 	flipperL = (Flippers*)App->entityManager->CreateEntity(EntityType::FLIPPERS);
 	ball = (Ball*)App->entityManager->CreateEntity(EntityType::BALL);
 
+
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	CreateColliders();
+	CreateSensors();
 
 	// Load textures
 	circle = App->textures->Load("pinball/wheel.png"); 
@@ -515,10 +517,16 @@ void ModuleScene::CreateColliders()
 	yellow->ctype = ColliderType::YELLOW_50;
 }
 
+void ModuleScene::CreateSensors()
+{
+	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
+	springSensor->ctype = ColliderType::SPRING_SENSOR;
+}
+
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	// Play Audio FX on every collision, regardless of who is colliding
-	//App->audio->PlayFx(bonus_fx);
+	App->audio->PlayFx(bonus_fx);
 
 	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
 }
