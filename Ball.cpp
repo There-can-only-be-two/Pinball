@@ -23,9 +23,10 @@ bool Ball::Start()
 {
 	LOG("Loading player");
 
-	ballBody = app->physics->CreateCircle(100, 100, 20);
+	ballBody = app->physics->CreateCircle(300, 300, 15);
 	ballBody->body->SetType(b2_dynamicBody);
 	ballBody->ctype = ColliderType::BALL;
+	//app->scene_intro->boxes.add(ballBody);
 	ballBody->listener = this;
 	texture = app->textures->Load("pinball/assets.png");
 
@@ -46,11 +47,11 @@ bool Ball::Update()
 {
 
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(ballBody->body->GetTransform().p.x);
-	position.y = METERS_TO_PIXELS(ballBody->body->GetTransform().p.y);
+	position.x = METERS_TO_PIXELS(ballBody->body->GetTransform().p.x - 15);
+	position.y = METERS_TO_PIXELS(ballBody->body->GetTransform().p.y - 15);
 
-	SDL_Rect rect = { position.x, position.y, 31, 29 };
-	app->renderer->Blit(texture, 139, 187, &rect);
+	SDL_Rect rect = { 229, 106, 31, 31 };
+	app->renderer->Blit(texture, position.x, position.y, &rect);
 
 
 	return true;

@@ -47,9 +47,12 @@ bool ModuleScene::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
-	img = App->textures->Load("pinball/background.png");
+
+  //img = App->textures->Load("pinball/background.png");
+	img = App->textures->Load("pinball/pinball_composition.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
+
 	//Audio
 	//App->audio->PlayMusic("Assets/Audio/", 0);
 	Mix_VolumeMusic(10);
@@ -309,26 +312,85 @@ void ModuleScene::CreateColliders()
 		472, 197,
 		483, 217
 	};
-	int WALL_LEFT[40] =
+	int WALL_LEFT[64] =
 	{
-		
+		206, 160,
+		180, 178,
+		155, 201,
+		134, 228,
+		122, 254,
+		115, 284,
+		114, 312,
+		116, 338,
+		122, 365,
+		130, 388,
+		142, 412,
+		146, 425,
+		145, 430,
+		140, 433,
+		133, 431,
+		121, 421,
+		108, 402,
+		93, 377,
+		82, 348,
+		76, 311,
+		75, 278,
+		78, 250,
+		87, 220,
+		101, 191,
+		122, 167,
+		144, 146,
+		165, 131,
+		183, 121,
+		195, 120,
+		207, 126,
+		212, 139,
+		212, 151
 	};
-	int WALL_RIGHT[40] =
+	int PLATFORM_LEFT[24] =
 	{
-
+		58, 650,
+		58, 663,
+		63, 673,
+		149, 717,
+		154, 716,
+		163, 698,
+		162, 692,
+		74, 647,
+		69, 641,
+		67, 635,
+		63, 632,
+		59, 635
+	};
+	int PLATFORM_RIGHT[24] =
+	{
+		452, 650,
+		451, 666,
+		446, 673,
+		361, 717,
+		355, 714,
+		348, 701,
+		348, 692,
+		433, 649,
+		439, 645,
+		444, 634,
+		447, 632,
+		450, 634
 	};
 
 
 	bg = App->physics->CreateChain(0, 0, BG, 112);
 	bg->body->SetType(b2BodyType::b2_staticBody);
 
-	/*wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 40);
+	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 64);
 	wallLeft->body->SetType(b2BodyType::b2_staticBody);
 
-	wallRight = App->physics->CreateChain(300, 0, WALL_RIGHT, 40);
-	wallRight->body->SetType(b2BodyType::b2_staticBody);*/
+	platformLeft = App->physics->CreateChain(0, 0, PLATFORM_LEFT, 24);
+	platformLeft->body->SetType(b2BodyType::b2_staticBody);
 
-	
+	platformRight = App->physics->CreateChain(0, 0, PLATFORM_RIGHT, 24);
+	platformRight->body->SetType(b2BodyType::b2_staticBody);
+
 
 	// Bounce
 	int A[6] =
