@@ -1,4 +1,6 @@
 #include "Globals.h"
+#include <iostream>
+#include <fstream>
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleDeath.h"
@@ -8,6 +10,8 @@
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include "ModuleScene.h"
+
 ModuleDeath::ModuleDeath(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
@@ -32,7 +36,12 @@ bool ModuleDeath::Start()
 	img = App->textures->Load("pinball/title1.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
-
+	
+	// Ranking text
+	ofstream myfile;
+	myfile.open("RANKING.txt");
+	myfile << "Highscore: " << App->scene_intro->highScore << "\n";
+	myfile.close();
 	return ret;
 }
 
@@ -46,7 +55,7 @@ bool ModuleDeath::CleanUp()
 update_status ModuleDeath::Update()
 {
 	App->renderer->Blit(img, 0, 0);
-	App->fonts->BlitText(130, 75, font, "THIS IS A TEST: PERDRE");
+	App->fonts->BlitText(430, 75, font, "RANKING");
 
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
