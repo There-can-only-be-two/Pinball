@@ -20,7 +20,8 @@ public:
 
 public:
 	PhysBody* ballBody = nullptr;
-
+	b2Vec2 bounceCenter;
+	bool bounce;
 	float springForce;
 
 private:

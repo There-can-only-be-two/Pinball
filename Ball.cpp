@@ -9,6 +9,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModuleScene.h"
+#include "Module.h"
 
 Ball::Ball(Application* app) : Entity(EntityType::BALL, app)
 {
@@ -30,6 +31,9 @@ bool Ball::Start()
 	//app->scene_intro->boxes.add(ballBody);
 	ballBody->listener = this;
 	texture = app->textures->Load("pinball/assets.png");
+	
+	bounce = false;
+	bounceCenter = { 0, 0 };
 
 	springForce = 0;
 	
@@ -50,6 +54,13 @@ bool Ball::CleanUp()
 bool Ball::Update()
 {
 
+	if (bounce) {
+		int vectorx = position.x - bounceCenter.x;
+		int vectory = -(position.y - bounceCenter.y);
+		ballBody->body->ApplyForce(b2Vec2(vectorx, vectory), ballBody->body->GetWorldCenter(), true);
+		bounce = false;
+	}
+
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(ballBody->body->GetTransform().p.x - 15);
 	position.y = METERS_TO_PIXELS(ballBody->body->GetTransform().p.y - 15);
@@ -68,6 +79,7 @@ bool Ball::Update()
 		app->scene_intro->springSensed = false;
 		LOG("RELEASE BALL");
 	}
+	
 
 	return true;
 }
@@ -85,15 +97,20 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
 		app->scene_intro->currentScore += 25;
-		ballBody->body->ApplyForce(b2Vec2(position.x-bodyB->body->GetWorldCenter().x, position.y - bodyB->body->GetWorldCenter().y), ballBody->body->GetWorldCenter(), true);
+		bounceCenter = { 227, 235 };
+		bounce = true;
 		break;
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
 		app->scene_intro->currentScore += 50;
+		bounceCenter = { 339, 235 };
+		bounce = true;
 		break;
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
 		app->scene_intro->currentScore += 100;
+		bounceCenter = { 283, 331 };
+		bounce = true;
 		break;
 	case ColliderType::DIAMOND:
 		LOG("Collision DIAMOND");
