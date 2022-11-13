@@ -23,9 +23,13 @@ public:
 
 	PhysBody* flipperLeft = nullptr;
 	PhysBody* flipperRight = nullptr;
-	PhysBody* sqr1 = nullptr;
 
-	b2RevoluteJoint* joint1;
+	PhysBody* sqr1 = nullptr;
+	PhysBody* sqr2 = nullptr;
+
+	b2RevoluteJoint* joint1 = nullptr;
+	b2RevoluteJoint* joint2 = nullptr;
+
 private:
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;

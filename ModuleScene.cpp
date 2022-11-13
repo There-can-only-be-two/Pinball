@@ -43,7 +43,8 @@ bool ModuleScene::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
-	img = App->textures->Load("pinball/background.png");
+	//img = App->textures->Load("pinball/background.png");
+	img = App->textures->Load("pinball/pinball_composition.png");
 
 	//Audio
 	//App->audio->PlayMusic("Assets/Audio/", 0);
