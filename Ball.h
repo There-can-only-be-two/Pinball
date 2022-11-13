@@ -22,6 +22,10 @@ public:
 	PhysBody* ballBody = nullptr;
 
 	float springForce;
+	
+	b2RevoluteJoint* joint;
+	int scorex10finished;
+	bool separed, jointCreated;
 
 private:
 	SDL_Texture* texture = nullptr;
