@@ -32,7 +32,11 @@ bool Ball::Start()
 	texture = app->textures->Load("pinball/assets.png");
 
 	springForce = 0;
+	scorex10finished = 0;
+	separed = false;
+	jointCreated = false;
 	
+
 	return true;
 }
 
@@ -67,6 +71,20 @@ bool Ball::Update()
 		app->scene_intro->springSensed = false;
 		LOG("RELEASE BALL");
 	}
+
+
+	if (app->scene_intro->scorex10sensed )
+	{
+		ballBody->body->ApplyForce(b2Vec2(100, -100), ballBody->body->GetWorldCenter(), true);
+		scorex10finished++;
+	}
+	if (scorex10finished > 300)
+	{
+		ballBody->body->ApplyForce(b2Vec2(-500, 300), ballBody->body->GetWorldCenter(), true);
+		scorex10finished = 0;
+		app->scene_intro->scorex10sensed = false;
+	}
+	
 
 	return true;
 }
