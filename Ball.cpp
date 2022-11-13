@@ -59,11 +59,10 @@ bool Ball::Update()
 
 void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	/*switch ()
+	switch (bodyB->ctype)
 	{
 	case ColliderType::WALL:
 		LOG("Collision WALL");
-
 		break;
 	case ColliderType::FLIPPERS:
 		LOG("Collision FLIPPERS");
@@ -71,5 +70,5 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
-	}*/
+	}
 }
