@@ -399,7 +399,7 @@ void ModuleScene::CreateColliders()
 	};
 	frankfurt_left = App->physics->CreateChain(0, 0, FRANKFURT_LEFT, 24);
 	frankfurt_left->body->SetType(b2BodyType::b2_staticBody);
-	frankfurt_left->ctype = ColliderType::FRANKFURT;
+	frankfurt_left->ctype = ColliderType::FRANKFURTL;
 	
 	int FRANKFURT_RIGHT[22] =
 	{
@@ -417,7 +417,7 @@ void ModuleScene::CreateColliders()
 	};
 	frankfurt_right = App->physics->CreateChain(0, 0, FRANKFURT_RIGHT, 22);
 	frankfurt_right->body->SetType(b2BodyType::b2_staticBody);
-	frankfurt_right->ctype = ColliderType::FRANKFURT;
+	frankfurt_right->ctype = ColliderType::FRANKFURTR;
 
 	blue = App->physics->CreateCircle(190+37, 196+39, 25);
 	blue->body->SetType(b2BodyType::b2_staticBody);
@@ -468,7 +468,7 @@ void ModuleScene::CreateSensors()
 	};
 	sensorTriLeft = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_LEFT, 8);
 	sensorTriLeft->body->SetType(b2_staticBody);
-	sensorTriLeft->ctype = ColliderType::TRIANGLE;
+	sensorTriLeft->ctype = ColliderType::TRIANGLEL;
 
 	int SENSOR_TRI_RIGHT[8]
 	{
@@ -479,7 +479,7 @@ void ModuleScene::CreateSensors()
 	};
 	sensorTriRight = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_RIGHT, 8);
 	sensorTriRight->body->SetType(b2_staticBody);
-	sensorTriRight->ctype = ColliderType::TRIANGLE;
+	sensorTriRight->ctype = ColliderType::TRIANGLER;
 
 }
 

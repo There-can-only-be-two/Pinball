@@ -21,9 +21,10 @@ public:
 public:
 	b2Vec2 p;
 	PhysBody* ballBody = nullptr;
-	b2Vec2 bounceCenter;
+	b2Vec2 bounceDir;
 	bool bounce;
 	float springForce;
+	int intensity;
 	
 	b2RevoluteJoint* joint;
 	int scorex10finished;

@@ -34,7 +34,8 @@ bool Ball::Start()
 	texture = app->textures->Load("pinball/assets.png");
 	
 	bounce = false;
-	bounceCenter = { 0, 0 };
+	bounceDir = { 0.0f, 0.0f };
+	intensity = 0;
 
 	springForce = 0;
 	scorex10finished = 0;
@@ -59,9 +60,8 @@ bool Ball::CleanUp()
 bool Ball::Update()
 {
 	if (bounce) {
-		b2Vec2 bounceDirection = { ballBody->body->GetWorldCenter() - bounceCenter };
-		bounceDirection.Normalize();
-		ballBody->body->ApplyForce(100*bounceDirection, ballBody->body->GetWorldCenter(), true);
+		bounceDir.Normalize();
+		ballBody->body->ApplyForce(intensity*bounceDir, ballBody->body->GetWorldCenter(), true);
 		bounce = false;
 	}
 
@@ -124,24 +124,27 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
 		app->scene_intro->currentScore += 25;
-		bounceCenter = app->scene_intro->blue->body->GetWorldCenter();
+		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->blue->body->GetWorldCenter() };
 		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
+		intensity = 70;
 		break;
 
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
 		app->scene_intro->currentScore += 50;
-		bounceCenter = app->scene_intro->yellow->body->GetWorldCenter();
+		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->yellow->body->GetWorldCenter() };
 		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
+		intensity = 70;
 		break;
 
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
 		app->scene_intro->currentScore += 100;
-		bounceCenter = app->scene_intro->red->body->GetWorldCenter();
+		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->red->body->GetWorldCenter() };
 		app->audio->PlayFx(app->scene_intro->bouncer_circle);
+		intensity = 70;
 		bounce = true;
 		break;
 
@@ -149,14 +152,31 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision DIAMOND");
 		break;
 
-	case ColliderType::TRIANGLE:
+	case ColliderType::TRIANGLEL:
 		LOG("Collision TRIANGLE");
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
 		app->scene_intro->sensorTriLeftSensed = true;
+		bounceDir = { 1.0f, -0.5f };
+		intensity = 150;
+		bounce = true;
 		break;
 
-	case ColliderType::FRANKFURT:
+	case ColliderType::TRIANGLER:
+		LOG("Collision TRIANGLE");
+		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
+		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
+		app->scene_intro->sensorTriRightSensed = true;
+		bounceDir = { -1.0f, -0.5f };
+		intensity = 150;
+		bounce = true;
+		break;
+
+	case ColliderType::FRANKFURTL:
+		LOG("Collision FRANKFURT");
+		break;
+
+	case ColliderType::FRANKFURTR:
 		LOG("Collision FRANKFURT");
 		break;
 
