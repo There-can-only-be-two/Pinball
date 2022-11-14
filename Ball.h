@@ -19,6 +19,7 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
+	b2Vec2 p;
 	PhysBody* ballBody = nullptr;
 	b2Vec2 bounceCenter;
 	bool bounce;

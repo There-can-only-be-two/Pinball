@@ -49,13 +49,16 @@ bool ModuleDeath::CleanUp()
 {
 	LOG("Unloading Death scene");
 	App->textures->Unload(img);
+	
+
+	App->fonts->UnLoad(font);
 	return true;
 }
 
 update_status ModuleDeath::Update()
 {
 	App->renderer->Blit(img, 0, 0);
-	App->fonts->BlitText(425, 75, font, "RANKING");
+	App->fonts->BlitText(422, 75, font, "RANKING");
 
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)

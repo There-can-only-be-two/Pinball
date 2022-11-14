@@ -24,8 +24,9 @@ Ball::~Ball()
 bool Ball::Start()
 {
 	LOG("Loading player");
-
-	ballBody = app->physics->CreateCircle(300, 300, 15);
+	p.x = 500; 
+	p.y = 726;
+	ballBody = app->physics->CreateCircle(p.x, p.y, 15);
 	ballBody->body->SetType(b2_dynamicBody);
 	ballBody->ctype = ColliderType::BALL;
 	//app->scene_intro->boxes.add(ballBody);
@@ -82,7 +83,6 @@ bool Ball::Update()
 		app->scene_intro->springSensed = false;
 		LOG("RELEASE BALL");
 	}
-	
 
 	if (app->scene_intro->sensorx10Sensed)
 	{
@@ -96,6 +96,15 @@ bool Ball::Update()
 		app->scene_intro->sensorx10Sensed = false;
 	}
 	
+	if (app->scene_intro->ballsensed)
+	{
+		
+		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
+		
+
+		app->scene_intro->ballsCounter--;
+		app->scene_intro->ballsensed = false;
+	}
 
 	return true;
 }
@@ -160,6 +169,11 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision SCOREX10");
 		app->scene_intro->sensorx10Sensed = true;
 		app->audio->PlayFx(app->scene_intro->intro);
+		break;
+
+	case ColliderType::BALL_SENSOR:
+		LOG("Collision BALL_SENSOR");
+		app->scene_intro->ballsensed = true;
 		break;
 
 	case ColliderType::UNKNOWN:
