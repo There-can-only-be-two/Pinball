@@ -77,10 +77,6 @@ update_status ModulePhysics::PreUpdate()
 
 update_status ModulePhysics::PostUpdate()
 {
-	// Activate or deactivate debug mode
-	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
-
 	// If we are not in debug mode, do nothing else here and Keep playing
 	if(!debug)
 		return UPDATE_CONTINUE;

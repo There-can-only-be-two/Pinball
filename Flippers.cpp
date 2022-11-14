@@ -91,18 +91,21 @@ bool Flippers::Update()
 {
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		flipperLeft->body->SetAngularVelocity(-15.0f);
+		flipperLeft->body->SetAngularVelocity(-1500 * DEGTORAD);
 	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	else
 	{
-		flipperLeft->body->SetAngularVelocity(10.0f);
+		flipperLeft->body->SetAngularVelocity(1500 * DEGTORAD);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		flipperRight->body->SetAngularVelocity(15.0f);
+		flipperRight->body->SetAngularVelocity(1500 * DEGTORAD);
 	}
-	else flipperRight->body->SetAngularVelocity(-10.0f);
+	else
+	{
+		flipperRight->body->SetAngularVelocity(-1500 * DEGTORAD);
+	}
 
 	return true;
 }

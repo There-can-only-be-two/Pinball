@@ -58,7 +58,6 @@ bool Ball::CleanUp()
 // Update: draw background
 bool Ball::Update()
 {
-
 	if (bounce) {
 		b2Vec2 bounceDirection = { ballBody->body->GetWorldCenter() - bounceCenter };
 		bounceDirection.Normalize();
@@ -85,7 +84,7 @@ bool Ball::Update()
 		LOG("RELEASE BALL");
 	}
 
-	if (app->scene_intro->scorex10sensed )
+	if (app->scene_intro->sensorx10Sensed)
 	{
 		ballBody->body->ApplyForce(b2Vec2(100, -100), ballBody->body->GetWorldCenter(), true);
 		scorex10finished++;
@@ -94,7 +93,7 @@ bool Ball::Update()
 	{
 		ballBody->body->ApplyForce(b2Vec2(-500, 300), ballBody->body->GetWorldCenter(), true);
 		scorex10finished = 0;
-		app->scene_intro->scorex10sensed = false;
+		app->scene_intro->sensorx10Sensed = false;
 	}
 	
 	if (app->scene_intro->ballsensed)
@@ -117,48 +116,66 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::FLIPPERS:
 		LOG("Collision FLIPPERS");
 		break;
+
 	case ColliderType::WALL:
 		LOG("Collision WALL");
 		break;
+
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
 		app->scene_intro->currentScore += 25;
 		bounceCenter = app->scene_intro->blue->body->GetWorldCenter();
+		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
 		break;
+
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
 		app->scene_intro->currentScore += 50;
 		bounceCenter = app->scene_intro->yellow->body->GetWorldCenter();
+		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
 		break;
+
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
 		app->scene_intro->currentScore += 100;
 		bounceCenter = app->scene_intro->red->body->GetWorldCenter();
+		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
 		break;
+
 	case ColliderType::DIAMOND:
 		LOG("Collision DIAMOND");
 		break;
+
 	case ColliderType::TRIANGLE:
 		LOG("Collision TRIANGLE");
+		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
+		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
+		app->scene_intro->sensorTriLeftSensed = true;
 		break;
+
 	case ColliderType::FRANKFURT:
 		LOG("Collision FRANKFURT");
 		break;
+
 	case ColliderType::SPRING_SENSOR:
 		LOG("Collision SPRING_SENSOR");
 		app->scene_intro->springSensed = true;
 		break;
+
 	case ColliderType::SCORE_X10:
 		LOG("Collision SCOREX10");
-		app->scene_intro->scorex10sensed = true;
+		app->scene_intro->sensorx10Sensed = true;
+		app->audio->PlayFx(app->scene_intro->intro);
 		break;
+
 	case ColliderType::BALL_SENSOR:
 		LOG("Collision BALL_SENSOR");
 		app->scene_intro->ballsensed = true;
 		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "SString.h"
 #include <list>
 #include "SString.h"
 
