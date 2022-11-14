@@ -13,6 +13,7 @@
 #include "ModuleDebug.h"
 #include "ModuleDeath.h"
 #include "ModuleTitle.h"
+#include "ModuleLights.h"
 
 Application::Application()
 {
@@ -24,13 +25,14 @@ Application::Application()
 	physics = new ModulePhysics(this);
 
 	title = new ModuleTitle(this, true);
-
 	scene_intro = new ModuleScene(this, false);
-	entityManager = new EntityManager(this, false);
 	death = new ModuleDeath(this, false);
 
-	debug = new ModuleDebug(this, true);
+	lights = new ModuleLights(this, false);
+	entityManager = new EntityManager(this, false);
+
 	fade = new ModuleFadeToBlack(this, true);
+	debug = new ModuleDebug(this, true);
 	renderer = new ModuleRender(this);
 
 
@@ -44,7 +46,6 @@ Application::Application()
 	AddModule(input);
 	AddModule(audio);
 	
-
 	AddModule(fonts);
 	AddModule(physics);
 	
@@ -52,9 +53,10 @@ Application::Application()
 	AddModule(title);
 	AddModule(scene_intro);
 	AddModule(death);
+
+	AddModule(lights);
 	AddModule(entityManager);
 	
-
 	AddModule(fade);
 	AddModule(debug);
 	AddModule(renderer);

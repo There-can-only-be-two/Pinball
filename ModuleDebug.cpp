@@ -37,9 +37,13 @@ update_status ModuleDebug::Update()
 	}
 
 	// F1: View colliders / logic
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		App->physics->debug = !App->physics->debug;
-	}
+	
+	//F2: Lights ON/OFF
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		lightsON = !lightsON;
+	
 
 	return UPDATE_CONTINUE;
 }

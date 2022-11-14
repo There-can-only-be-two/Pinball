@@ -66,6 +66,9 @@ public:
 	bool ballsensed;
 	PhysBody* sensorTriLeft;
 	bool sensorTriLeftSensed;
+	PhysBody* sensorTriRight;
+	bool sensorTriRightSensed;
+	
 
 	// Textures
 	SDL_Texture* circle;
