@@ -47,20 +47,17 @@ bool ModuleScene::Start()
 	CreateColliders();
 	CreateSensors();
 
-
 	// Load textures
 	//img = App->textures->Load("pinball/pinball_composition.png");
 	img = App->textures->Load("pinball/background.png");
 	//img = App->textures->Load("pinball/top.png");
 	balls = App->textures->Load("pinball/prova.png");
 
-
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
 	fontBalls = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
-
 
 	//Audio
 	Mix_VolumeMusic(10);
@@ -73,15 +70,13 @@ bool ModuleScene::Start()
 	bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
 	bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
 
-
 	//Set variables
 	previousScore = currentScore;
 	currentScore = 0;
-
+	ballsCounter = 3;
+	
 	App->entityManager->Enable();
 	App->lights->Enable();
-
-
 	return ret;
 }
 
@@ -93,6 +88,7 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(rick);
 	App->textures->Unload(img);
 	App->fonts->UnLoad(font);
+	App->lights->Disable();
 	DeleteMap();
 	
 	return true;
@@ -100,7 +96,7 @@ bool ModuleScene::CleanUp()
 
 update_status ModuleScene::Update()
 {
-	App->renderer->Blit(img, 0, 0);
+	App->renderer->Blit(img, 10, 0);
 
 #pragma region UI
 	//Draws variables
@@ -542,4 +538,6 @@ void ModuleScene::DeleteMap()
 	delete sensorTriLeft;
 	sensorTriLeft = nullptr;
 
+	delete sensorTriRight;
+	sensorTriRight = nullptr;
 }
