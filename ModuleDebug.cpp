@@ -36,7 +36,7 @@ update_status ModuleDebug::Update()
 			variables = !variables;
 	}
 
-	// F9: View colliders / logic
+	// F1: View colliders / logic
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		App->physics->debug = !App->physics->debug;
 	}

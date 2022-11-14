@@ -18,7 +18,6 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	// Initialise all the internal class variables, at least to NULL pointer
 	circle = box = rick = NULL;
 	ray_on = false;
-	sensed = false;
 	highScore = 1000;
 	currentScore = 0;
 	previousScore = 0;
@@ -56,7 +55,12 @@ bool ModuleScene::Start()
 	Mix_VolumeMusic(10);
 	//App->audio->PlayMusic("Assets/Audio/", 0);
 	//App->audio->LoadFx("Assets/Audio/");
-	bonus_fx = App->audio->LoadFx("pinball/Audio/bonus.wav");
+	intro = App->audio->LoadFx("pinball/Audio/intro.wav");
+	flipper = App->audio->LoadFx("pinball/Audio/flipper.wav");
+	spring = App->audio->LoadFx("pinball/Audio/spring.wav");
+	bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
+	bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
+	bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
 
 
 	//Set variables
@@ -413,27 +417,48 @@ void ModuleScene::CreateSensors()
 	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
 	springSensor->ctype = ColliderType::SPRING_SENSOR;
 
-	int SCOREX10SENSOR[8]
+	int SENSOR_X10[8]
 	{
 		455, 414,
 		452, 417,
 		480, 443,
 		483, 439
 	};
-	scorex10sensor = App->physics->CreateChainSensor(0, 0, SCOREX10SENSOR, 8);
-	scorex10sensor->body->SetType(b2_staticBody);
-	scorex10sensor->ctype = ColliderType::SCORE_X10;
+	sensorx10 = App->physics->CreateChainSensor(0, 0, SENSOR_X10, 8);
+	sensorx10->body->SetType(b2_staticBody);
+	sensorx10->ctype = ColliderType::SCORE_X10;
+
+	int SENSOR_TRI_LEFT[8]
+	{
+		127, 531,
+		109, 540,
+		149, 623,
+		171, 615
+	};
+	sensorTriLeft = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_LEFT, 8);
+	sensorTriLeft->body->SetType(b2_staticBody);
+	sensorTriLeft->ctype = ColliderType::TRIANGLE;
+
+	/*int SENSOR_TRI_RIGHT[8]
+	{
+		127, 531,
+		109, 540,
+		149, 623,
+		171, 615
+	};
+	sensorTriLeft = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_LEFT, 8);
+	sensorTriLeft->body->SetType(b2_staticBody);
+	sensorTriLeft->ctype = ColliderType::TRIANGLE;*/
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	// Play Audio FX on every collision, regardless of who is colliding
-	App->audio->PlayFx(bonus_fx);
 
 	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
 }
 
-void ModuleScene::DeleteMap() {
+void ModuleScene::DeleteMap()
+{
 	delete bg;
 	bg = nullptr;
 
@@ -476,6 +501,9 @@ void ModuleScene::DeleteMap() {
 	delete springSensor;
 	springSensor = nullptr;
 
-	delete scorex10sensor;
-	scorex10sensor = nullptr;
+	delete sensorx10;
+	sensorx10 = nullptr;
+
+	delete sensorTriLeft;
+	sensorTriLeft = nullptr;
 }

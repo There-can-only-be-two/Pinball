@@ -57,12 +57,13 @@ public:
 	Entity* ball;
 
 	//Sensors
-	PhysBody* lower_ground_sensor; // Lower ground sensor (will kill all objects passig through it)
-	bool sensed;
 	PhysBody* springSensor;
 	bool springSensed;
-	PhysBody* scorex10sensor;
-	bool scorex10sensed;
+	PhysBody* sensorx10;
+	bool sensorx10Sensed;
+	PhysBody* sensorTriLeft;
+	bool sensorTriLeftSensed;
+	
 
 	// Textures
 	SDL_Texture* circle;
@@ -80,8 +81,14 @@ public:
 	char previous[10] = { "\0" };
 	uint previousScore = 0;
 
+
 	// FX
-	uint bonus_fx;
+	uint intro;
+	uint flipper;
+	uint spring;
+	uint bouncer_circle;
+	uint bouncer_tri_1;
+	uint bouncer_tri_2;
 
 	// Raycast
 	p2Point<int> ray;
