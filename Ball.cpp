@@ -24,8 +24,9 @@ Ball::~Ball()
 bool Ball::Start()
 {
 	LOG("Loading player");
-	int x=500, y=726;
-	ballBody = app->physics->CreateCircle(500, 726, 15);
+	p.x = 500; 
+	p.y = 726;
+	ballBody = app->physics->CreateCircle(p.x, p.y, 15);
 	ballBody->body->SetType(b2_dynamicBody);
 	ballBody->ctype = ColliderType::BALL;
 	//app->scene_intro->boxes.add(ballBody);
@@ -98,12 +99,9 @@ bool Ball::Update()
 	
 	if (app->scene_intro->ballsensed)
 	{
-		delete ballBody;
-		ballBody = nullptr;
 		
-		ballBody = app->physics->CreateCircle(500, 726, 15);
-		ballBody->body->SetType(b2_dynamicBody);
-		ballBody->ctype = ColliderType::BALL;
+		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
+		
 
 		app->scene_intro->ballsCounter--;
 		app->scene_intro->ballsensed = false;
@@ -158,7 +156,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->scene_intro->scorex10sensed = true;
 		break;
 	case ColliderType::BALL_SENSOR:
-		LOG("Collision SCOREX10");
+		LOG("Collision BALL_SENSOR");
 		app->scene_intro->ballsensed = true;
 		break;
 	case ColliderType::UNKNOWN:

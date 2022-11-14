@@ -501,4 +501,7 @@ void ModuleScene::DeleteMap() {
 
 	delete scorex10sensor;
 	scorex10sensor = nullptr;
+
+	delete ballsensor;
+	ballsensor = nullptr;
 }
