@@ -127,7 +127,7 @@ update_status ModuleScene::Update()
 
 #pragma endregion
 
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
 	{
 		App->fade->FadeBlack(this, (Module*)App->death, 90);
 		App->entityManager->Disable();
@@ -441,7 +441,7 @@ void ModuleScene::CreateSensors()
 		483, 439
 	};
   
-	scorex10sensor = App->physics->CreateChainSensor(0, 0, SCOREX10SENSOR, 8);
+	scorex10sensor = App->physics->CreateChainSensor(0, 0, SENSOR_X10, 8);
 	scorex10sensor->body->SetType(b2_staticBody);
 	scorex10sensor->ctype = ColliderType::SCORE_X10;
 

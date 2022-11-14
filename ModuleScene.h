@@ -59,7 +59,7 @@ public:
 	//Sensors
 	PhysBody* springSensor;
 	bool springSensed;
-
+	bool sensed;
 	PhysBody* scorex10sensor;
 	bool scorex10sensed;
 	PhysBody* ballsensor;
