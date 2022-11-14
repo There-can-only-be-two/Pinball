@@ -69,9 +69,6 @@ bool Ball::Update()
 	position.x = METERS_TO_PIXELS(ballBody->body->GetTransform().p.x - 15);
 	position.y = METERS_TO_PIXELS(ballBody->body->GetTransform().p.y - 15);
 
-	SDL_Rect rect = { 229, 106, 31, 31 };
-	app->renderer->Blit(texture, position.x, position.y, &rect);
-
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && app->scene_intro->springSensed && springForce < 400 )
 	{
 		springForce += 3.0;
@@ -105,6 +102,13 @@ bool Ball::Update()
 		app->scene_intro->ballsCounter--;
 		app->scene_intro->ballsensed = false;
 	}
+
+	return true;
+}
+
+bool Ball::PostUpdate() {
+	SDL_Rect rect = { 229, 106, 31, 31 };
+	app->renderer->Blit(texture, position.x, position.y, &rect);
 
 	return true;
 }
@@ -173,7 +177,8 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::BALL_SENSOR:
 		LOG("Collision BALL_SENSOR");
-		app->scene_intro->ballsensed = true;
+		if (!app->scene_intro->ray_on)
+			app->scene_intro->ballsensed = true;
 		break;
 
 	case ColliderType::UNKNOWN:

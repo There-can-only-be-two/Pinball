@@ -20,6 +20,9 @@ public:
 
 	// Called every frame
 	update_status Update();
+	
+	// Called every frame
+	update_status PostUpdate();
 
 	// Called before quitting
 	bool CleanUp();

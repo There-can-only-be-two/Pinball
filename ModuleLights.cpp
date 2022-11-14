@@ -79,6 +79,10 @@ update_status ModuleLights::PostUpdate()
 
 bool ModuleLights::CleanUp()
 {
-
+	App->textures->Unload(arrows_left);
+	App->textures->Unload(arrows_mid);
+	App->textures->Unload(combo_right);
+	App->textures->Unload(trigger);
+	App->textures->Unload(x10);
 	return true;
 }
