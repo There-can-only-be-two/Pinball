@@ -63,23 +63,26 @@ public:
 	bool springSensed;
 	PhysBody* scorex10sensor;
 	bool scorex10sensed;
+	PhysBody* ballsensor;
+	bool ballsensed;
 
 	// Textures
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* img;
-
+	SDL_Texture* balls;
 
 	//scores
-	int font, fontHype;
+	int font, fontHype, fontBalls;
 	char high[10] = { "\0" };
 	uint highScore = 0;
 	char current[10] = { "\0" };
 	uint currentScore = 0;
 	char previous[10] = { "\0" };
 	uint previousScore = 0;
-
+	char ballsLeft[3] = { "\0" };
+	uint ballsCounter = 0;
 	// FX
 	uint bonus_fx;
 

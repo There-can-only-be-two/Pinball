@@ -19,9 +19,10 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	circle = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
-	highScore = 1000;
+	highScore = 10000;
 	currentScore = 0;
 	previousScore = 0;
+	ballsCounter = 3;
 }
 
 ModuleScene::~ModuleScene()
@@ -46,11 +47,13 @@ bool ModuleScene::Start()
 	// Load textures
 	img = App->textures->Load("pinball/pinball_composition.png");
 	//img = App->textures->Load("pinball/background.png");
+	balls = App->textures->Load("pinball/prova.png");
 
 	//fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
+	fontBalls = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
 
 	//Audio
 	Mix_VolumeMusic(10);
@@ -84,12 +87,15 @@ bool ModuleScene::CleanUp()
 
 update_status ModuleScene::Update()
 {
+	App->renderer->Blit(img, 0, 0);
+
+#pragma region UI
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
 	sprintf_s(previous, 10, "%7d", previousScore);
-
-	App->renderer->Blit(img, 0, 0);
+	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
+	
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
 
 	App->fonts->BlitText(600, 175, font, "CURRENT SCORE:");
@@ -106,6 +112,13 @@ update_status ModuleScene::Update()
 		App->fonts->BlitText(700, 130, fontHype, high);
 		App->fonts->BlitText(700, 230, fontHype, current);
 	}
+	
+	SDL_Rect recBall = { 229, 106, 31, 31 };
+	App->renderer->Blit(balls, 360, 875+3);
+	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
+	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
+
+#pragma endregion
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
@@ -423,6 +436,16 @@ void ModuleScene::CreateSensors()
 	scorex10sensor = App->physics->CreateChainSensor(0, 0, SCOREX10SENSOR, 8);
 	scorex10sensor->body->SetType(b2_staticBody);
 	scorex10sensor->ctype = ColliderType::SCORE_X10;
+
+	int BALLSENSOR[6] = {
+	214, 831,
+	296, 832,
+	253, 850
+	};
+
+	ballsensor = App->physics->CreateChainSensor(0, 0, BALLSENSOR, 6);
+	ballsensor->body->SetType(b2_staticBody);
+	ballsensor->ctype = ColliderType::BALL_SENSOR;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
