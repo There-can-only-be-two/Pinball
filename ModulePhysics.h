@@ -26,6 +26,7 @@ enum class ColliderType {
 	FRANKFURT,
 	SPRING_SENSOR,
 	SCORE_X10,
+	BALL_SENSOR,
 	UNKNOWN
 	// ..
 };

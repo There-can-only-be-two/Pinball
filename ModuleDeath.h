@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "SString.h"
 #include <list>
+#include "SString.h"
 
 struct Scores {
 	SString name;
@@ -39,7 +40,4 @@ public:
 	uint highScore;
 	// to store each highscore
 	uint* ranks;
-	// Raycast
-	p2Point<int> ray;
-	bool ray_on;
 };
