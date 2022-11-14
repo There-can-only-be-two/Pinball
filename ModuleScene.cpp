@@ -11,6 +11,7 @@
 #include "Ball.h"
 #include "EntityManager.h"
 #include "ModuleFonts.h"
+#include "ModuleLights.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -42,14 +43,18 @@ bool ModuleScene::Start()
 	CreateColliders();
 	CreateSensors();
 
-	// Load textures
-	img = App->textures->Load("pinball/pinball_composition.png");
-	//img = App->textures->Load("pinball/background.png");
 
-	//fonts
+	// Load textures
+	//img = App->textures->Load("pinball/pinball_composition.png");
+	img = App->textures->Load("pinball/background.png");
+	img = App->textures->Load("pinball/top.png");
+
+
+	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
+
 
 	//Audio
 	Mix_VolumeMusic(10);
@@ -68,6 +73,7 @@ bool ModuleScene::Start()
 	currentScore = 0;
 
 	App->entityManager->Enable();
+	App->lights->Enable();
 
 
 	return ret;
@@ -339,7 +345,6 @@ void ModuleScene::CreateColliders()
 	};
 	triangle_left = App->physics->CreateChain(0, 0, REBOUND_LEFT, 28);
 	triangle_left->body->SetType(b2BodyType::b2_staticBody);
-	triangle_left->ctype = ColliderType::TRIANGLE;
 	
 	int REBOUND_RIGHT[28] =
 	{
@@ -360,7 +365,6 @@ void ModuleScene::CreateColliders()
 	};
 	triangle_right = App->physics->CreateChain(0, 0, REBOUND_RIGHT, 28);
 	triangle_right->body->SetType(b2BodyType::b2_staticBody);
-	triangle_right->ctype = ColliderType::TRIANGLE;
 
 	int FRANKFURT_LEFT[24] =
 	{
@@ -399,15 +403,15 @@ void ModuleScene::CreateColliders()
 	frankfurt_right->body->SetType(b2BodyType::b2_staticBody);
 	frankfurt_right->ctype = ColliderType::FRANKFURT;
 
-	blue = App->physics->CreateCircle(190+37, 196+39, 38);
+	blue = App->physics->CreateCircle(190+37, 196+39, 25);
 	blue->body->SetType(b2BodyType::b2_staticBody);
 	blue->ctype = ColliderType::BLUE_25;
 
-	red = App->physics->CreateCircle(300+39, 196 + 39, 38);
+	red = App->physics->CreateCircle(300+39, 196 + 39, 25);
 	red->body->SetType(b2BodyType::b2_staticBody);
 	red->ctype = ColliderType::RED_100;
 
-	yellow = App->physics->CreateCircle(246 + 37, 294 + 37, 37);
+	yellow = App->physics->CreateCircle(246 + 37, 294 + 37, 25);
 	yellow->body->SetType(b2BodyType::b2_staticBody);
 	yellow->ctype = ColliderType::YELLOW_50;
 }
@@ -439,16 +443,16 @@ void ModuleScene::CreateSensors()
 	sensorTriLeft->body->SetType(b2_staticBody);
 	sensorTriLeft->ctype = ColliderType::TRIANGLE;
 
-	/*int SENSOR_TRI_RIGHT[8]
+	int SENSOR_TRI_RIGHT[8]
 	{
-		127, 531,
-		109, 540,
-		149, 623,
-		171, 615
+		380, 533,
+		397, 542,
+		357, 624,
+		338, 616
 	};
-	sensorTriLeft = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_LEFT, 8);
-	sensorTriLeft->body->SetType(b2_staticBody);
-	sensorTriLeft->ctype = ColliderType::TRIANGLE;*/
+	sensorTriRight = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_RIGHT, 8);
+	sensorTriRight->body->SetType(b2_staticBody);
+	sensorTriRight->ctype = ColliderType::TRIANGLE;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)

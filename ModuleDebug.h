@@ -19,8 +19,9 @@ public:
 
 public:
 	//flags
-	bool drawDebug;
+	bool drawDebug = false;
 	bool variables = false;
+	bool lightsON = false;
 
 private:
 

@@ -9,8 +9,8 @@ class ModuleTextures;
 class ModuleInput;
 class ModuleAudio;
 class ModuleFonts;
-class ModulePlayer;
 class ModuleScene;
+class ModuleLights;
 class EntityManager;
 class ModulePhysics;
 class ModuleFadeToBlack;
@@ -29,9 +29,8 @@ public:
 	ModuleInput* input;
 	ModuleAudio* audio;
 	ModuleFonts* fonts;
-	ModulePlayer* player;
-
 	ModuleScene* scene_intro;
+	ModuleLights* lights;
 	EntityManager* entityManager;
 	ModulePhysics* physics;
 	ModuleFadeToBlack* fade;

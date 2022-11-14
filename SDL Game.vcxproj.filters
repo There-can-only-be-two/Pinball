@@ -20,6 +20,9 @@
     <Filter Include="Source\Scenes">
       <UniqueIdentifier>{b13e59cb-ddca-47a3-8cfa-d3b8cc866919}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Game Modules">
+      <UniqueIdentifier>{22a4c192-0533-418b-835f-109d626db263}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2Point.h">
@@ -100,6 +103,9 @@
     <ClInclude Include="PolyBounce.h">
       <Filter>Source\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleLights.h">
+      <Filter>Source\Game Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityManager.cpp">
@@ -161,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="PolyBounce.cpp">
       <Filter>Source\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLights.cpp">
+      <Filter>Source\Game Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

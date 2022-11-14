@@ -63,6 +63,8 @@ public:
 	bool sensorx10Sensed;
 	PhysBody* sensorTriLeft;
 	bool sensorTriLeftSensed;
+	PhysBody* sensorTriRight;
+	bool sensorTriRightSensed;
 	
 
 	// Textures
