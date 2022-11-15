@@ -90,6 +90,7 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* img;
+	SDL_Texture* top;
 	SDL_Texture* balls;
 	SDL_Texture* assets;
 
@@ -102,7 +103,7 @@ public:
 	Animation frankLightR;
 
 	//scores
-	int font, fontHype, fontBalls;
+	int font, fontHype, fontBalls, fontPixelWhite;
 	char high[10] = { "\0" };
 	uint highScore = 0;
 	char current[10] = { "\0" };

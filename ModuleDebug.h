@@ -16,10 +16,12 @@ public:
 	update_status PostUpdate();		// Draw if debug true
 
 	void DrawDebug();
+	void DrawPhysics();
 
 public:
 	//flags
 	bool drawDebug = false;
+	bool drawPhysics = false;
 	bool variables = false;
 	bool lightsON = false;
 

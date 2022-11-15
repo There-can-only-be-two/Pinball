@@ -51,6 +51,7 @@ bool ModuleScene::Start()
 	// Load textures
 	//img = App->textures->Load("pinball/pinball_composition.png");
 	img = App->textures->Load("pinball/background.png");
+	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
 
@@ -59,8 +60,11 @@ bool ModuleScene::Start()
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
 	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
 	fontBalls = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
+	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.,;:$#'! /?%&()@ -+=      " };
+	fontPixelWhite = App->fonts->Load("pinball/Fonts/fontPixelWhiteX2.png", lookupTable, 7);
 
 	//Audio
+	Mix_Volume(-1, 32);
 	Mix_VolumeMusic(10);
 	//App->audio->PlayMusic("Assets/Audio/", 0);
 	//App->audio->LoadFx("Assets/Audio/");
@@ -541,8 +545,7 @@ void ModuleScene::DeleteMap()
 	wallLeft = nullptr;
 
 	delete platformLeft;
-	platformLeft = nullptr;
-	
+	platformLeft = nullptr;	
 	delete platformRight;
 	platformRight = nullptr;
 
@@ -551,22 +554,18 @@ void ModuleScene::DeleteMap()
 
 	delete triangle_left;
 	triangle_left = nullptr;
-
 	delete triangle_right;
 	triangle_right = nullptr;
 
 	delete frankfurt_left;
 	frankfurt_left = nullptr;
-
 	delete frankfurt_right;
 	frankfurt_right = nullptr;
 
 	delete blue;
 	blue = nullptr;
-
 	delete red;
 	red = nullptr;
-
 	delete yellow;
 	yellow = nullptr;
 
@@ -584,7 +583,13 @@ void ModuleScene::DeleteMap()
 
 	delete sensorTriLeft;
 	sensorTriLeft = nullptr;
-
 	delete sensorTriRight;
 	sensorTriRight = nullptr;
+
+	delete sensorComboA1;
+	sensorComboA1 = nullptr;
+	delete sensorComboA2;
+	sensorComboA2 = nullptr;
+	delete sensorComboA3;
+	sensorComboA3 = nullptr;
 }

@@ -89,7 +89,7 @@ update_status ModuleLights::PostUpdate()
 	}
 	if (App->scene_intro->sensorComboA3_Sensed)
 	{
-		SDL_Rect rect = { 27, 66, 27, 34 };
+		SDL_Rect rect = { 27, 63, 27, 37 };
 		App->renderer->Blit(combo_A, 426, 291, &rect);
 	}
 	if (App->scene_intro->sensorComboA1_Sensed &&

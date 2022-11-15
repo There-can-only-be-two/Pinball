@@ -95,8 +95,6 @@ public:
 	// Debug mode
 	bool debug;
 
-private:
-
 	// Box2D World
 
 	// Main ground

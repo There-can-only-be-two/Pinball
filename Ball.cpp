@@ -106,9 +106,13 @@ bool Ball::Update()
 	return true;
 }
 
-bool Ball::PostUpdate() {
+bool Ball::PostUpdate()
+{
 	SDL_Rect rect = { 229, 106, 31, 31 };
 	app->renderer->Blit(texture, position.x, position.y, &rect);
+
+	SDL_Rect rect2 = { 0, 0, 115, 335 };
+	app->renderer->Blit(app->scene_intro->top, 434, 122, &rect2);
 
 	return true;
 }
