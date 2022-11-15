@@ -120,6 +120,11 @@ public:
 	uint bouncer_circle;
 	uint bouncer_tri_1;
 	uint bouncer_tri_2;
+	uint trigger;
+	uint comboA;
+	uint new_ball;
+	uint death;
+	uint game_over;
 
 	// Raycast
 	p2Point<int> ray;
