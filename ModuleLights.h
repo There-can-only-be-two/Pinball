@@ -19,7 +19,7 @@ public:
 public:
 	SDL_Texture* arrows_left = nullptr;
 	SDL_Texture* arrows_mid = nullptr;
-	SDL_Texture* combo_right = nullptr;
+	SDL_Texture* combo_A = nullptr;
 	SDL_Texture* trigger = nullptr;
 	SDL_Texture* x10 = nullptr;
 

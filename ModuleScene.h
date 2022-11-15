@@ -58,17 +58,31 @@ public:
 
 	//Sensors
 	PhysBody* springSensor;
-	bool springSensed;
+	bool spring_Sensed;
 	bool sensed;
 	PhysBody* scorex10sensor;
-	bool scorex10sensed;
+	bool scorex10_Sensed;
 	PhysBody* ballsensor;
-	bool ballsensed;
+	bool ball_Sensed;
 	PhysBody* sensorTriLeft;
-	bool sensorTriLeftSensed;
+	bool sensorTriLeft_Sensed;
 	PhysBody* sensorTriRight;
-	bool sensorTriRightSensed;
-	
+	bool sensorTriRight_Sensed;
+
+	PhysBody* sensorComboA1;
+	bool sensorComboA1_Sensed;
+	PhysBody* sensorComboA2;
+	bool sensorComboA2_Sensed;
+	PhysBody* sensorComboA3;
+	bool sensorComboA3_Sensed;
+
+	PhysBody* sensorComboB1;
+	bool sensorComboB1_Sensed;
+	PhysBody* sensorComboB2;
+	bool sensorComboB2_Sensed;
+	PhysBody* sensorComboB3;
+	bool sensorComboB3_Sensed;
+
 
 	// Textures
 	SDL_Texture* circle;

@@ -69,19 +69,19 @@ bool Ball::Update()
 	position.x = METERS_TO_PIXELS(ballBody->body->GetTransform().p.x - 15);
 	position.y = METERS_TO_PIXELS(ballBody->body->GetTransform().p.y - 15);
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && app->scene_intro->springSensed && springForce < 400 )
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && app->scene_intro->spring_Sensed && springForce < 400 )
 	{
 		springForce += 3.0;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && app->scene_intro->springSensed && springForce > 30)
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && app->scene_intro->spring_Sensed && springForce > 30)
 	{
 		ballBody->body->ApplyForceToCenter(b2Vec2(0, -springForce), true);
 		springForce = 0;
-		app->scene_intro->springSensed = false;
+		app->scene_intro->spring_Sensed = false;
 		LOG("RELEASE BALL");
 	}
 
-	if (app->scene_intro->scorex10sensed)
+	if (app->scene_intro->scorex10_Sensed)
 	{
 		ballBody->body->ApplyForce(b2Vec2(100, -100), ballBody->body->GetWorldCenter(), true);
 		scorex10finished++;
@@ -90,17 +90,17 @@ bool Ball::Update()
 	{
 		ballBody->body->ApplyForce(b2Vec2(-500, 300), ballBody->body->GetWorldCenter(), true);
 		scorex10finished = 0;
-		app->scene_intro->scorex10sensed = false;
+		app->scene_intro->scorex10_Sensed = false;
 	}
 	
-	if (app->scene_intro->ballsensed)
+	if (app->scene_intro->ball_Sensed)
 	{
 		
 		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
 		
 
 		app->scene_intro->ballsCounter--;
-		app->scene_intro->ballsensed = false;
+		app->scene_intro->ball_Sensed = false;
 	}
 
 	return true;
@@ -160,7 +160,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision TRIANGLE");
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
-		app->scene_intro->sensorTriLeftSensed = true;
+		app->scene_intro->sensorTriLeft_Sensed = true;
 		bounceDir = { 1.0f, -0.5f };
 		intensity = 150;
 		bounce = true;
@@ -170,7 +170,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision TRIANGLE");
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
-		app->scene_intro->sensorTriRightSensed = true;
+		app->scene_intro->sensorTriRight_Sensed = true;
 		bounceDir = { -1.0f, -0.5f };
 		intensity = 150;
 		bounce = true;
@@ -184,21 +184,37 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision FRANKFURT");
 		break;
 
+
+		//SENSORS
 	case ColliderType::SPRING_SENSOR:
 		LOG("Collision SPRING_SENSOR");
-		app->scene_intro->springSensed = true;
+		app->scene_intro->spring_Sensed = true;
 		break;
 
 	case ColliderType::SCORE_X10:
 		LOG("Collision SCOREX10");
-		app->scene_intro->scorex10sensed = true;
+		app->scene_intro->scorex10_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->intro);
 		break;
 
 	case ColliderType::BALL_SENSOR:
 		LOG("Collision BALL_SENSOR");
 		if (!app->scene_intro->ray_on)
-			app->scene_intro->ballsensed = true;
+			app->scene_intro->ball_Sensed = true;
+		break;
+	
+	case ColliderType::SENSOR_COMBO_A1:
+		app->scene_intro->sensorComboA1_Sensed = true;
+		break;
+
+	case ColliderType::SENSOR_COMBO_A2:
+		app->scene_intro->sensorComboA2_Sensed = true;
+
+		break;
+
+	case ColliderType::SENSOR_COMBO_A3:
+		app->scene_intro->sensorComboA3_Sensed = true;
+
 		break;
 
 	case ColliderType::UNKNOWN:

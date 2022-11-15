@@ -19,7 +19,7 @@ bool ModuleLights::Start()
 {
 	arrows_left = App->textures->Load("pinball/Lights/arrows_left.png");
 	arrows_mid = App->textures->Load("pinball/Lights/arrows_mid.png");
-	combo_right = App->textures->Load("pinball/Lights/combo_right.png");
+	combo_A = App->textures->Load("pinball/Lights/combo_A.png");
 	trigger = App->textures->Load("pinball/Lights/trigger.png");
 	x10 = App->textures->Load("pinball/Lights/x10.png");
 
@@ -71,8 +71,33 @@ update_status ModuleLights::PostUpdate()
 		SDL_Rect rect = { 48, 0, 48, 148 };
 		App->renderer->Blit(arrows_mid, 231, 522, &rect);
 	}
+	
 
+	//COMBO A
+	SDL_Rect rect = { 0, 0, 27, 100 };
+	App->renderer->Blit(combo_A, 426, 228, &rect);
 
+	if (App->scene_intro->sensorComboA1_Sensed)
+	{
+		SDL_Rect rect = { 27, 0, 27, 30 };
+		App->renderer->Blit(combo_A, 426, 228, &rect);
+	}
+	if (App->scene_intro->sensorComboA2_Sensed)
+	{
+		SDL_Rect rect = { 27, 30, 27, 33 };
+		App->renderer->Blit(combo_A, 426, 258, &rect);
+	}
+	if (App->scene_intro->sensorComboA3_Sensed)
+	{
+		SDL_Rect rect = { 27, 66, 27, 34 };
+		App->renderer->Blit(combo_A, 426, 291, &rect);
+	}
+	if (App->scene_intro->sensorComboA1_Sensed &&
+		App->scene_intro->sensorComboA2_Sensed &&
+		App->scene_intro->sensorComboA3_Sensed)
+	{
+
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -81,7 +106,7 @@ bool ModuleLights::CleanUp()
 {
 	App->textures->Unload(arrows_left);
 	App->textures->Unload(arrows_mid);
-	App->textures->Unload(combo_right);
+	App->textures->Unload(combo_A);
 	App->textures->Unload(trigger);
 	App->textures->Unload(x10);
 	return true;
