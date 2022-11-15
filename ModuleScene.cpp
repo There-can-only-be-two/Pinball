@@ -171,21 +171,23 @@ update_status ModuleScene::Update()
 	
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
 
-	App->fonts->BlitText(600, 175, font, "CURRENT SCORE:");
+	App->fonts->BlitText(600, 185, font, "CURRENT SCORE:");
 
 	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
-	App->fonts->BlitText(700, 330, font, previous);
+	App->fonts->BlitText(800, 330, font, previous);
 
 	if (highScore > currentScore) {
-		App->fonts->BlitText(700, 130, font, high);		
-		App->fonts->BlitText(700, 230, font, current);		
+		App->fonts->BlitText(800, 130, font, high);		
+		App->fonts->BlitText(800, 230, font, current);		
 	}
 	else {
 		highScore = currentScore;
-		App->fonts->BlitText(700, 130, fontHype, high);
-		App->fonts->BlitText(700, 230, fontHype, current);
+		App->fonts->BlitText(800, 130, fontHype, high);
+		App->fonts->BlitText(800, 230, fontHype, current);
 	}
-	
+	#pragma endregion
+
+
 	SDL_Rect recBall = { 229, 106, 31, 31 };
 	App->renderer->Blit(balls, 360, 875+3);
 	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
@@ -215,6 +217,7 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(assets, 315, 209, &redRect);
 	redLight.Update();
 
+
 	SDL_Rect triangLRect = triangleLightL.GetCurrentFrame();
 	App->renderer->Blit(assets, 95, 527, &triangLRect);
 	triangleLightL.Update();
@@ -233,7 +236,6 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(assets, 88, 430, &timeRect);
 	timeLight.Update();
 
-	#pragma endregion
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
 	{
