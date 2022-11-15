@@ -162,6 +162,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
 		app->scene_intro->sensorTriLeft_Sensed = true;
+		app->scene_intro->triangleLightL.SetCurrentFrame(0);
 		bounceDir = { 1.0f, -0.5f };
 		intensity = 180;
 		bounce = true;
@@ -172,6 +173,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_1);
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
 		app->scene_intro->sensorTriRight_Sensed = true;
+		app->scene_intro->triangleLightR.SetCurrentFrame(0);
 		bounceDir = { -1.0f, -0.5f };
 		intensity = 180;
 		bounce = true;

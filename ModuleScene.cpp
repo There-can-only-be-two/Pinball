@@ -79,6 +79,24 @@ bool ModuleScene::Start()
 	redLight.speed = 0.5f;
 	redLight.loop = false;
 	redLight.SetCurrentFrame(3);
+
+	//280, 91
+
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 91, 76, 118 });
+	triangleLightL.speed = 0.5f;
+	triangleLightL.loop = false;
+	triangleLightL.SetCurrentFrame(3);
+
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 91, 76, 118 });
+	triangleLightR.speed = 0.5f;
+	triangleLightR.loop = false;
+	triangleLightR.SetCurrentFrame(3);
 	
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
@@ -181,6 +199,14 @@ update_status ModuleScene::Update()
 	SDL_Rect redRect = redLight.GetCurrentFrame();
 	App->renderer->Blit(assets, 315, 209, &redRect);
 	redLight.Update();
+
+	SDL_Rect triangLRect = triangleLightL.GetCurrentFrame();
+	App->renderer->Blit(assets, 95, 527, &triangLRect);
+	triangleLightL.Update();
+
+	SDL_Rect triangRRect = triangleLightR.GetCurrentFrame();
+	App->renderer->Blit(assets, 342, 527, &triangRRect);
+	triangleLightR.Update();
 
 #pragma endregion
 
