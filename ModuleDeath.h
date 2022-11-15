@@ -3,7 +3,6 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
-#include "SString.h"
 #include <list>
 #include "SString.h"
 
@@ -26,18 +25,20 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void SwapRank(Scores l[]);
 
 public:
 
 	// Lists of physics objects
-	list<Scores> ranking = { {"XAVI", 100000}, {"HECTOR", 99000}, {"JULS", 69000}, {"JAN", 42000}, {"YOU", 0} };
+	Scores ranking[5] = { {"XAVI", 1000000}, {"HECTOR", 99000}, {"JULS", 69000}, {"JAN", 42000}, {"YOU", score } };
+	int score;
 
 	// Textures
 	SDL_Texture* img;
 	int font;
 	
 	// FX
-	uint highScore;
+	uint currentScore;
 	// to store each highscore
 	uint* ranks;
 };

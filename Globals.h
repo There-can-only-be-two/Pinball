@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 #define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
 
@@ -24,7 +25,7 @@ enum update_status
 
 // Configuration -----------
 #define SCREEN_WIDTH 1024
-#define SCREEN_HEIGHT 1024
+#define SCREEN_HEIGHT 968
 #define SCREEN_SIZE 1
 #define WIN_FULLSCREEN false
 #define WIN_RESIZABLE false
