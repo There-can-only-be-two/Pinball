@@ -152,6 +152,40 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	return pbody;
 }
 
+PhysBody* ModulePhysics::CreateCircleSensor(int x, int y, int radius)
+{
+	// Create BODY at position x,y
+	b2BodyDef body;
+	body.type = b2_staticBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	// Add BODY to the world
+	b2Body* b = world->CreateBody(&body);
+
+	// Create SHAPE
+	b2CircleShape shape;
+	shape.m_radius = PIXEL_TO_METERS(radius);
+
+	// Create FIXTURE
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+	fixture.isSensor = true;
+
+	// Add fixture to the BODY
+	b->CreateFixture(&fixture);
+
+	// Create our custom PhysBody class
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	b->SetUserData(pbody);
+	pbody->width = pbody->height = radius;
+
+	// Return our PhysBody class
+	return pbody;
+}
+
+
 PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 {
 	// Create BODY at position x,y

@@ -28,4 +28,6 @@ public:
 	bool combo_right_ON = false;
 	bool trigger_ON = false;
 	bool x10_ON = false;
+
+	int delayComboA;
 };

@@ -55,6 +55,57 @@ bool ModuleScene::Start()
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
 
+	//Load animations
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 144, 2, 52, 52 });
+	blueLight.speed = 0.5f;
+	blueLight.loop = false;
+	blueLight.SetCurrentFrame(3);
+
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 249, 2, 52, 52 });
+	yellowLight.speed = 0.5f;
+	yellowLight.loop = false;
+	yellowLight.SetCurrentFrame(3);
+
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 357, 2, 52, 52 });
+	redLight.speed = 0.5f;
+	redLight.loop = false;
+	redLight.SetCurrentFrame(3);
+
+	//280, 91
+
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 91, 76, 118 });
+	triangleLightL.speed = 0.5f;
+	triangleLightL.loop = false;
+	triangleLightL.SetCurrentFrame(3);
+
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 91, 76, 118 });
+	triangleLightR.speed = 0.5f;
+	triangleLightR.loop = false;
+	triangleLightR.SetCurrentFrame(3);
+
+	timeLight.PushBack({ 444, 248, 50, 50 });
+	timeLight.PushBack({ 501, 248, 50, 50 });
+	timeLight.PushBack({ 444, 248, 50, 50 });
+	timeLight.PushBack({ 501, 248, 50, 50 });
+	timeLight.speed = 0.1f;
+	timeLight.loop = false;
+	timeLight.SetCurrentFrame(3);
+	
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
@@ -74,6 +125,13 @@ bool ModuleScene::Start()
 	bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
 	bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
 	bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
+	trigger = App->audio->LoadFx("pinball/Audio/trigger.wav");
+	comboA = App->audio->LoadFx("pinball/Audio/comboA.wav");
+	new_ball = App->audio->LoadFx("pinball/Audio/new_ball.wav");
+	death = App->audio->LoadFx("pinball/Audio/death.wav");
+	spring = App->audio->LoadFx("pinball/Audio/spring.wav");
+	game_over = App->audio->LoadFx("pinball/Audio/game_over.wav");
+
 
 	//Set variables
 	previousScore = currentScore;
@@ -135,17 +193,48 @@ update_status ModuleScene::Update()
 	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
 	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
 
-	SDL_Rect OffBlue = { 144, 2, 52, 52 };
-	SDL_Rect OnBlue = { 91, 2, 52, 52 };
-	App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
+	//SDL_Rect OffBlue = { 144, 2, 52, 52 };
+	//SDL_Rect OnBlue = { 91, 2, 52, 52 };
+	//App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
 
-	SDL_Rect OffYellow = { 249, 2, 52, 52 };
-	SDL_Rect OnYellow = { 196, 2, 52, 52 };
-	App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
+	SDL_Rect blueRect = blueLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 202, 209, &blueRect);
+	blueLight.Update();
 
-	SDL_Rect OffRed = { 357, 2, 52, 52 };
-	SDL_Rect OnRed = { 303, 2, 52, 52 };
-	App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
+	//SDL_Rect OffYellow = { 249, 2, 52, 52 };
+	//SDL_Rect OnYellow = { 196, 2, 52, 52 };
+	//App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
+
+	SDL_Rect yellowRect = yellowLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 258, 306, &yellowRect);
+	yellowLight.Update();
+
+	//SDL_Rect OffRed = { 357, 2, 52, 52 };
+	//SDL_Rect OnRed = { 303, 2, 52, 52 };
+	//App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
+
+	SDL_Rect redRect = redLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 315, 209, &redRect);
+	redLight.Update();
+
+
+	SDL_Rect triangLRect = triangleLightL.GetCurrentFrame();
+	App->renderer->Blit(assets, 95, 527, &triangLRect);
+	triangleLightL.Update();
+
+	SDL_Rect triangRRect = triangleLightR.GetCurrentFrame();
+	App->renderer->Blit(assets, 342, 527, &triangRRect);
+	triangleLightR.Update();
+
+	SDL_Rect frankLRect = { 9, 156, 50, 70 };
+	App->renderer->Blit(assets, 157, 330, &frankLRect);
+
+	SDL_Rect frankRRect = {71, 155, 50, 70};
+	App->renderer->Blit(assets, 350, 330, &frankRRect);
+
+	SDL_Rect timeRect = timeLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 88, 430, &timeRect);
+	timeLight.Update();
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
@@ -453,6 +542,9 @@ void ModuleScene::CreateSensors()
 	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
 	springSensor->ctype = ColliderType::SPRING_SENSOR;
 
+	timeSensor = App->physics->CreateCircleSensor(112, 455, 23);
+	timeSensor->ctype = ColliderType::TIME_SENSOR;
+
 	int SENSOR_X10[8]
 	{
 		455, 414,
@@ -470,6 +562,8 @@ void ModuleScene::CreateSensors()
 	296, 832,
 	253, 850
 	};
+
+
 
 	ballsensor = App->physics->CreateChainSensor(0, 0, BALLSENSOR, 6);
 	ballsensor->body->SetType(b2_staticBody);
@@ -497,6 +591,7 @@ void ModuleScene::CreateSensors()
 	sensorTriRight->body->SetType(b2_staticBody);
 	sensorTriRight->ctype = ColliderType::TRIANGLER;
 
+	//COMBO A
 	int SENSOR_COMBO_A1[8] =
 	{
 		435, 229,
@@ -529,6 +624,40 @@ void ModuleScene::CreateSensors()
 	sensorComboA3 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_A3, 8);
 	sensorComboA3->body->SetType(b2_staticBody);
 	sensorComboA3->ctype = ColliderType::SENSOR_COMBO_A3;
+
+	//COMBO B
+	int SENSOR_COMBO_B1[8] =
+	{
+		225, 116,
+		225, 161,
+		234, 161,
+		234, 116,
+	};
+	sensorComboB1 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_B1, 8);
+	sensorComboB1->body->SetType(b2_staticBody);
+	sensorComboB1->ctype = ColliderType::SENSOR_COMBO_B1;
+
+	int SENSOR_COMBO_B2[8] =
+	{
+		281, 116,
+		281, 161,
+		290, 161,
+		290, 116,
+	};
+	sensorComboB2 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_B2, 8);
+	sensorComboB2->body->SetType(b2_staticBody);
+	sensorComboB2->ctype = ColliderType::SENSOR_COMBO_B2;
+
+	int SENSOR_COMBO_B3[8] =
+	{
+		337, 116,
+		337, 161,
+		346, 161,
+		346, 116
+	};
+	sensorComboB3 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_B3, 8);
+	sensorComboB3->body->SetType(b2_staticBody);
+	sensorComboB3->ctype = ColliderType::SENSOR_COMBO_B3;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)

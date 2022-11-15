@@ -25,6 +25,8 @@ bool Flippers::Start()
 {
 	LOG("Loading player");
 
+	texture = app->textures->Load("pinball/assets.png");
+
 	//FLIPPER LEFT
 	flipperLeft = app->physics->CreateRectangle(171, 697, 90, 30);
 	flipperLeft->listener = this;
@@ -92,6 +94,7 @@ bool Flippers::Update()
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		flipperLeft->body->SetAngularVelocity(-1500 * DEGTORAD);
+		LOG("%f", flipperLeft->GetRotation());
 	}
 	else
 	{
@@ -101,11 +104,18 @@ bool Flippers::Update()
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		flipperRight->body->SetAngularVelocity(1500 * DEGTORAD);
+		LOG("%f", flipperRight->GetRotation());
 	}
 	else
 	{
 		flipperRight->body->SetAngularVelocity(-1500 * DEGTORAD);
 	}
+
+	SDL_Rect rectL = { 4, 86, 86, 60 };
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 36, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 34, &rectL, 10.0f, flipperLeft->GetRotation()-31, 60, 30);
+
+	SDL_Rect rectR = { 118, 86, 86, 60 };
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 45, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 34, &rectR, 10.0f, flipperRight->GetRotation()+31 , 21, 30);
 
 	return true;
 }

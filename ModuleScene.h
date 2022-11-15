@@ -69,6 +69,8 @@ public:
 	bool sensorTriLeft_Sensed;
 	PhysBody* sensorTriRight;
 	bool sensorTriRight_Sensed;
+	PhysBody* timeSensor;
+	bool timeSensor_Sensed;
 
 	PhysBody* sensorComboA1;
 	bool sensorComboA1_Sensed;
@@ -99,8 +101,7 @@ public:
 	Animation yellowLight;
 	Animation triangleLightL;
 	Animation triangleLightR;
-	Animation frankLightL;
-	Animation frankLightR;
+	Animation timeLight;
 
 	//scores
 	int font, fontHype, fontBalls, fontPixelWhite;
@@ -120,6 +121,11 @@ public:
 	uint bouncer_circle;
 	uint bouncer_tri_1;
 	uint bouncer_tri_2;
+	uint trigger;
+	uint comboA;
+	uint new_ball;
+	uint death;
+	uint game_over;
 
 	// Raycast
 	p2Point<int> ray;
