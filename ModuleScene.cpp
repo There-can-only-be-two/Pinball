@@ -97,6 +97,14 @@ bool ModuleScene::Start()
 	triangleLightR.speed = 0.5f;
 	triangleLightR.loop = false;
 	triangleLightR.SetCurrentFrame(3);
+
+	timeLight.PushBack({ 444, 248, 50, 50 });
+	timeLight.PushBack({ 501, 248, 50, 50 });
+	timeLight.PushBack({ 444, 248, 50, 50 });
+	timeLight.PushBack({ 501, 248, 50, 50 });
+	timeLight.speed = 0.1f;
+	timeLight.loop = false;
+	timeLight.SetCurrentFrame(3);
 	
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
@@ -213,6 +221,10 @@ update_status ModuleScene::Update()
 
 	SDL_Rect frankRRect = {71, 155, 50, 70};
 	App->renderer->Blit(assets, 350, 330, &frankRRect);
+
+	SDL_Rect timeRect = timeLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 88, 430, &timeRect);
+	timeLight.Update();
 
 #pragma endregion
 
@@ -521,6 +533,9 @@ void ModuleScene::CreateSensors()
 	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
 	springSensor->ctype = ColliderType::SPRING_SENSOR;
 
+	timeSensor = App->physics->CreateCircleSensor(112, 455, 23);
+	timeSensor->ctype = ColliderType::TIME_SENSOR;
+
 	int SENSOR_X10[8]
 	{
 		455, 414,
@@ -538,6 +553,8 @@ void ModuleScene::CreateSensors()
 	296, 832,
 	253, 850
 	};
+
+
 
 	ballsensor = App->physics->CreateChainSensor(0, 0, BALLSENSOR, 6);
 	ballsensor->body->SetType(b2_staticBody);

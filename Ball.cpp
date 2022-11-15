@@ -220,6 +220,12 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 		break;
 
+	case ColliderType::TIME_SENSOR:
+		app->scene_intro->timeSensor_Sensed = true;
+		app->scene_intro->timeLight.SetCurrentFrame(0);
+
+		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
