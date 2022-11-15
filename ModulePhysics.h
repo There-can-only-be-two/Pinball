@@ -14,7 +14,8 @@
 #define METERS_TO_PIXELS(m) ((int) floor(PIXELS_PER_METER * m))
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
-enum class ColliderType {
+enum class ColliderType
+{
 	BALL,
 	FLIPPERS,
 	WALL,
@@ -26,11 +27,18 @@ enum class ColliderType {
 	TRIANGLER,
 	FRANKFURTL,
 	FRANKFURTR,
+
+	//SENSORS
 	SPRING_SENSOR,
-	SCORE_X10,
 	BALL_SENSOR,
+	SCORE_X10,
+	SENSOR_COMBO_A1,
+	SENSOR_COMBO_A2,
+	SENSOR_COMBO_A3,
+	SENSOR_COMBO_B1,
+	SENSOR_COMBO_B2,
+	SENSOR_COMBO_B3,
 	UNKNOWN
-	// ..
 };
 
 // Small class to return to other modules to track position and rotation of physics bodies
