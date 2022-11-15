@@ -115,6 +115,7 @@ bool Ball::PostUpdate() {
 
 void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+
 	switch (bodyB->ctype)
 	{
 	case ColliderType::FLIPPERS:
@@ -129,31 +130,24 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision BLUE_25");
 		app->scene_intro->currentScore += 25;
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->blue->body->GetWorldCenter() };
-		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
-		intensity = 70;
+		intensity = 100;
 		break;
 
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
 		app->scene_intro->currentScore += 50;
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->yellow->body->GetWorldCenter() };
-		app->audio->PlayFx(app->scene_intro->bouncer_circle);
 		bounce = true;
-		intensity = 70;
+		intensity = 100;
 		break;
 
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
 		app->scene_intro->currentScore += 100;
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->red->body->GetWorldCenter() };
-		app->audio->PlayFx(app->scene_intro->bouncer_circle);
-		intensity = 70;
 		bounce = true;
-		break;
-
-	case ColliderType::DIAMOND:
-		LOG("Collision DIAMOND");
+		intensity = 100;	
 		break;
 
 	case ColliderType::TRIANGLEL:
@@ -162,7 +156,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
 		app->scene_intro->sensorTriLeftSensed = true;
 		bounceDir = { 1.0f, -0.5f };
-		intensity = 150;
+		intensity = 180;
 		bounce = true;
 		break;
 
@@ -172,7 +166,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->bouncer_tri_2);
 		app->scene_intro->sensorTriRightSensed = true;
 		bounceDir = { -1.0f, -0.5f };
-		intensity = 150;
+		intensity = 180;
 		bounce = true;
 		break;
 

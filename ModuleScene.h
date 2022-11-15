@@ -4,6 +4,7 @@
 #include "p2Point.h"
 #include "Globals.h"
 #include "Entity.h"
+#include "Animation.h"
 
 class PhysBody;
 
@@ -76,6 +77,15 @@ public:
 	SDL_Texture* rick;
 	SDL_Texture* img;
 	SDL_Texture* balls;
+	SDL_Texture* assets;
+
+	Animation blueLight;
+	Animation redLight;
+	Animation yellowLight;
+	Animation triangleLightL;
+	Animation triangleLightR;
+	Animation frankLightL;
+	Animation frankLightR;
 
 	//scores
 	int font, fontHype, fontBalls;
