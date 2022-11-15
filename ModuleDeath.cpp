@@ -39,7 +39,7 @@ bool ModuleDeath::Start()
 	img = App->textures->Load("pinball/title1.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
-	fontFirst = App->fonts->Load("pinball/Fonts/red.png", fontText, 1);
+	fontFirst = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
 	score = App->scene_intro->currentScore;
 	
 	OutFileRank(ranking);

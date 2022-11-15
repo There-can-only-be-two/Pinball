@@ -133,7 +133,7 @@ update_status ModuleLights::PostUpdate()
 	
 
 	//COMBO B
-	SDL_Rect rect = { 0, 0, 27, 100 };
+	//SDL_Rect rect = { 0, 0, 27, 100 };
 	App->renderer->Blit(trigger, 426, 228, &rect);
 
 	if (delayComboA == 0)
