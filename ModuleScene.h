@@ -99,8 +99,6 @@ public:
 	Animation yellowLight;
 	Animation triangleLightL;
 	Animation triangleLightR;
-	Animation frankLightL;
-	Animation frankLightR;
 
 	//scores
 	int font, fontHype, fontBalls, fontPixelWhite;

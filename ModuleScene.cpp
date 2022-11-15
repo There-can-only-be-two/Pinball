@@ -55,6 +55,31 @@ bool ModuleScene::Start()
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
 
+	//Load animations
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 144, 2, 52, 52 });
+	blueLight.speed = 0.5f;
+	blueLight.loop = false;
+	blueLight.SetCurrentFrame(3);
+
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 249, 2, 52, 52 });
+	yellowLight.speed = 0.5f;
+	yellowLight.loop = false;
+	yellowLight.SetCurrentFrame(3);
+
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 357, 2, 52, 52 });
+	redLight.speed = 0.5f;
+	redLight.loop = false;
+	redLight.SetCurrentFrame(3);
+	
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
 	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
@@ -133,17 +158,29 @@ update_status ModuleScene::Update()
 	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
 	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
 
-	SDL_Rect OffBlue = { 144, 2, 52, 52 };
-	SDL_Rect OnBlue = { 91, 2, 52, 52 };
-	App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
+	//SDL_Rect OffBlue = { 144, 2, 52, 52 };
+	//SDL_Rect OnBlue = { 91, 2, 52, 52 };
+	//App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
 
-	SDL_Rect OffYellow = { 249, 2, 52, 52 };
-	SDL_Rect OnYellow = { 196, 2, 52, 52 };
-	App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
+	SDL_Rect blueRect = blueLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 202, 209, &blueRect);
+	blueLight.Update();
 
-	SDL_Rect OffRed = { 357, 2, 52, 52 };
-	SDL_Rect OnRed = { 303, 2, 52, 52 };
-	App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
+	//SDL_Rect OffYellow = { 249, 2, 52, 52 };
+	//SDL_Rect OnYellow = { 196, 2, 52, 52 };
+	//App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
+
+	SDL_Rect yellowRect = yellowLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 258, 306, &yellowRect);
+	yellowLight.Update();
+
+	//SDL_Rect OffRed = { 357, 2, 52, 52 };
+	//SDL_Rect OnRed = { 303, 2, 52, 52 };
+	//App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
+
+	SDL_Rect redRect = redLight.GetCurrentFrame();
+	App->renderer->Blit(assets, 315, 209, &redRect);
+	redLight.Update();
 
 #pragma endregion
 
