@@ -125,6 +125,13 @@ bool ModuleScene::Start()
 	bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
 	bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
 	bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
+	trigger = App->audio->LoadFx("pinball/Audio/trigger.wav");
+	comboA = App->audio->LoadFx("pinball/Audio/comboA.wav");
+	new_ball = App->audio->LoadFx("pinball/Audio/new_ball.wav");
+	death = App->audio->LoadFx("pinball/Audio/death.wav");
+	spring = App->audio->LoadFx("pinball/Audio/spring.wav");
+	game_over = App->audio->LoadFx("pinball/Audio/game_over.wav");
+
 
 	//Set variables
 	previousScore = currentScore;
@@ -155,7 +162,7 @@ update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 10, 0);
 
-#pragma region UI
+	#pragma region UI
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
@@ -226,7 +233,7 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(assets, 88, 430, &timeRect);
 	timeLight.Update();
 
-#pragma endregion
+	#pragma endregion
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
 	{
@@ -582,6 +589,7 @@ void ModuleScene::CreateSensors()
 	sensorTriRight->body->SetType(b2_staticBody);
 	sensorTriRight->ctype = ColliderType::TRIANGLER;
 
+	//COMBO A
 	int SENSOR_COMBO_A1[8] =
 	{
 		435, 229,
@@ -614,6 +622,40 @@ void ModuleScene::CreateSensors()
 	sensorComboA3 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_A3, 8);
 	sensorComboA3->body->SetType(b2_staticBody);
 	sensorComboA3->ctype = ColliderType::SENSOR_COMBO_A3;
+
+	//COMBO B
+	int SENSOR_COMBO_B1[8] =
+	{
+		225, 116,
+		225, 161,
+		234, 161,
+		234, 116,
+	};
+	sensorComboB1 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_B1, 8);
+	sensorComboB1->body->SetType(b2_staticBody);
+	sensorComboB1->ctype = ColliderType::SENSOR_COMBO_B1;
+
+	int SENSOR_COMBO_B2[8] =
+	{
+		281, 116,
+		281, 161,
+		290, 161,
+		290, 116,
+	};
+	sensorComboB2 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_B2, 8);
+	sensorComboB2->body->SetType(b2_staticBody);
+	sensorComboB2->ctype = ColliderType::SENSOR_COMBO_B2;
+
+	int SENSOR_COMBO_B3[8] =
+	{
+		337, 116,
+		337, 161,
+		346, 161,
+		346, 116
+	};
+	sensorComboB3 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_B3, 8);
+	sensorComboB3->body->SetType(b2_staticBody);
+	sensorComboB3->ctype = ColliderType::SENSOR_COMBO_B3;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
