@@ -69,6 +69,8 @@ public:
 	bool sensorTriLeft_Sensed;
 	PhysBody* sensorTriRight;
 	bool sensorTriRight_Sensed;
+	PhysBody* timeSensor;
+	bool timeSensor_Sensed;
 
 	PhysBody* sensorComboA1;
 	bool sensorComboA1_Sensed;
@@ -99,6 +101,7 @@ public:
 	Animation yellowLight;
 	Animation triangleLightL;
 	Animation triangleLightR;
+	Animation timeLight;
 
 	//scores
 	int font, fontHype, fontBalls, fontPixelWhite;
