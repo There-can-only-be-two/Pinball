@@ -208,6 +208,12 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(assets, 342, 527, &triangRRect);
 	triangleLightR.Update();
 
+	SDL_Rect frankLRect = { 9, 156, 50, 70 };
+	App->renderer->Blit(assets, 157, 330, &frankLRect);
+
+	SDL_Rect frankRRect = {71, 155, 50, 70};
+	App->renderer->Blit(assets, 350, 330, &frankRRect);
+
 #pragma endregion
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
