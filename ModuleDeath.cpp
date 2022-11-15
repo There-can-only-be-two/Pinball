@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "Globals.h"
 #include <iostream>
 #include <fstream>
@@ -12,13 +14,12 @@
 #include "ModuleFonts.h"
 #include "ModuleScene.h"
 
+
 ModuleDeath::ModuleDeath(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
 	// Initialise all the internal class variables, at least to NULL pointer
 	//ranking.
-
-	
 }
 
 ModuleDeath::~ModuleDeath()
@@ -37,12 +38,14 @@ bool ModuleDeath::Start()
 	// Load textures
 	img = App->textures->Load("pinball/title1.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
-	font = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
-	
+	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
+	fontFirst = App->fonts->Load("pinball/Fonts/red.png", fontText, 1);
 	score = App->scene_intro->currentScore;
-
 	
-	
+	OutFileRank(ranking);
+	SwapRank(ranking);
+	//AddScore(ranking, score);
+	//InFileRank(ranking);
 	return ret;
 }
 
@@ -53,30 +56,28 @@ bool ModuleDeath::CleanUp()
 	
 	App->fonts->UnLoad(font);
 	
-	// Ranking text
-	ofstream myfile;
-	myfile.open("RANKING.txt");
-	for (int i = 0; i < 5; i++) {
-		myfile << ranking[i].name.GetString() << ", " << ranking[i].score << ";\n";
-	}
-	
-	myfile.close();
-
 	return true;
 }
 
 update_status ModuleDeath::Update()
 {
-	App->renderer->Blit(img, 0, 0);
+	//App->renderer->Blit(img, 0, 0);
 	App->fonts->BlitText(422, 75, font, "RANKING");
 	
 	char scoreFont[10] = { "\0" };
 	
-
 	for (int i = 0; i < 5; i++) {
-		App->fonts->BlitText(310, 150*(i+1), font, ranking[i].name.GetString());
-		sprintf_s(scoreFont, 10, "%7d", ranking[i].score);
-		App->fonts->BlitText(520, 150 * (i + 1), font, scoreFont);
+		if (ranking[i].name == "YOU") {
+			App->fonts->BlitText(310, 150 * (i + 1), fontFirst, ranking[i].name.c_str());
+			sprintf_s(scoreFont, 10, "%7d", ranking[i].score);
+			App->fonts->BlitText(520, 150 * (i + 1), fontFirst, scoreFont);
+
+		}
+		else {
+			App->fonts->BlitText(310, 150 * (i + 1), font, ranking[i].name.c_str());
+			sprintf_s(scoreFont, 10, "%7d", ranking[i].score);
+			App->fonts->BlitText(520, 150 * (i + 1), font, scoreFont);
+		}
 	}
 
 	// If user presses SPACE, enable RayCast
@@ -89,9 +90,17 @@ update_status ModuleDeath::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModuleDeath::AddScore(Scores l[], int score) {
+	if (l[4].score <= score) {
+		l[4].name = "YOU";
+		l[4].score = score;
+	}
+	SwapRank(l);
+}
+
 void ModuleDeath::SwapRank(Scores l[]) {
 	int temp_score;
-	SString	temp_name;
+	string temp_name;
 	for (int i = 0; i < 4; i++) {
 		if (l[i].score< l[i+1].score) {
 			//Swap scores
@@ -109,4 +118,36 @@ void ModuleDeath::SwapRank(Scores l[]) {
 			continue;
 		}
 	}
+}
+
+void ModuleDeath::InFileRank(Scores l[]) {
+	// Ranking text
+	ofstream myfile;
+	myfile.open("RANKING.txt");
+	for (int i = 0; i < 5; i++) {
+		myfile << l[i].name << " " << l[i].score << ";\n";
+	}
+
+	myfile.close();
+
+}
+
+void ModuleDeath::OutFileRank(Scores l[]) {
+	ifstream myfile;
+	myfile.open("RANKING.txt");
+	string line;
+	int i = 0;
+	string a[10];
+	while (getline(myfile, line)) {
+		a[i] = line;
+		i++;
+	}
+
+	for (int j = 0; j < 5; j++) {
+		
+		//l[j].name = (a[j]);
+		l[j].score = (int)atoi(a[j+5].c_str());
+		l[j].name =  a[j];
+	}
+	
 }

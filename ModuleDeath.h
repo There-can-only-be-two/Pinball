@@ -5,9 +5,9 @@
 #include "Globals.h"
 #include <list>
 #include "SString.h"
-
+#include <string>
 struct Scores {
-	SString name;
+	string name;
 	int score;
 };
 
@@ -25,20 +25,24 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	void SwapRank(Scores l[]);
-	void InScores(Scores l[]);
-	void OutScores(Scores l[]);
 	void AddScore(Scores l[], int current);
+	
+	// Swap to write scores in order so it can be a ranking
+	void SwapRank(Scores l[]);
+	// Write names and scores in the .txt file
+	void InFileRank(Scores l[]);
+	// Extract names out of the.txt
+	void OutFileRank(Scores l[]);
 
 public:
 
 	// Lists of physics objects
-	Scores ranking[5] = { {"XAVI", 1000000}, {"HECTOR", 99000}, {"JULS", 69000}, {"JAN", 42000}, {"YOU", score } };
+	Scores ranking[5];// = { {"XAVI", 1000000}, {"HECTOR", 99000}, {"JULS", 69000}, {"JAN", 42000}, {"YOU", score } };
 	int score;
 
 	// Textures
 	SDL_Texture* img;
-	int font;
+	int font, fontFirst;
 	
 	// FX
 	uint currentScore;

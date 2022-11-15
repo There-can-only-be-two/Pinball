@@ -104,7 +104,7 @@ update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 10, 0);
 
-#pragma region UI
+	#pragma region UI
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
@@ -113,21 +113,23 @@ update_status ModuleScene::Update()
 	
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
 
-	App->fonts->BlitText(600, 175, font, "CURRENT SCORE:");
+	App->fonts->BlitText(600, 185, font, "CURRENT SCORE:");
 
 	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
-	App->fonts->BlitText(700, 330, font, previous);
+	App->fonts->BlitText(800, 330, font, previous);
 
 	if (highScore > currentScore) {
-		App->fonts->BlitText(700, 130, font, high);		
-		App->fonts->BlitText(700, 230, font, current);		
+		App->fonts->BlitText(800, 130, font, high);		
+		App->fonts->BlitText(800, 230, font, current);		
 	}
 	else {
 		highScore = currentScore;
-		App->fonts->BlitText(700, 130, fontHype, high);
-		App->fonts->BlitText(700, 230, fontHype, current);
+		App->fonts->BlitText(800, 130, fontHype, high);
+		App->fonts->BlitText(800, 230, fontHype, current);
 	}
-	
+	#pragma endregion
+
+
 	SDL_Rect recBall = { 229, 106, 31, 31 };
 	App->renderer->Blit(balls, 360, 875+3);
 	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
@@ -145,7 +147,6 @@ update_status ModuleScene::Update()
 	SDL_Rect OnRed = { 303, 2, 52, 52 };
 	App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
 
-#pragma endregion
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
 	{
