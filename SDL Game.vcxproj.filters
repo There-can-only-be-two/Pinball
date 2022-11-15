@@ -106,6 +106,9 @@
     <ClInclude Include="ModuleLights.h">
       <Filter>Source\Game Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source\Core Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityManager.cpp">

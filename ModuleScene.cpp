@@ -12,6 +12,7 @@
 #include "EntityManager.h"
 #include "ModuleFonts.h"
 #include "ModuleLights.h"
+#include "Animation.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -50,7 +51,7 @@ bool ModuleScene::Start()
 	// Load textures
 	//img = App->textures->Load("pinball/pinball_composition.png");
 	img = App->textures->Load("pinball/background.png");
-	//img = App->textures->Load("pinball/top.png");
+	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
 
 	//Fonts
@@ -87,6 +88,7 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(box);
 	App->textures->Unload(rick);
 	App->textures->Unload(img);
+	App->textures->Unload(assets);
 	App->fonts->UnLoad(font);
 	App->lights->Disable();
 	DeleteMap();
@@ -126,6 +128,18 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(balls, 360, 875+3);
 	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
 	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
+
+	SDL_Rect OffBlue = { 144, 2, 52, 52 };
+	SDL_Rect OnBlue = { 91, 2, 52, 52 };
+	App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
+
+	SDL_Rect OffYellow = { 249, 2, 52, 52 };
+	SDL_Rect OnYellow = { 196, 2, 52, 52 };
+	App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
+
+	SDL_Rect OffRed = { 357, 2, 52, 52 };
+	SDL_Rect OnRed = { 303, 2, 52, 52 };
+	App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
 
 #pragma endregion
 
@@ -314,29 +328,29 @@ void ModuleScene::CreateColliders()
 
 
 	// Bounce
-	int DIAMOND[34] =
-	{
-		205, 440,
-		246, 420,
-		251, 418,
-		256, 418,
-		261, 418,
-		266, 419,
-		308, 438,
-		313, 442,
-		314, 448,
-		314, 454,
-		309, 460,
-		268, 480,
-		257, 482,
-		247, 480,
-		204, 461,
-		199, 454,
-		199, 445
-	};
-	diamond = App->physics->CreateChain(0, 0, DIAMOND, 34);
-	diamond->body->SetType(b2BodyType::b2_staticBody);
-	diamond->ctype = ColliderType::DIAMOND;
+	//int DIAMOND[34] =
+	//{
+	//	205, 440,
+	//	246, 420,
+	//	251, 418,
+	//	256, 418,
+	//	261, 418,
+	//	266, 419,
+	//	308, 438,
+	//	313, 442,
+	//	314, 448,
+	//	314, 454,
+	//	309, 460,
+	//	268, 480,
+	//	257, 482,
+	//	247, 480,
+	//	204, 461,
+	//	199, 454,
+	//	199, 445
+	//};
+	//diamond = App->physics->CreateChain(0, 0, DIAMOND, 34);
+	//diamond->body->SetType(b2BodyType::b2_staticBody);
+	//diamond->ctype = ColliderType::DIAMOND;
 
 	int REBOUND_LEFT[28] =
 	{
@@ -355,6 +369,7 @@ void ModuleScene::CreateColliders()
 		123, 534,
 		115, 529
 	};
+
 	triangle_left = App->physics->CreateChain(0, 0, REBOUND_LEFT, 28);
 	triangle_left->body->SetType(b2BodyType::b2_staticBody);
 	
