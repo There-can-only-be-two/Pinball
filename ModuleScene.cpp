@@ -514,9 +514,9 @@ void ModuleScene::CreateSensors()
 		444, 288,
 		452, 287
 	};
-	sensorComboA1 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_A2, 8);
-	sensorComboA1->body->SetType(b2_staticBody);
-	sensorComboA1->ctype = ColliderType::SENSOR_COMBO_A2;
+	sensorComboA2 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_A2, 8);
+	sensorComboA2->body->SetType(b2_staticBody);
+	sensorComboA2->ctype = ColliderType::SENSOR_COMBO_A2;
 
 	int SENSOR_COMBO_A3[8] =
 	{
@@ -525,9 +525,9 @@ void ModuleScene::CreateSensors()
 		438, 322,
 		446, 326
 	};
-	sensorComboA1 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_A3, 8);
-	sensorComboA1->body->SetType(b2_staticBody);
-	sensorComboA1->ctype = ColliderType::SENSOR_COMBO_A3;
+	sensorComboA3 = App->physics->CreateChainSensor(0, 0, SENSOR_COMBO_A3, 8);
+	sensorComboA3->body->SetType(b2_staticBody);
+	sensorComboA3->ctype = ColliderType::SENSOR_COMBO_A3;
 }
 
 void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)

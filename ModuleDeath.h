@@ -26,8 +26,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void SwapRank(Scores l[]);
-	void Extract(Scores l[]);
-
+	void InScores(Scores l[]);
+	void OutScores(Scores l[]);
+	void AddScore(Scores l[], int current);
 
 public:
 
