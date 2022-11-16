@@ -52,55 +52,6 @@ bool ModuleScene::Start()
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
 	timebar = App->textures->Load("pinball/Barra.png");
-
-	//Load animations
-	blueLight.PushBack({ 91, 2, 52, 52 });
-	blueLight.PushBack({ 91, 2, 52, 52 });
-	blueLight.PushBack({ 91, 2, 52, 52 });
-	blueLight.PushBack({ 144, 2, 52, 52 });
-	blueLight.speed = 0.5f; //NOTA: Para el fps control, añadir variable basada en los fps a la velocidad
-	blueLight.loop = false;
-	blueLight.SetCurrentFrame(3);
-
-	yellowLight.PushBack({ 196, 2, 52, 52 });
-	yellowLight.PushBack({ 196, 2, 52, 52 });
-	yellowLight.PushBack({ 196, 2, 52, 52 });
-	yellowLight.PushBack({ 249, 2, 52, 52 });
-	yellowLight.speed = 0.5f;
-	yellowLight.loop = false;
-	yellowLight.SetCurrentFrame(3);
-
-	redLight.PushBack({ 303, 2, 52, 52 });
-	redLight.PushBack({ 303, 2, 52, 52 });
-	redLight.PushBack({ 303, 2, 52, 52 });
-	redLight.PushBack({ 357, 2, 52, 52 });
-	redLight.speed = 0.5f;
-	redLight.loop = false;
-	redLight.SetCurrentFrame(3);
-
-	triangleLightL.PushBack({ 280, 210, 76, 118 });
-	triangleLightL.PushBack({ 280, 210, 76, 118 });
-	triangleLightL.PushBack({ 280, 210, 76, 118 });
-	triangleLightL.PushBack({ 280, 91, 76, 118 });
-	triangleLightL.speed = 0.5f;
-	triangleLightL.loop = false;
-	triangleLightL.SetCurrentFrame(3);
-
-	triangleLightR.PushBack({ 365, 210, 76, 118 });
-	triangleLightR.PushBack({ 365, 210, 76, 118 });
-	triangleLightR.PushBack({ 365, 210, 76, 118 });
-	triangleLightR.PushBack({ 365, 91, 76, 118 });
-	triangleLightR.speed = 0.5f;
-	triangleLightR.loop = false;
-	triangleLightR.SetCurrentFrame(3);
-
-	timeLight.PushBack({ 444, 248, 50, 50 });
-	timeLight.PushBack({ 501, 248, 50, 50 });
-	timeLight.PushBack({ 444, 248, 50, 50 });
-	timeLight.PushBack({ 501, 248, 50, 50 });
-	timeLight.speed = 0.1f;
-	timeLight.loop = false;
-	timeLight.SetCurrentFrame(3);
 	
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
@@ -172,7 +123,27 @@ update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 10, 0);
 
+	SDL_Rect recBall = { 229, 106, 31, 31 };
+	App->renderer->Blit(balls, 360, 875+3);
+	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
+	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
+
+	SDL_Rect frankLRect = { 9, 156, 50, 70 };
+	App->renderer->Blit(assets, 157, 330, &frankLRect);
+
+	SDL_Rect frankRRect = {71, 155, 50, 70};
+	App->renderer->Blit(assets, 350, 330, &frankRRect);
+
+	
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
+	{
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->entityManager->Disable();
+	}
+
 	#pragma region UI
+  
+  
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
@@ -191,8 +162,8 @@ update_status ModuleScene::Update()
 	App->fonts->BlitText(920, 400, font, multiplier);
 
 	if (highScore > currentScore) {
-		App->fonts->BlitText(800, 130, font, high);		
-		App->fonts->BlitText(800, 230, font, current);		
+		App->fonts->BlitText(800, 130, font, high);
+		App->fonts->BlitText(800, 230, font, current);
 	}
 	else {
 		highScore = currentScore;
@@ -207,51 +178,14 @@ update_status ModuleScene::Update()
 	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
 	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
 
-	//SDL_Rect OffBlue = { 144, 2, 52, 52 };
-	//SDL_Rect OnBlue = { 91, 2, 52, 52 };
-	//App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
-
-	SDL_Rect blueRect = blueLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 202, 209, &blueRect);
-	blueLight.Update();
-
-	//SDL_Rect OffYellow = { 249, 2, 52, 52 };
-	//SDL_Rect OnYellow = { 196, 2, 52, 52 };
-	//App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
-
-	SDL_Rect yellowRect = yellowLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 258, 306, &yellowRect);
-	yellowLight.Update();
-
-	//SDL_Rect OffRed = { 357, 2, 52, 52 };
-	//SDL_Rect OnRed = { 303, 2, 52, 52 };
-	//App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
-
-	SDL_Rect redRect = redLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 315, 209, &redRect);
-	redLight.Update();
-
-
-	SDL_Rect triangLRect = triangleLightL.GetCurrentFrame();
-	App->renderer->Blit(assets, 95, 527, &triangLRect);
-	triangleLightL.Update();
-
-	SDL_Rect triangRRect = triangleLightR.GetCurrentFrame();
-	App->renderer->Blit(assets, 342, 527, &triangRRect);
-	triangleLightR.Update();
-
 	SDL_Rect frankLRect = { 9, 156, 50, 70 };
 	App->renderer->Blit(assets, 157, 330, &frankLRect);
 
 	SDL_Rect frankRRect = {71, 155, 50, 70};
 	App->renderer->Blit(assets, 350, 330, &frankRRect);
 
-	SDL_Rect timeRect = timeLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 88, 430, &timeRect);
-	timeLight.Update();
 
 	//TIME FUNCTION
-
 	if (time > 0) {
 		SDL_Rect bar = { 71, 865, 240, 60 };
 		App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
@@ -301,6 +235,7 @@ update_status ModuleScene::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 	#pragma endregion
+
 
 	// Keep playing
 	return UPDATE_CONTINUE;

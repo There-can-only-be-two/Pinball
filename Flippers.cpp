@@ -112,10 +112,10 @@ bool Flippers::Update()
 	}
 
 	SDL_Rect rectL = { 4, 86, 86, 60 };
-	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 36, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 34, &rectL, 10.0f, flipperLeft->GetRotation()-31, 60, 30);
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 36, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 34, &rectL, 10.0f, flipperLeft->GetRotation(), 60, 30);
 
 	SDL_Rect rectR = { 118, 86, 86, 60 };
-	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 45, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 34, &rectR, 10.0f, flipperRight->GetRotation()+31 , 21, 30);
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 45, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 34, &rectR, 10.0f, flipperRight->GetRotation() , 21, 30);
 
 	return true;
 }
