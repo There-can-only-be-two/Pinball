@@ -63,7 +63,7 @@ void ModuleDebug::DrawDebug()
 {
 	int fontId = 3;
 	int debugX = 600;
-	int debugY = 420;
+	int debugY = 500;
 
 
 	App->fonts->BlitText(debugX, debugY + 0, fontId, "#DEBUG MODE (TAB)  ON/OFF");

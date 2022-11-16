@@ -173,18 +173,6 @@ update_status ModuleScene::Update()
 	#pragma endregion
 
 
-	SDL_Rect recBall = { 229, 106, 31, 31 };
-	App->renderer->Blit(balls, 360, 875+3);
-	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
-	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
-
-	SDL_Rect frankLRect = { 9, 156, 50, 70 };
-	App->renderer->Blit(assets, 157, 330, &frankLRect);
-
-	SDL_Rect frankRRect = {71, 155, 50, 70};
-	App->renderer->Blit(assets, 350, 330, &frankRRect);
-
-
 	//TIME FUNCTION
 	if (time > 0) {
 		SDL_Rect bar = { 71, 865, 240, 60 };
