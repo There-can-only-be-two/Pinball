@@ -96,6 +96,12 @@ void ModuleDebug::DrawDebug()
 		string = std::string("BALL.Y = ") + std::to_string(App->scene_intro->ball->position.y);
 		App->fonts->BlitText(debugX, debugY + 120, fontId, string.c_str());
 
+		//Spring force
+		if (App->scene_intro->springForce == 420)
+			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce) + "  X)";
+		else
+			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce);
+		App->fonts->BlitText(debugX, debugY + 140, fontId, string.c_str());
 	}	
 }
 

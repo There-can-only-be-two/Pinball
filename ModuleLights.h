@@ -16,6 +16,9 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	void ComboA();
+	void ComboB();
+
 public:
 	SDL_Texture* arrows_left = nullptr;
 	SDL_Texture* arrows_mid = nullptr;
@@ -30,4 +33,5 @@ public:
 	bool x10_ON = false;
 
 	int delayComboA;
+	int delayComboB;
 };

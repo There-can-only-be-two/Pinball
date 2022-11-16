@@ -18,7 +18,6 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 {
 
 	// Initialise all the internal class variables, at least to NULL pointer
-	circle = box = rick = NULL;
 	ray_on = false;
 
 	sensed = false;
@@ -44,6 +43,7 @@ bool ModuleScene::Start()
 
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
+	springForce = 0;
 
 	CreateColliders();
 	CreateSensors();
@@ -119,18 +119,18 @@ bool ModuleScene::Start()
 	Mix_VolumeMusic(10);
 	//App->audio->PlayMusic("Assets/Audio/", 0);
 	//App->audio->LoadFx("Assets/Audio/");
-	intro = App->audio->LoadFx("pinball/Audio/intro.wav");
-	flipper = App->audio->LoadFx("pinball/Audio/flipper.wav");
-	spring = App->audio->LoadFx("pinball/Audio/spring.wav");
-	bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
-	bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
-	bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
-	trigger = App->audio->LoadFx("pinball/Audio/trigger.wav");
-	comboA = App->audio->LoadFx("pinball/Audio/comboA.wav");
-	new_ball = App->audio->LoadFx("pinball/Audio/new_ball.wav");
-	death = App->audio->LoadFx("pinball/Audio/death.wav");
-	spring = App->audio->LoadFx("pinball/Audio/spring.wav");
-	game_over = App->audio->LoadFx("pinball/Audio/game_over.wav");
+	sfx_intro = App->audio->LoadFx("pinball/Audio/intro.wav");
+	sfx_flipper = App->audio->LoadFx("pinball/Audio/flipper.wav");
+	sfx_spring = App->audio->LoadFx("pinball/Audio/spring.wav");
+	sfx_bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
+	sfx_bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
+	sfx_bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
+	sfx_trigger = App->audio->LoadFx("pinball/Audio/trigger.wav");
+	sfx_comboA = App->audio->LoadFx("pinball/Audio/comboA.wav");
+	sfx_new_ball = App->audio->LoadFx("pinball/Audio/new_ball.wav");
+	sfx_death = App->audio->LoadFx("pinball/Audio/death.wav");
+	sfx_spring = App->audio->LoadFx("pinball/Audio/spring.wav");
+	sfx_game_over = App->audio->LoadFx("pinball/Audio/game_over.wav");
 
 
 	//Set variables
@@ -146,9 +146,6 @@ bool ModuleScene::Start()
 bool ModuleScene::CleanUp()
 {
 	LOG("Unloading Intro scene");
-	App->textures->Unload(circle);
-	App->textures->Unload(box);
-	App->textures->Unload(rick);
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
 	App->fonts->UnLoad(font);
@@ -540,10 +537,10 @@ void ModuleScene::CreateColliders()
 void ModuleScene::CreateSensors()
 {
 	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
-	springSensor->ctype = ColliderType::SPRING_SENSOR;
+	springSensor->ctype = ColliderType::SENSOR_SPRING;
 
 	timeSensor = App->physics->CreateCircleSensor(112, 455, 23);
-	timeSensor->ctype = ColliderType::TIME_SENSOR;
+	timeSensor->ctype = ColliderType::SENSOR_SPRING;
 
 	int SENSOR_X10[8]
 	{
@@ -551,23 +548,20 @@ void ModuleScene::CreateSensors()
 		452, 417,
 		480, 443,
 		483, 439
-	};
-  
+	}; 
 	scorex10sensor = App->physics->CreateChainSensor(0, 0, SENSOR_X10, 8);
 	scorex10sensor->body->SetType(b2_staticBody);
-	scorex10sensor->ctype = ColliderType::SCORE_X10;
+	scorex10sensor->ctype = ColliderType::SENSOR_X10;
 
-	int BALLSENSOR[6] = {
-	214, 831,
-	296, 832,
-	253, 850
+	int SENSOR_DEATH[6] =
+	{
+		214, 831,
+		296, 832,
+		253, 850
 	};
-
-
-
-	ballsensor = App->physics->CreateChainSensor(0, 0, BALLSENSOR, 6);
-	ballsensor->body->SetType(b2_staticBody);
-	ballsensor->ctype = ColliderType::BALL_SENSOR;
+	sensorDeath = App->physics->CreateChainSensor(0, 0, SENSOR_DEATH, 6);
+	sensorDeath->body->SetType(b2_staticBody);
+	sensorDeath->ctype = ColliderType::SENSOR_DEATH;
 
 	int SENSOR_TRI_LEFT[8]
 	{
@@ -578,7 +572,7 @@ void ModuleScene::CreateSensors()
 	};
 	sensorTriLeft = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_LEFT, 8);
 	sensorTriLeft->body->SetType(b2_staticBody);
-	sensorTriLeft->ctype = ColliderType::TRIANGLEL;
+	sensorTriLeft->ctype = ColliderType::SENSOR_TRI_LEFT;
 
 	int SENSOR_TRI_RIGHT[8]
 	{
@@ -589,7 +583,7 @@ void ModuleScene::CreateSensors()
 	};
 	sensorTriRight = App->physics->CreateChainSensor(0, 0, SENSOR_TRI_RIGHT, 8);
 	sensorTriRight->body->SetType(b2_staticBody);
-	sensorTriRight->ctype = ColliderType::TRIANGLER;
+	sensorTriRight->ctype = ColliderType::SENSOR_TRI_RIGHT;
 
 	//COMBO A
 	int SENSOR_COMBO_A1[8] =
@@ -708,8 +702,8 @@ void ModuleScene::DeleteMap()
 	delete scorex10sensor;
 	scorex10sensor = nullptr;
 
-	delete ballsensor;
-	ballsensor = nullptr;
+	delete sensorDeath;
+	sensorDeath = nullptr;
 
 	delete sensorTriLeft;
 	sensorTriLeft = nullptr;
@@ -722,4 +716,11 @@ void ModuleScene::DeleteMap()
 	sensorComboA2 = nullptr;
 	delete sensorComboA3;
 	sensorComboA3 = nullptr;
+
+	delete sensorComboB1;
+	sensorComboB1 = nullptr;
+	delete sensorComboB2;
+	sensorComboB2 = nullptr;
+	delete sensorComboB3;
+	sensorComboB3 = nullptr;
 }

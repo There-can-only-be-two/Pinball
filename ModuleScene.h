@@ -25,7 +25,10 @@ public:
 	void CreateSensors();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void DeleteMap();
+
 public:
+	//Variables
+	int springForce;
 
 	// Lists of physics objects
 	p2List<PhysBody*> entityList;
@@ -63,8 +66,8 @@ public:
 	bool sensed;
 	PhysBody* scorex10sensor;
 	bool scorex10_Sensed;
-	PhysBody* ballsensor;
-	bool ball_Sensed;
+	PhysBody* sensorDeath;
+	bool sensorDeath_Sensed;
 	PhysBody* sensorTriLeft;
 	bool sensorTriLeft_Sensed;
 	PhysBody* sensorTriRight;
@@ -88,9 +91,6 @@ public:
 
 
 	// Textures
-	SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;
 	SDL_Texture* img;
 	SDL_Texture* top;
 	SDL_Texture* balls;
@@ -115,17 +115,17 @@ public:
 	uint ballsCounter = 0;
 
 	// FX
-	uint intro;
-	uint flipper;
-	uint spring;
-	uint bouncer_circle;
-	uint bouncer_tri_1;
-	uint bouncer_tri_2;
-	uint trigger;
-	uint comboA;
-	uint new_ball;
-	uint death;
-	uint game_over;
+	uint sfx_intro;
+	uint sfx_flipper;
+	uint sfx_spring;
+	uint sfx_bouncer_circle;
+	uint sfx_bouncer_tri_1;
+	uint sfx_bouncer_tri_2;
+	uint sfx_trigger;
+	uint sfx_comboA;
+	uint sfx_new_ball;
+	uint sfx_death;
+	uint sfx_game_over;
 
 	// Raycast
 	p2Point<int> ray;

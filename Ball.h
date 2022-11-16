@@ -23,7 +23,6 @@ public:
 	PhysBody* ballBody = nullptr;
 	b2Vec2 bounceDir;
 	bool bounce;
-	float springForce;
 	int intensity;
 	
 	b2RevoluteJoint* joint;

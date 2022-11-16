@@ -74,7 +74,26 @@ update_status ModuleLights::PostUpdate()
 	}
 	
 
-	//COMBO A
+	ComboA();
+
+	ComboB();
+	
+
+	return UPDATE_CONTINUE;
+}
+
+bool ModuleLights::CleanUp()
+{
+	App->textures->Unload(arrows_left);
+	App->textures->Unload(arrows_mid);
+	App->textures->Unload(combo_A);
+	App->textures->Unload(trigger);
+	App->textures->Unload(x10);
+	return true;
+}
+
+void ModuleLights::ComboA()
+{
 	SDL_Rect rect = { 0, 0, 27, 100 };
 	App->renderer->Blit(combo_A, 426, 228, &rect);
 
@@ -104,7 +123,7 @@ update_status ModuleLights::PostUpdate()
 		}
 	}
 	else
-	{	
+	{
 		if (delayComboA % 20 < 7)
 		{
 			SDL_Rect rect = { 27, 63, 27, 37 };
@@ -130,76 +149,60 @@ update_status ModuleLights::PostUpdate()
 
 		delayComboA--;
 	}
-	
+}
 
-	//COMBO B
-	//SDL_Rect rect = { 0, 0, 27, 100 };
-	App->renderer->Blit(trigger, 426, 228, &rect);
+void ModuleLights::ComboB()
+{
+	SDL_Rect rect = { 0, 0, 9, 53 };
+	App->renderer->Blit(trigger, 225, 112, &rect);
+	App->renderer->Blit(trigger, 281, 112, &rect);
+	App->renderer->Blit(trigger, 337, 112, &rect);
 
-	if (delayComboA == 0)
+	if (delayComboB == 0)
 	{
-		if (App->scene_intro->sensorComboA1_Sensed)
+		SDL_Rect rect = { 9, 0, 9, 53 };
+
+		if (App->scene_intro->sensorComboB1_Sensed)
+			App->renderer->Blit(trigger, 225, 112, &rect);
+
+		if (App->scene_intro->sensorComboB2_Sensed)
+			App->renderer->Blit(trigger, 281, 112, &rect);
+
+		if (App->scene_intro->sensorComboB3_Sensed)
+			App->renderer->Blit(trigger, 337, 112, &rect);
+
+		if (App->scene_intro->sensorComboB1_Sensed &&
+			App->scene_intro->sensorComboB2_Sensed &&
+			App->scene_intro->sensorComboB3_Sensed)
 		{
-			SDL_Rect rect = { 0, 0, 0, 0 };
-			App->renderer->Blit(trigger, 426, 228, &rect);
-		}
-		if (App->scene_intro->sensorComboA2_Sensed)
-		{
-			SDL_Rect rect = { 27, 30, 27, 33 };
-			App->renderer->Blit(trigger, 426, 258, &rect);
-		}
-		if (App->scene_intro->sensorComboA3_Sensed)
-		{
-			SDL_Rect rect = { 27, 63, 27, 37 };
-			App->renderer->Blit(trigger, 426, 291, &rect);
-		}
-		if (App->scene_intro->sensorComboA1_Sensed &&
-			App->scene_intro->sensorComboA2_Sensed &&
-			App->scene_intro->sensorComboA3_Sensed)
-		{
-			delayComboA = 180;
+			delayComboB = 600; //10sec at 60FPS
 			App->scene_intro->currentScore += 5000;
 		}
 	}
 	else
 	{
-		if (delayComboA % 20 < 7)
+		if (delayComboB % 20 < 10)
 		{
-			SDL_Rect rect = { 27, 63, 27, 37 };
-			App->renderer->Blit(trigger, 426, 291, &rect);
-		}
-		else if (delayComboA % 20 > 12)
-		{
-			SDL_Rect rect = { 27, 0, 27, 30 };
-			App->renderer->Blit(trigger, 426, 228, &rect);
+			SDL_Rect rect = { 0, 0, 9, 53 };
+			App->renderer->Blit(trigger, 225, 112, &rect);
+			App->renderer->Blit(trigger, 281, 112, &rect);
+			App->renderer->Blit(trigger, 337, 112, &rect);
 		}
 		else
 		{
-			SDL_Rect rect = { 27, 30, 27, 33 };
-			App->renderer->Blit(trigger, 426, 258, &rect);
+			SDL_Rect rect = { 9, 0, 9, 53 };
+			App->renderer->Blit(trigger, 225, 112, &rect);
+			App->renderer->Blit(trigger, 281, 112, &rect);
+			App->renderer->Blit(trigger, 337, 112, &rect);
 		}
 
-		if (delayComboA == 1)
+		if (delayComboB == 1)
 		{
-			App->scene_intro->sensorComboA1_Sensed = false;
-			App->scene_intro->sensorComboA2_Sensed = false;
-			App->scene_intro->sensorComboA3_Sensed = false;
+			App->scene_intro->sensorComboB1_Sensed = false;
+			App->scene_intro->sensorComboB2_Sensed = false;
+			App->scene_intro->sensorComboB3_Sensed = false;
 		}
 
-		delayComboA--;
+		delayComboB--;
 	}
-
-
-
-	return UPDATE_CONTINUE;
-}
-
-bool ModuleLights::CleanUp()
-{
-	App->textures->Unload(arrows_left);
-	App->textures->Unload(arrows_mid);
-	App->textures->Unload(combo_A);
-	App->textures->Unload(trigger);
-	App->textures->Unload(x10);
-	return true;
 }
