@@ -142,7 +142,6 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(assets);
 
 	App->textures->Unload(timebar);
-	App->fonts->UnLoad(font);
 
 	App->lights->Disable();
 	blueLight.FullReset();
@@ -167,18 +166,6 @@ int ModuleScene::AddScore(int score) {
 update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 10, 0);
-
-	SDL_Rect recBall = { 229, 106, 31, 31 };
-	App->renderer->Blit(balls, 360, 875+3);
-	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
-	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
-
-	SDL_Rect frankLRect = { 9, 156, 50, 70 };
-	App->renderer->Blit(assets, 157, 330, &frankLRect);
-
-	SDL_Rect frankRRect = {71, 155, 50, 70};
-	App->renderer->Blit(assets, 350, 330, &frankRRect);
-
 	
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
 	{
@@ -187,8 +174,6 @@ update_status ModuleScene::Update()
 	}
 
 	#pragma region UI
-  
-  
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
@@ -229,6 +214,17 @@ update_status ModuleScene::Update()
 		App->fonts->BlitText(800, 115, App->fonts->yellow, high);
 		App->fonts->BlitText(800, 240, App->fonts->yellow, current);
 	}
+
+	SDL_Rect recBall = { 229, 106, 31, 31 };
+	App->renderer->Blit(balls, 360, 875 + 3);
+	App->fonts->BlitText(390, 878 + 2, App->fonts->black, "X ");
+	App->fonts->BlitText(425, 878 + 2, App->fonts->black, ballsLeft);
+
+	SDL_Rect frankLRect = { 9, 156, 50, 70 };
+	App->renderer->Blit(assets, 157, 330, &frankLRect);
+
+	SDL_Rect frankRRect = { 71, 155, 50, 70 };
+	App->renderer->Blit(assets, 350, 330, &frankRRect);
 	#pragma endregion
 
 
