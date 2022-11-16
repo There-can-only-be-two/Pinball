@@ -16,13 +16,10 @@
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-
 	// Initialise all the internal class variables, at least to NULL pointer
 	ray_on = false;
 
-	sensed = false;
 	highScore = 10000;
-
 	currentScore = 0;
 	previousScore = 0;
 	ballsCounter = 3;
@@ -536,11 +533,11 @@ void ModuleScene::CreateColliders()
 
 void ModuleScene::CreateSensors()
 {
-	springSensor = App->physics->CreateRectangleSensor(515, 800, 10, 10);
-	springSensor->ctype = ColliderType::SENSOR_SPRING;
+	sensorSpring = App->physics->CreateRectangleSensor(515, 800, 10, 10);
+	sensorSpring->ctype = ColliderType::SENSOR_SPRING;
 
-	timeSensor = App->physics->CreateCircleSensor(112, 455, 23);
-	timeSensor->ctype = ColliderType::SENSOR_SPRING;
+	sensorTime = App->physics->CreateCircleSensor(112, 455, 23);
+	sensorTime->ctype = ColliderType::SENSOR_TIME;
 
 	int SENSOR_X10[8]
 	{
@@ -549,9 +546,9 @@ void ModuleScene::CreateSensors()
 		480, 443,
 		483, 439
 	}; 
-	scorex10sensor = App->physics->CreateChainSensor(0, 0, SENSOR_X10, 8);
-	scorex10sensor->body->SetType(b2_staticBody);
-	scorex10sensor->ctype = ColliderType::SENSOR_X10;
+	sensorX10 = App->physics->CreateChainSensor(0, 0, SENSOR_X10, 8);
+	sensorX10->body->SetType(b2_staticBody);
+	sensorX10->ctype = ColliderType::SENSOR_X10;
 
 	int SENSOR_DEATH[6] =
 	{
@@ -696,11 +693,11 @@ void ModuleScene::DeleteMap()
 	delete ballBody;
 	ballBody = nullptr;
 	
-	delete springSensor;
-	springSensor = nullptr;
+	delete sensorSpring;
+	sensorSpring = nullptr;
 
-	delete scorex10sensor;
-	scorex10sensor = nullptr;
+	delete sensorX10;
+	sensorX10 = nullptr;
 
 	delete sensorDeath;
 	sensorDeath = nullptr;
@@ -723,4 +720,7 @@ void ModuleScene::DeleteMap()
 	sensorComboB2 = nullptr;
 	delete sensorComboB3;
 	sensorComboB3 = nullptr;
+
+	delete sensorTime;
+	sensorDeath = nullptr;
 }

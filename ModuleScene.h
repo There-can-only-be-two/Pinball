@@ -32,9 +32,6 @@ public:
 
 	// Lists of physics objects
 	p2List<PhysBody*> entityList;
-	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> circles;
-	p2List<PhysBody*> ricks;
 	
 	//Map
 	PhysBody* bg;
@@ -52,8 +49,8 @@ public:
 	PhysBody* blue;
 	PhysBody* yellow;
 	PhysBody* red;
-	/*PhysBody* flipperLeft;
-	PhysBody* flipperRight;*/
+	//PhysBody* flipperLeft;
+	//PhysBody* flipperRight;
 
 	//Entities
 	Entity* flipperL;
@@ -61,19 +58,18 @@ public:
 	Entity* ball;
 
 	//Sensors
-	PhysBody* springSensor;
-	bool spring_Sensed;
-	bool sensed;
-	PhysBody* scorex10sensor;
-	bool scorex10_Sensed;
+	PhysBody* sensorSpring;
+	bool sensorSpring_Sensed;
+	PhysBody* sensorX10;
+	bool sensorX10_Sensed;
 	PhysBody* sensorDeath;
 	bool sensorDeath_Sensed;
 	PhysBody* sensorTriLeft;
 	bool sensorTriLeft_Sensed;
 	PhysBody* sensorTriRight;
 	bool sensorTriRight_Sensed;
-	PhysBody* timeSensor;
-	bool timeSensor_Sensed;
+	PhysBody* sensorTime;
+	bool sensorTime_Sensed;
 
 	PhysBody* sensorComboA1;
 	bool sensorComboA1_Sensed;
@@ -89,13 +85,13 @@ public:
 	PhysBody* sensorComboB3;
 	bool sensorComboB3_Sensed;
 
-
 	// Textures
 	SDL_Texture* img;
 	SDL_Texture* top;
 	SDL_Texture* balls;
 	SDL_Texture* assets;
 
+	//Animations
 	Animation blueLight;
 	Animation redLight;
 	Animation yellowLight;
@@ -114,7 +110,7 @@ public:
 	char ballsLeft[3] = { "\0" };
 	uint ballsCounter = 0;
 
-	// FX
+	//SFX
 	uint sfx_intro;
 	uint sfx_flipper;
 	uint sfx_spring;

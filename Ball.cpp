@@ -70,21 +70,21 @@ bool Ball::Update()
 
 	//Spring force
 	int springForce = app->scene_intro->springForce;
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && app->scene_intro->spring_Sensed)
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && app->scene_intro->sensorSpring_Sensed)
 	{
 		app->scene_intro->springForce = springForce == 420 ? 420 : springForce += 3.0;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && app->scene_intro->spring_Sensed && springForce > 60)
+	else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && app->scene_intro->sensorSpring_Sensed && springForce > 60)
 	{
 		ballBody->body->ApplyForceToCenter(b2Vec2(0, -springForce), true);
 		app->scene_intro->springForce = 0;
-		app->scene_intro->spring_Sensed = false;
+		app->scene_intro->sensorSpring_Sensed = false;
 		LOG("RELEASE BALL");
 	}
 	else
 		app->scene_intro->springForce = 0;
 
-	if (app->scene_intro->scorex10_Sensed)
+	if (app->scene_intro->sensorX10_Sensed)
 	{
 		ballBody->body->ApplyForce(b2Vec2(100, -100), ballBody->body->GetWorldCenter(), true);
 		scorex10finished++;
@@ -93,7 +93,7 @@ bool Ball::Update()
 	{
 		ballBody->body->ApplyForce(b2Vec2(-500, 300), ballBody->body->GetWorldCenter(), true);
 		scorex10finished = 0;
-		app->scene_intro->scorex10_Sensed = false;
+		app->scene_intro->sensorX10_Sensed = false;
 	}
 	
 	if (app->scene_intro->sensorDeath_Sensed)
@@ -159,9 +159,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 
 	case ColliderType::SENSOR_TRI_LEFT:
-		LOG("Collision TRIANGLE");
+		LOG("Collision TRIANGLE_LEFT");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
+		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
 		app->scene_intro->sensorTriLeft_Sensed = true;
 		app->scene_intro->triangleLightL.SetCurrentFrame(0);
 		bounceDir = { 1.0f, -0.5f };
@@ -170,9 +170,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 
 	case ColliderType::SENSOR_TRI_RIGHT:
-		LOG("Collision TRIANGLE");
+		LOG("Collision TRIANGLE_RIGHT");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
+		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
 		app->scene_intro->sensorTriRight_Sensed = true;
 		app->scene_intro->triangleLightR.SetCurrentFrame(0);
 		bounceDir = { -1.0f, -0.5f };
@@ -192,12 +192,12 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		// SENSORS ===================================================
 	case ColliderType::SENSOR_SPRING:
 		LOG("Collision SPRING_SENSOR");
-		app->scene_intro->spring_Sensed = true;
+		app->scene_intro->sensorSpring_Sensed = true;
 		break;
 
 	case ColliderType::SENSOR_X10:
 		LOG("Collision SCOREX10");
-		app->scene_intro->scorex10_Sensed = true;
+		app->scene_intro->sensorX10_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_intro);
 		break;
 
@@ -238,7 +238,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 		
 	case ColliderType::SENSOR_TIME:
-		app->scene_intro->timeSensor_Sensed = true;
+		app->scene_intro->sensorTime_Sensed = true;
 		app->scene_intro->timeLight.SetCurrentFrame(0);
 
 		break;
