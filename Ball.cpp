@@ -131,9 +131,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
+		app->scene_intro->sensorBlue_Sensed = true;
 		app->scene_intro->currentScore += 25;
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->blue->body->GetWorldCenter() };
-		app->scene_intro->blueLight.SetCurrentFrame(0);
 		bounce = true;
 		intensity = 100;
 		break;
@@ -141,9 +141,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
+		app->scene_intro->sensorYellow_Sensed = true;
 		app->scene_intro->currentScore += 50;
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->yellow->body->GetWorldCenter() };
-		app->scene_intro->yellowLight.SetCurrentFrame(0);
 		bounce = true;
 		intensity = 100;
 		break;
@@ -151,9 +151,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
+		app->scene_intro->sensorRed_Sensed = true;
 		app->scene_intro->currentScore += 100;
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->red->body->GetWorldCenter() };
-		app->scene_intro->redLight.SetCurrentFrame(0);
 		bounce = true;
 		intensity = 100;
 		break;

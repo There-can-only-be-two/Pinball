@@ -18,6 +18,9 @@ public:
 
 	void ComboA();
 	void ComboB();
+	void CircleBouncer();
+	void TriangleBouncer();
+	void Time();
 
 public:
 	SDL_Texture* arrows_left = nullptr;
@@ -32,6 +35,12 @@ public:
 	bool trigger_ON = false;
 	bool x10_ON = false;
 
+	int delayBlue;
+	int delayYellow;
+	int delayRed;
+	int delayTriLeft;
+	int delayTriRight;
 	int delayComboA;
 	int delayComboB;
+	int delayTime;
 };

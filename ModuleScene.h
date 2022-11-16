@@ -58,6 +58,10 @@ public:
 	Entity* ball;
 
 	//Sensors
+	bool sensorBlue_Sensed;
+	bool sensorYellow_Sensed;
+	bool sensorRed_Sensed;
+
 	PhysBody* sensorSpring;
 	bool sensorSpring_Sensed;
 	PhysBody* sensorX10;
