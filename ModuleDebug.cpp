@@ -61,7 +61,7 @@ update_status ModuleDebug::PostUpdate()
 
 void ModuleDebug::DrawDebug()
 {
-	int fontId = 3;
+	int fontId = 6;
 	int debugX = 600;
 	int debugY = 420;
 

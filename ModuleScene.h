@@ -101,7 +101,6 @@ public:
 	Animation timeLight;
 
 	//scores
-	int font, fontHype, fontBalls, fontPixelWhite;
 	char high[10] = { "\0" };
 	uint highScore = 0;
 	char current[10] = { "\0" };

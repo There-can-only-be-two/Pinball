@@ -100,14 +100,6 @@ bool ModuleScene::Start()
 	timeLight.speed = 0.1f;
 	timeLight.loop = false;
 	timeLight.SetCurrentFrame(3);
-	
-	//Fonts
-	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
-	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
-	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
-	fontBalls = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.,;:$#'! /?%&()@ -+=      " };
-	fontPixelWhite = App->fonts->Load("pinball/Fonts/fontPixelWhiteX2.png", lookupTable, 7);
 
 	//Audio
 	Mix_Volume(-1, 32);
@@ -144,7 +136,6 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
-	App->fonts->UnLoad(font);
 	App->lights->Disable();
 	blueLight.FullReset();
 	redLight.FullReset();
@@ -177,32 +168,44 @@ update_status ModuleScene::Update()
 	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
 	sprintf_s(multiplier, 4, "%2d", AddScore(1));
 	
-	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
+	App->fonts->BlitText(600, 75, App->fonts->white, "HIGHSCORE");
 
-	App->fonts->BlitText(600, 185, font, "CURRENT SCORE:");
+	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
 
-	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
-	App->fonts->BlitText(800, 330, font, previous);
+	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
+	App->fonts->BlitText(800, 905, App->fonts->grey, previous);
 
-	App->fonts->BlitText(600, 400, font, "MULTIPLIER:X");
-	App->fonts->BlitText(920, 400, font, multiplier);
+	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
+	
+	int a = AddScore(1);
+	switch (a) {
+	case 1:
+		App->fonts->BlitText(900, 320, App->fonts->red, "X");
+		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
+	case 2:
+		App->fonts->BlitText(900, 320, App->fonts->blue, "X");
+		App->fonts->BlitText(932, 320, App->fonts->blue, multiplier);
+	case 10:
+		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
+		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
+	}
 
 	if (highScore > currentScore) {
-		App->fonts->BlitText(800, 130, font, high);		
-		App->fonts->BlitText(800, 230, font, current);		
+		App->fonts->BlitText(800, 115, App->fonts->white, high);
+		App->fonts->BlitText(800, 240, App->fonts->white, current);
 	}
 	else {
 		highScore = currentScore;
-		App->fonts->BlitText(800, 130, fontHype, high);
-		App->fonts->BlitText(800, 230, fontHype, current);
+		App->fonts->BlitText(800, 115, App->fonts->yellow, high);
+		App->fonts->BlitText(800, 240, App->fonts->yellow, current);
 	}
 	#pragma endregion
 
 
 	SDL_Rect recBall = { 229, 106, 31, 31 };
 	App->renderer->Blit(balls, 360, 875+3);
-	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
-	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
+	App->fonts->BlitText(390, 878+2, App->fonts->black, "X ");
+	App->fonts->BlitText(425, 878+2, App->fonts->black, ballsLeft);
 
 	//SDL_Rect OffBlue = { 144, 2, 52, 52 };
 	//SDL_Rect OnBlue = { 91, 2, 52, 52 };

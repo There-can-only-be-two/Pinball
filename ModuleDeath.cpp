@@ -38,8 +38,6 @@ bool ModuleDeath::Start()
 	// Load textures
 	img = App->textures->Load("pinball/title1.png");
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
-	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
-	fontFirst = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
 	score = App->scene_intro->currentScore;
 	
 	OutFileRank(ranking);
@@ -53,30 +51,27 @@ bool ModuleDeath::CleanUp()
 {
 	LOG("Unloading Death scene");
 	App->textures->Unload(img);
-	
-	App->fonts->UnLoad(font);
-	App->fonts->UnLoad(fontFirst);
 	return true;
 }
 
 update_status ModuleDeath::Update()
 {
 	//App->renderer->Blit(img, 0, 0);
-	App->fonts->BlitText(422, 75, font, "RANKING");
+	App->fonts->BlitText(422, 75, App->fonts->white, "RANKING");
 	
 	char scoreFont[10] = { "\0" };
 	
 	for (int i = 0; i < 5; i++) {
 		if (ranking[i].name == "YOU") {
-			App->fonts->BlitText(310, 150 * (i + 1), fontFirst, ranking[i].name.c_str());
+			App->fonts->BlitText(310, 150 * (i + 1), App->fonts->yellow, ranking[i].name.c_str());
 			sprintf_s(scoreFont, 10, "%7d", ranking[i].score);
-			App->fonts->BlitText(520, 150 * (i + 1), fontFirst, scoreFont);
+			App->fonts->BlitText(520, 150 * (i + 1), App->fonts->yellow, scoreFont);
 
 		}
 		else {
-			App->fonts->BlitText(310, 150 * (i + 1), font, ranking[i].name.c_str());
+			App->fonts->BlitText(310, 150 * (i + 1), App->fonts->white, ranking[i].name.c_str());
 			sprintf_s(scoreFont, 10, "%7d", ranking[i].score);
-			App->fonts->BlitText(520, 150 * (i + 1), font, scoreFont);
+			App->fonts->BlitText(520, 150 * (i + 1), App->fonts->white, scoreFont);
 		}
 	}
 
