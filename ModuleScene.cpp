@@ -51,15 +51,58 @@ bool ModuleScene::Start()
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
+
+	//Load animations
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 91, 2, 52, 52 });
+	blueLight.PushBack({ 144, 2, 52, 52 });
+	blueLight.speed = 0.5f; //NOTA: Para el fps control, a�adir variable basada en los fps a la velocidad
+	blueLight.loop = false;
+	blueLight.SetCurrentFrame(3);
+
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 196, 2, 52, 52 });
+	yellowLight.PushBack({ 249, 2, 52, 52 });
+	yellowLight.speed = 0.5f;
+	yellowLight.loop = false;
+	yellowLight.SetCurrentFrame(3);
+
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 303, 2, 52, 52 });
+	redLight.PushBack({ 357, 2, 52, 52 });
+	redLight.speed = 0.5f;
+	redLight.loop = false;
+	redLight.SetCurrentFrame(3);
+
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 210, 76, 118 });
+	triangleLightL.PushBack({ 280, 91, 76, 118 });
+	triangleLightL.speed = 0.5f;
+	triangleLightL.loop = false;
+	triangleLightL.SetCurrentFrame(3);
+
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 210, 76, 118 });
+	triangleLightR.PushBack({ 365, 91, 76, 118 });
+	triangleLightR.speed = 0.5f;
+	triangleLightR.loop = false;
+	triangleLightR.SetCurrentFrame(3);
+
+	timeLight.PushBack({ 444, 248, 50, 50 });
+	timeLight.PushBack({ 501, 248, 50, 50 });
+	timeLight.PushBack({ 444, 248, 50, 50 });
+	timeLight.PushBack({ 501, 248, 50, 50 });
+	timeLight.speed = 0.1f;
+	timeLight.loop = false;
+	timeLight.SetCurrentFrame(3);
+
 	timebar = App->textures->Load("pinball/Barra.png");
-	
-	//Fonts
-	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
-	font = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
-	fontHype = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
-	fontBalls = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.,;:$#'! /?%&()@ -+=      " };
-	fontPixelWhite = App->fonts->Load("pinball/Fonts/fontPixelWhiteX2.png", lookupTable, 7);
+
 
 	//Audio
 	Mix_Volume(-1, 32);
@@ -97,8 +140,10 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
+
 	App->textures->Unload(timebar);
 	App->fonts->UnLoad(font);
+
 	App->lights->Disable();
 	blueLight.FullReset();
 	redLight.FullReset();
@@ -151,26 +196,41 @@ update_status ModuleScene::Update()
 	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
 	sprintf_s(multiplier, 4, "%2d", AddScore(1));
 	
-	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
+	App->fonts->BlitText(600, 75, App->fonts->white, "HIGHSCORE");
 
-	App->fonts->BlitText(600, 185, font, "CURRENT SCORE:");
+	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
 
-	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
-	App->fonts->BlitText(800, 330, font, previous);
+	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
+	App->fonts->BlitText(800, 905, App->fonts->grey, previous);
 
-	App->fonts->BlitText(600, 400, font, "MULTIPLIER:X");
-	App->fonts->BlitText(920, 400, font, multiplier);
+	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
+	
+	int a = AddScore(1);
+	switch (a) {
+	case 1:
+		App->fonts->BlitText(900, 320, App->fonts->red, "X");
+		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
+	case 2:
+		App->fonts->BlitText(900, 320, App->fonts->blue, "X");
+		App->fonts->BlitText(932, 320, App->fonts->blue, multiplier);
+	case 10:
+		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
+		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
+	}
 
 	if (highScore > currentScore) {
-		App->fonts->BlitText(800, 130, font, high);
-		App->fonts->BlitText(800, 230, font, current);
+
+		App->fonts->BlitText(800, 115, App->fonts->white, high);
+		App->fonts->BlitText(800, 240, App->fonts->white, current);
+
 	}
 	else {
 		highScore = currentScore;
-		App->fonts->BlitText(800, 130, fontHype, high);
-		App->fonts->BlitText(800, 230, fontHype, current);
+		App->fonts->BlitText(800, 115, App->fonts->yellow, high);
+		App->fonts->BlitText(800, 240, App->fonts->yellow, current);
 	}
 	#pragma endregion
+
 
 
 	//TIME FUNCTION
@@ -184,6 +244,7 @@ update_status ModuleScene::Update()
 	else {
 		//GAME ENDS
 	}
+
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)

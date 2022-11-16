@@ -14,6 +14,20 @@ ModuleFonts::~ModuleFonts() {
 
 }
 
+bool ModuleFonts::Start() {
+	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
+	black = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
+	grey = App->fonts->Load("pinball/Fonts/grey.png", fontText, 1);
+	white = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);
+	yellow = App->fonts->Load("pinball/Fonts/yellow.png", fontText, 1);
+	red = App->fonts->Load("pinball/Fonts/red.png", fontText, 1);
+	blue = App->fonts->Load("pinball/Fonts/blue.png", fontText, 1);
+	// Debug
+	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.,;:$#'! /?%&()@ -+=      " };
+	whiteDebug = App->fonts->Load("pinball/Fonts/fontPixelWhiteX2.png", lookupTable, 7);
+	return true;
+}
+
 // Load new texture from file path
 int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows) {
 	int id = -1;
@@ -109,4 +123,15 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const {
 		// Advance the position where we blit the next character
 		x += spriteRect.w;
 	}
+}
+
+bool ModuleFonts::CleanUp() {
+	UnLoad(black);
+	UnLoad(grey);
+	UnLoad(white);
+	UnLoad(yellow);
+	UnLoad(red);
+	UnLoad(whiteDebug);
+	
+	return true;
 }

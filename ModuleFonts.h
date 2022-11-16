@@ -31,6 +31,7 @@ public:
 	// Destructor
 	~ModuleFonts();
 
+	bool Start();
 	// Loads a font file from a texture
 	// Returns a font index from the fonts array
 	// Param texturePath	- The path to the texture file
@@ -45,6 +46,8 @@ public:
 	// Create a surface from text
 	void BlitText(int x, int y, int fontIndex, const char* text) const;
 
+	bool CleanUp();
+	int black, grey, white, yellow, red, blue, whiteDebug;
 private:
 	// An array to keep track and store all loaded fonts
 	Font fonts[MAX_FONTS];
