@@ -13,7 +13,7 @@ ModuleTitle::ModuleTitle(Application* app, bool start_enabled) : Module(app, sta
 {
 
 	// Initialise all the internal class variables, at least to NULL pointer
-	img = NULL;
+	logo = NULL;
 
 }
 
@@ -27,11 +27,12 @@ bool ModuleTitle::Start()
 	LOG("Loading Title assets");
 	bool ret = true;
 
+	timer = 120;
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load textures
-	img = App->textures->Load("pinball/title1.png");
+	logo = App->textures->Load("pinball/logo.png");
 
 
 	return ret;
@@ -40,15 +41,16 @@ bool ModuleTitle::Start()
 bool ModuleTitle::CleanUp()
 {
 	LOG("Unloading Title scene");
-	App->textures->Unload(img);
+	App->textures->Unload(logo);
 	return true;
 }
 
 update_status ModuleTitle::Update()
 {
-	App->renderer->Blit(img, 0, 0);
+	App->renderer->Blit(logo, 280, 180);
 	// If user presses SPACE, enable RayCast
 	
+	App->audio->PlayFx(App->scene_intro->sfx_bouncer_tri_1);
 
 	// Keep playing
 	return UPDATE_CONTINUE;
@@ -56,10 +58,11 @@ update_status ModuleTitle::Update()
 
 update_status ModuleTitle::PostUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (timer == 0 || App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-  		App->fade->FadeBlack(this,(Module*)App->scene_intro, 50);
-		
+  		App->fade->FadeBlack(this,(Module*)App->scene_intro, 90);
 	}
+	timer--;
+
 	return UPDATE_CONTINUE;
 }

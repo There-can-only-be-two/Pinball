@@ -326,25 +326,27 @@ void ModuleScene::CreateColliders()
 		212, 139,
 		212, 151
 	};
-	int PLATFORM_LEFT[24] =
+	int PLATFORM_LEFT[28] =
 	{
-		58, 650,
+		58, 652,
 		58, 663,
-		63, 673,
+		64, 673,
 		149, 717,
 		154, 716,
 		163, 698,
 		162, 692,
 		74, 647,
-		69, 641,
-		67, 635,
-		63, 632,
-		59, 635
+		69, 642,
+		68, 635,
+		68, 571,
+		66, 562,
+		62, 560,
+		58, 569
 	};
-	int PLATFORM_RIGHT[24] =
+	int PLATFORM_RIGHT[28] =
 	{
-		452, 650,
-		451, 666,
+		451, 651,
+		451, 663,
 		446, 673,
 		361, 717,
 		355, 714,
@@ -352,9 +354,11 @@ void ModuleScene::CreateColliders()
 		348, 692,
 		433, 649,
 		439, 645,
-		444, 634,
-		447, 632,
-		450, 634
+		442, 641,
+		442, 571,
+		444, 563,
+		448, 560,
+		451, 569
 	};
 
 
@@ -364,10 +368,10 @@ void ModuleScene::CreateColliders()
 	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 64);
 	wallLeft->body->SetType(b2BodyType::b2_staticBody);
 
-	platformLeft = App->physics->CreateChain(0, 0, PLATFORM_LEFT, 24);
+	platformLeft = App->physics->CreateChain(0, 0, PLATFORM_LEFT, 28);
 	platformLeft->body->SetType(b2BodyType::b2_staticBody);
 
-	platformRight = App->physics->CreateChain(0, 0, PLATFORM_RIGHT, 24);
+	platformRight = App->physics->CreateChain(0, 0, PLATFORM_RIGHT, 28);
 	platformRight->body->SetType(b2BodyType::b2_staticBody);
 
 

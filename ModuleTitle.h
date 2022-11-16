@@ -22,11 +22,11 @@ public:
 
 public:
 
-	// Lists of physics objects
-
+	// var
+	int timer;
 
 	// Textures
-	SDL_Texture* img;
+	SDL_Texture* logo;
 
 
 	// Raycast
