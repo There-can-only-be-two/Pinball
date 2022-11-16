@@ -59,6 +59,10 @@ public:
 	Entity* ball;
 
 	//Sensors
+	bool sensorBlue_Sensed;
+	bool sensorYellow_Sensed;
+	bool sensorRed_Sensed;
+
 	PhysBody* sensorSpring;
 	bool sensorSpring_Sensed;
 	PhysBody* sensorX10;
@@ -91,6 +95,7 @@ public:
 	SDL_Texture* top;
 	SDL_Texture* balls;
 	SDL_Texture* assets;
+	SDL_Texture* timebar;
 
 	//Animations
 	Animation blueLight;
@@ -111,6 +116,8 @@ public:
 	uint ballsCounter = 0;
 	char multiplier[4] = { "\0" };
 	int scoreMultiplier;
+	int timeScore;
+	int time;
 
 	//SFX
 	uint sfx_intro;

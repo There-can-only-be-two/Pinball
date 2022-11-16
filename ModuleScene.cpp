@@ -57,7 +57,7 @@ bool ModuleScene::Start()
 	blueLight.PushBack({ 91, 2, 52, 52 });
 	blueLight.PushBack({ 91, 2, 52, 52 });
 	blueLight.PushBack({ 144, 2, 52, 52 });
-	blueLight.speed = 0.5f; //NOTA: Para el fps control, añadir variable basada en los fps a la velocidad
+	blueLight.speed = 0.5f; //NOTA: Para el fps control, aï¿½adir variable basada en los fps a la velocidad
 	blueLight.loop = false;
 	blueLight.SetCurrentFrame(3);
 
@@ -101,6 +101,9 @@ bool ModuleScene::Start()
 	timeLight.loop = false;
 	timeLight.SetCurrentFrame(3);
 
+	timebar = App->textures->Load("pinball/Barra.png");
+
+
 	//Audio
 	Mix_Volume(-1, 32);
 	Mix_VolumeMusic(10);
@@ -125,6 +128,7 @@ bool ModuleScene::Start()
 	currentScore = 0;
 	ballsCounter = 3;
 	scoreMultiplier = 1;
+	time = 3600; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
 	App->entityManager->Enable();
 	App->lights->Enable();
@@ -136,6 +140,10 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
+
+	App->textures->Unload(timebar);
+	App->fonts->UnLoad(font);
+
 	App->lights->Disable();
 	blueLight.FullReset();
 	redLight.FullReset();
@@ -160,7 +168,27 @@ update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 10, 0);
 
+	SDL_Rect recBall = { 229, 106, 31, 31 };
+	App->renderer->Blit(balls, 360, 875+3);
+	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
+	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
+
+	SDL_Rect frankLRect = { 9, 156, 50, 70 };
+	App->renderer->Blit(assets, 157, 330, &frankLRect);
+
+	SDL_Rect frankRRect = {71, 155, 50, 70};
+	App->renderer->Blit(assets, 350, 330, &frankRRect);
+
+	
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
+	{
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->entityManager->Disable();
+	}
+
 	#pragma region UI
+  
+  
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
@@ -191,8 +219,10 @@ update_status ModuleScene::Update()
 	}
 
 	if (highScore > currentScore) {
+
 		App->fonts->BlitText(800, 115, App->fonts->white, high);
 		App->fonts->BlitText(800, 240, App->fonts->white, current);
+
 	}
 	else {
 		highScore = currentScore;
@@ -202,53 +232,19 @@ update_status ModuleScene::Update()
 	#pragma endregion
 
 
-	SDL_Rect recBall = { 229, 106, 31, 31 };
-	App->renderer->Blit(balls, 360, 875+3);
-	App->fonts->BlitText(390, 878+2, App->fonts->black, "X ");
-	App->fonts->BlitText(425, 878+2, App->fonts->black, ballsLeft);
 
-	//SDL_Rect OffBlue = { 144, 2, 52, 52 };
-	//SDL_Rect OnBlue = { 91, 2, 52, 52 };
-	//App->renderer->Blit(assets, 190 + 12, 196 + 13, &OffBlue);
+	//TIME FUNCTION
+	if (time > 0) {
+		SDL_Rect bar = { 71, 865, 240, 60 };
+		App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
+		SDL_Rect timerRect = { 0, 0, 282, 65 };
+		App->renderer->Blit(timebar, 50, 860, &timerRect);
+		time--;
+	}
+	else {
+		//GAME ENDS
+	}
 
-	SDL_Rect blueRect = blueLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 202, 209, &blueRect);
-	blueLight.Update();
-
-	//SDL_Rect OffYellow = { 249, 2, 52, 52 };
-	//SDL_Rect OnYellow = { 196, 2, 52, 52 };
-	//App->renderer->Blit(assets, 246 + 12, 294 + 12, &OffYellow);
-
-	SDL_Rect yellowRect = yellowLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 258, 306, &yellowRect);
-	yellowLight.Update();
-
-	//SDL_Rect OffRed = { 357, 2, 52, 52 };
-	//SDL_Rect OnRed = { 303, 2, 52, 52 };
-	//App->renderer->Blit(assets, 300 + 15, 196 + 13, &OffRed);
-
-	SDL_Rect redRect = redLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 315, 209, &redRect);
-	redLight.Update();
-
-
-	SDL_Rect triangLRect = triangleLightL.GetCurrentFrame();
-	App->renderer->Blit(assets, 95, 527, &triangLRect);
-	triangleLightL.Update();
-
-	SDL_Rect triangRRect = triangleLightR.GetCurrentFrame();
-	App->renderer->Blit(assets, 342, 527, &triangRRect);
-	triangleLightR.Update();
-
-	SDL_Rect frankLRect = { 9, 156, 50, 70 };
-	App->renderer->Blit(assets, 157, 330, &frankLRect);
-
-	SDL_Rect frankRRect = {71, 155, 50, 70};
-	App->renderer->Blit(assets, 350, 330, &frankRRect);
-
-	SDL_Rect timeRect = timeLight.GetCurrentFrame();
-	App->renderer->Blit(assets, 88, 430, &timeRect);
-	timeLight.Update();
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
@@ -288,6 +284,7 @@ update_status ModuleScene::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 	#pragma endregion
+
 
 	// Keep playing
 	return UPDATE_CONTINUE;
@@ -390,25 +387,27 @@ void ModuleScene::CreateColliders()
 		212, 139,
 		212, 151
 	};
-	int PLATFORM_LEFT[24] =
+	int PLATFORM_LEFT[28] =
 	{
-		58, 650,
+		58, 652,
 		58, 663,
-		63, 673,
+		64, 673,
 		149, 717,
 		154, 716,
 		163, 698,
 		162, 692,
 		74, 647,
-		69, 641,
-		67, 635,
-		63, 632,
-		59, 635
+		69, 642,
+		68, 635,
+		68, 571,
+		66, 562,
+		62, 560,
+		58, 569
 	};
-	int PLATFORM_RIGHT[24] =
+	int PLATFORM_RIGHT[28] =
 	{
-		452, 650,
-		451, 666,
+		451, 651,
+		451, 663,
 		446, 673,
 		361, 717,
 		355, 714,
@@ -416,9 +415,11 @@ void ModuleScene::CreateColliders()
 		348, 692,
 		433, 649,
 		439, 645,
-		444, 634,
-		447, 632,
-		450, 634
+		442, 641,
+		442, 571,
+		444, 563,
+		448, 560,
+		451, 569
 	};
 
 
@@ -428,10 +429,10 @@ void ModuleScene::CreateColliders()
 	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 64);
 	wallLeft->body->SetType(b2BodyType::b2_staticBody);
 
-	platformLeft = App->physics->CreateChain(0, 0, PLATFORM_LEFT, 24);
+	platformLeft = App->physics->CreateChain(0, 0, PLATFORM_LEFT, 28);
 	platformLeft->body->SetType(b2BodyType::b2_staticBody);
 
-	platformRight = App->physics->CreateChain(0, 0, PLATFORM_RIGHT, 24);
+	platformRight = App->physics->CreateChain(0, 0, PLATFORM_RIGHT, 28);
 	platformRight->body->SetType(b2BodyType::b2_staticBody);
 
 
