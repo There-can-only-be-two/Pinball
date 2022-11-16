@@ -77,8 +77,6 @@ bool ModuleScene::Start()
 	redLight.loop = false;
 	redLight.SetCurrentFrame(3);
 
-	//280, 91
-
 	triangleLightL.PushBack({ 280, 210, 76, 118 });
 	triangleLightL.PushBack({ 280, 210, 76, 118 });
 	triangleLightL.PushBack({ 280, 210, 76, 118 });
@@ -134,6 +132,7 @@ bool ModuleScene::Start()
 	previousScore = currentScore;
 	currentScore = 0;
 	ballsCounter = 3;
+	scoreMultiplier = 1;
 	
 	App->entityManager->Enable();
 	App->lights->Enable();
@@ -158,6 +157,14 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
+int ModuleScene::AddScore(int score) {
+	if (App->lights->delayComboB > 0){
+		return score * scoreMultiplier * 10;
+	}
+	return score * scoreMultiplier;
+
+}
+
 update_status ModuleScene::Update()
 {
 	App->renderer->Blit(img, 10, 0);
@@ -168,6 +175,7 @@ update_status ModuleScene::Update()
 	sprintf_s(current, 10, "%7d", currentScore);
 	sprintf_s(previous, 10, "%7d", previousScore);
 	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
+	sprintf_s(multiplier, 4, "%2d", AddScore(1));
 	
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
 
@@ -175,6 +183,9 @@ update_status ModuleScene::Update()
 
 	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
 	App->fonts->BlitText(800, 330, font, previous);
+
+	App->fonts->BlitText(600, 400, font, "MULTIPLIER:X");
+	App->fonts->BlitText(920, 400, font, multiplier);
 
 	if (highScore > currentScore) {
 		App->fonts->BlitText(800, 130, font, high);		

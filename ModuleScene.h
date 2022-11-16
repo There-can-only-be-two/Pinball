@@ -25,6 +25,7 @@ public:
 	void CreateSensors();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void DeleteMap();
+	int AddScore(int score);
 
 public:
 	//Variables
@@ -109,6 +110,8 @@ public:
 	uint previousScore = 0;
 	char ballsLeft[3] = { "\0" };
 	uint ballsCounter = 0;
+	char multiplier[4] = { "\0" };
+	int scoreMultiplier;
 
 	//SFX
 	uint sfx_intro;
