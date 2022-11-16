@@ -57,7 +57,7 @@ bool ModuleScene::Start()
 	blueLight.PushBack({ 91, 2, 52, 52 });
 	blueLight.PushBack({ 91, 2, 52, 52 });
 	blueLight.PushBack({ 144, 2, 52, 52 });
-	blueLight.speed = 0.5f;
+	blueLight.speed = 0.5f; //NOTA: Para el fps control, añadir variable basada en los fps a la velocidad
 	blueLight.loop = false;
 	blueLight.SetCurrentFrame(3);
 
@@ -147,6 +147,12 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(assets);
 	App->fonts->UnLoad(font);
 	App->lights->Disable();
+	blueLight.FullReset();
+	redLight.FullReset();
+	yellowLight.FullReset();
+	triangleLightL.FullReset();
+	triangleLightR.FullReset();
+	timeLight.FullReset();
 	DeleteMap();
 	
 	return true;
