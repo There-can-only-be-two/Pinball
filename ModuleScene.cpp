@@ -51,6 +51,7 @@ bool ModuleScene::Start()
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
+	timebar = App->textures->Load("pinball/Barra.png");
 
 	//Load animations
 	blueLight.PushBack({ 91, 2, 52, 52 });
@@ -133,6 +134,7 @@ bool ModuleScene::Start()
 	currentScore = 0;
 	ballsCounter = 3;
 	scoreMultiplier = 1;
+	time = 3600; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
 	App->entityManager->Enable();
 	App->lights->Enable();
@@ -144,6 +146,7 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
+	App->textures->Unload(timebar);
 	App->fonts->UnLoad(font);
 	App->lights->Disable();
 	blueLight.FullReset();
@@ -246,6 +249,19 @@ update_status ModuleScene::Update()
 	SDL_Rect timeRect = timeLight.GetCurrentFrame();
 	App->renderer->Blit(assets, 88, 430, &timeRect);
 	timeLight.Update();
+
+	//TIME FUNCTION
+
+	if (time > 0) {
+		SDL_Rect bar = { 71, 865, 240, 60 };
+		App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
+		SDL_Rect timerRect = { 0, 0, 282, 65 };
+		App->renderer->Blit(timebar, 50, 860, &timerRect);
+		time--;
+	}
+	else {
+		//GAME ENDS
+	}
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)

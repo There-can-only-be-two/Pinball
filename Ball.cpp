@@ -199,6 +199,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision SCOREX10");
 		app->scene_intro->sensorX10_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_intro);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(15000);
 		break;
 
 	case ColliderType::SENSOR_DEATH:

@@ -91,6 +91,7 @@ public:
 	SDL_Texture* top;
 	SDL_Texture* balls;
 	SDL_Texture* assets;
+	SDL_Texture* timebar;
 
 	//Animations
 	Animation blueLight;
@@ -112,6 +113,8 @@ public:
 	uint ballsCounter = 0;
 	char multiplier[4] = { "\0" };
 	int scoreMultiplier;
+	int timeScore;
+	int time;
 
 	//SFX
 	uint sfx_intro;
