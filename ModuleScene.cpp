@@ -51,6 +51,7 @@ bool ModuleScene::Start()
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
+	timebar = App->textures->Load("pinball/Barra.png");
 	
 	//Fonts
 	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
@@ -83,6 +84,8 @@ bool ModuleScene::Start()
 	previousScore = currentScore;
 	currentScore = 0;
 	ballsCounter = 3;
+	scoreMultiplier = 1;
+	time = 3600; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
 	App->entityManager->Enable();
 	App->lights->Enable();
@@ -94,11 +97,26 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
+	App->textures->Unload(timebar);
 	App->fonts->UnLoad(font);
 	App->lights->Disable();
+	blueLight.FullReset();
+	redLight.FullReset();
+	yellowLight.FullReset();
+	triangleLightL.FullReset();
+	triangleLightR.FullReset();
+	timeLight.FullReset();
 	DeleteMap();
 	
 	return true;
+}
+
+int ModuleScene::AddScore(int score) {
+	if (App->lights->delayComboB > 0){
+		return score * scoreMultiplier * 10;
+	}
+	return score * scoreMultiplier;
+
 }
 
 update_status ModuleScene::Update()
@@ -124,18 +142,24 @@ update_status ModuleScene::Update()
 	}
 
 	#pragma region UI
+  
+  
 	//Draws variables
 	sprintf_s(high, 10, "%7d", highScore);
 	sprintf_s(current, 10, "%7d", currentScore);
 	sprintf_s(previous, 10, "%7d", previousScore);
 	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
-
+	sprintf_s(multiplier, 4, "%2d", AddScore(1));
+	
 	App->fonts->BlitText(600, 75, font, "HIGHSCORE:");
 
 	App->fonts->BlitText(600, 185, font, "CURRENT SCORE:");
 
 	App->fonts->BlitText(600, 275, font, "PREVIOUS SCORE:");
 	App->fonts->BlitText(800, 330, font, previous);
+
+	App->fonts->BlitText(600, 400, font, "MULTIPLIER:X");
+	App->fonts->BlitText(920, 400, font, multiplier);
 
 	if (highScore > currentScore) {
 		App->fonts->BlitText(800, 130, font, high);
@@ -147,6 +171,39 @@ update_status ModuleScene::Update()
 		App->fonts->BlitText(800, 230, fontHype, current);
 	}
 	#pragma endregion
+
+
+	SDL_Rect recBall = { 229, 106, 31, 31 };
+	App->renderer->Blit(balls, 360, 875+3);
+	App->fonts->BlitText(390, 878+2, fontBalls, "X ");
+	App->fonts->BlitText(425, 878+2, fontBalls, ballsLeft);
+
+	SDL_Rect frankLRect = { 9, 156, 50, 70 };
+	App->renderer->Blit(assets, 157, 330, &frankLRect);
+
+	SDL_Rect frankRRect = {71, 155, 50, 70};
+	App->renderer->Blit(assets, 350, 330, &frankRRect);
+
+
+	//TIME FUNCTION
+	if (time > 0) {
+		SDL_Rect bar = { 71, 865, 240, 60 };
+		App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
+		SDL_Rect timerRect = { 0, 0, 282, 65 };
+		App->renderer->Blit(timebar, 50, 860, &timerRect);
+		time--;
+	}
+	else {
+		//GAME ENDS
+	}
+
+
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
+	{
+		App->fade->FadeBlack(this, (Module*)App->death, 90);
+		App->entityManager->Disable();
+	}
+
 
 	#pragma region RAYCAST
 	// Prepare for raycast ------------------------------------------------------

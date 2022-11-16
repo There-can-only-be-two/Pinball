@@ -10,6 +10,7 @@
 #include "Flippers.h"
 #include "Ball.h"
 #include "ModuleFonts.h"
+#include "Module.h"
 
 ModuleLights::ModuleLights(Application* app, bool start_enabled) : Module(app, start_enabled) {}
 
@@ -216,7 +217,8 @@ void ModuleLights::ComboA()
 			App->scene_intro->sensorComboA3_Sensed)
 		{
 			delayComboA = 180;
-			App->scene_intro->currentScore += 5000;
+			App->scene_intro->currentScore += App->scene_intro->AddScore(2000);
+			App->scene_intro->scoreMultiplier *= 2;
 		}
 	}
 	else
@@ -273,7 +275,7 @@ void ModuleLights::ComboB()
 			App->scene_intro->sensorComboB3_Sensed)
 		{
 			delayComboB = 600; //10sec at 60FPS
-			App->scene_intro->currentScore += 5000;
+			App->scene_intro->currentScore += App->scene_intro->AddScore(5000);
 		}
 	}
 	else

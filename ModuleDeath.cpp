@@ -43,9 +43,9 @@ bool ModuleDeath::Start()
 	score = App->scene_intro->currentScore;
 	
 	OutFileRank(ranking);
-	SwapRank(ranking);
-	//AddScore(ranking, score);
-	//InFileRank(ranking);
+	//SwapRank(ranking);
+	AddScore(ranking, score);
+	InFileRank(ranking);
 	return ret;
 }
 
@@ -55,7 +55,7 @@ bool ModuleDeath::CleanUp()
 	App->textures->Unload(img);
 	
 	App->fonts->UnLoad(font);
-	
+	App->fonts->UnLoad(fontFirst);
 	return true;
 }
 
@@ -125,9 +125,11 @@ void ModuleDeath::InFileRank(Scores l[]) {
 	ofstream myfile;
 	myfile.open("RANKING.txt");
 	for (int i = 0; i < 5; i++) {
-		myfile << l[i].name << " " << l[i].score << ";\n";
+		myfile << l[i].name << "\n";
 	}
-
+	for (int i = 0; i < 5; i++) {
+		myfile << l[i].score << "\n";
+	}
 	myfile.close();
 
 }
@@ -149,5 +151,5 @@ void ModuleDeath::OutFileRank(Scores l[]) {
 		l[j].score = (int)atoi(a[j+5].c_str());
 		l[j].name =  a[j];
 	}
-	
+	myfile.close();
 }
