@@ -132,7 +132,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision BLUE_25");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
 		app->scene_intro->sensorBlue_Sensed = true;
-		app->scene_intro->currentScore += app->scene_intro->AddScore(25);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->blue->body->GetWorldCenter() };
 		bounce = true;
 		intensity = 100;
@@ -142,7 +141,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision YELLOW_50");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
 		app->scene_intro->sensorYellow_Sensed = true;
-		app->scene_intro->currentScore += app->scene_intro->AddScore(50);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->yellow->body->GetWorldCenter() };
 		bounce = true;
 		intensity = 100;
@@ -152,7 +150,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("Collision RED_100");
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
 		app->scene_intro->sensorRed_Sensed = true;
-		app->scene_intro->currentScore += app->scene_intro->AddScore(100);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->red->body->GetWorldCenter() };
 		bounce = true;
 		intensity = 100;
@@ -163,7 +160,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
 		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
 		app->scene_intro->sensorTriLeft_Sensed = true;
-		app->scene_intro->triangleLightL.SetCurrentFrame(0);
 		bounceDir = { 1.0f, -0.5f };
 		intensity = 180;
 		bounce = true;
@@ -174,7 +170,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
 		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
 		app->scene_intro->sensorTriRight_Sensed = true;
-		app->scene_intro->triangleLightR.SetCurrentFrame(0);
 		bounceDir = { -1.0f, -0.5f };
 		intensity = 180;
 		bounce = true;
@@ -240,7 +235,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		
 	case ColliderType::SENSOR_TIME:
 		app->scene_intro->sensorTime_Sensed = true;
-		app->scene_intro->timeLight.SetCurrentFrame(0);
 		app->scene_intro->scoreMultiplier = 1;
 		app->scene_intro->time += app->scene_intro->timeScore*0.06;
 		app->scene_intro->timeScore = 0;

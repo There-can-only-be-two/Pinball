@@ -44,6 +44,9 @@ update_status ModuleDebug::Update()
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		lightsON = !lightsON;
 	
+	//U: Chnage UI
+	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+		changeUI = !changeUI;
 
 	return UPDATE_CONTINUE;
 }

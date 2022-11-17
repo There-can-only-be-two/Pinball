@@ -24,8 +24,6 @@ public:
 	bool drawPhysics = false;
 	bool variables = false;
 	bool lightsON = false;
-
-private:
-
+	bool changeUI = false;
 
 };

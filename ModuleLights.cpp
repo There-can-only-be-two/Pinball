@@ -102,6 +102,7 @@ void ModuleLights::CircleBouncer()
 	if (App->scene_intro->sensorBlue_Sensed)
 	{
 		delayBlue = 6;
+		App->scene_intro->currentScore += App->scene_intro->AddScore(25);
 		App->scene_intro->sensorBlue_Sensed = false;
 	}
 	if (delayBlue > 0)
@@ -120,6 +121,7 @@ void ModuleLights::CircleBouncer()
 	if (App->scene_intro->sensorYellow_Sensed)
 	{
 		delayYellow = 6;
+		App->scene_intro->currentScore += App->scene_intro->AddScore(50);
 		App->scene_intro->sensorYellow_Sensed = false;
 	}
 	if (delayYellow > 0)
@@ -138,6 +140,7 @@ void ModuleLights::CircleBouncer()
 	if (App->scene_intro->sensorRed_Sensed)
 	{
 		delayRed = 6;
+		App->scene_intro->currentScore += App->scene_intro->AddScore(100);
 		App->scene_intro->sensorRed_Sensed = false;
 	}
 	if (delayRed > 0)

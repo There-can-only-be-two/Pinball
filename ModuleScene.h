@@ -21,11 +21,13 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	int AddScore(int score);
+	void DrawUI_1();
+	void DrawUI_2();
 	void CreateColliders();
 	void CreateSensors();
-	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void DeleteMap();
-	int AddScore(int score);
+	void RayCast();
 
 public:
 	//Variables
@@ -116,7 +118,7 @@ public:
 	uint previousScore = 0;
 	char ballsLeft[3] = { "\0" };
 	uint ballsCounter = 0;
-	char multiplier[4] = { "\0" };
+	char multiplier[5] = { "\0" };
 	int scoreMultiplier;
 	int timeScore;
 	int time;

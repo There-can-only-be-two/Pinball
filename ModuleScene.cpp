@@ -12,6 +12,7 @@
 #include "EntityManager.h"
 #include "ModuleFonts.h"
 #include "ModuleLights.h"
+#include "ModuleDebug.h"
 #include "Animation.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -51,56 +52,6 @@ bool ModuleScene::Start()
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
-
-	//Load animations
-	blueLight.PushBack({ 91, 2, 52, 52 });
-	blueLight.PushBack({ 91, 2, 52, 52 });
-	blueLight.PushBack({ 91, 2, 52, 52 });
-	blueLight.PushBack({ 144, 2, 52, 52 });
-	blueLight.speed = 0.5f; //NOTA: Para el fps control, a�adir variable basada en los fps a la velocidad
-	blueLight.loop = false;
-	blueLight.SetCurrentFrame(3);
-
-	yellowLight.PushBack({ 196, 2, 52, 52 });
-	yellowLight.PushBack({ 196, 2, 52, 52 });
-	yellowLight.PushBack({ 196, 2, 52, 52 });
-	yellowLight.PushBack({ 249, 2, 52, 52 });
-	yellowLight.speed = 0.5f;
-	yellowLight.loop = false;
-	yellowLight.SetCurrentFrame(3);
-
-	redLight.PushBack({ 303, 2, 52, 52 });
-	redLight.PushBack({ 303, 2, 52, 52 });
-	redLight.PushBack({ 303, 2, 52, 52 });
-	redLight.PushBack({ 357, 2, 52, 52 });
-	redLight.speed = 0.5f;
-	redLight.loop = false;
-	redLight.SetCurrentFrame(3);
-
-	triangleLightL.PushBack({ 280, 210, 76, 118 });
-	triangleLightL.PushBack({ 280, 210, 76, 118 });
-	triangleLightL.PushBack({ 280, 210, 76, 118 });
-	triangleLightL.PushBack({ 280, 91, 76, 118 });
-	triangleLightL.speed = 0.5f;
-	triangleLightL.loop = false;
-	triangleLightL.SetCurrentFrame(3);
-
-	triangleLightR.PushBack({ 365, 210, 76, 118 });
-	triangleLightR.PushBack({ 365, 210, 76, 118 });
-	triangleLightR.PushBack({ 365, 210, 76, 118 });
-	triangleLightR.PushBack({ 365, 91, 76, 118 });
-	triangleLightR.speed = 0.5f;
-	triangleLightR.loop = false;
-	triangleLightR.SetCurrentFrame(3);
-
-	timeLight.PushBack({ 444, 248, 50, 50 });
-	timeLight.PushBack({ 501, 248, 50, 50 });
-	timeLight.PushBack({ 444, 248, 50, 50 });
-	timeLight.PushBack({ 501, 248, 50, 50 });
-	timeLight.speed = 0.1f;
-	timeLight.loop = false;
-	timeLight.SetCurrentFrame(3);
-
 	timebar = App->textures->Load("pinball/Barra.png");
 
 
@@ -156,84 +107,36 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-int ModuleScene::AddScore(int score) {
-	if (App->lights->delayComboB > 0){
-		timeScore += score * scoreMultiplier * 10;
-		return score * scoreMultiplier * 10;
-	}
-	timeScore += score * scoreMultiplier;
-	return score * scoreMultiplier;
-
-}
-
 update_status ModuleScene::Update()
 {
-	App->renderer->Blit(img, 10, 0);
-	
+	//Check out of balls
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
 	{
 		App->fade->FadeBlack(this, (Module*)App->death, 90);
 		App->entityManager->Disable();
 	}
 
-	#pragma region UI
-	//Draws variables
-	sprintf_s(high, 10, "%7d", highScore);
-	sprintf_s(current, 10, "%7d", currentScore);
-	sprintf_s(previous, 10, "%7d", previousScore);
-	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
-	sprintf_s(multiplier, 4, "%2d", AddScore(1));
+	//Draw map
+	App->renderer->Blit(img, 10, 0);
 	
-	App->fonts->BlitText(600, 75, App->fonts->white, "HIGHSCORE");
-
-	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
-
-	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
-	App->fonts->BlitText(800, 905, App->fonts->grey, previous);
-
-	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
-	
-	
-	if ((AddScore(1)) < 2) {
-		App->fonts->BlitText(900, 320, App->fonts->white, "X");
-		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
-	}
-	else if ((AddScore(1)) >= 2 && (AddScore(1))<8) {
-		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
-		App->fonts->BlitText(932, 320, App->fonts->yellow, multiplier);
-	}
-	else if ((AddScore(1)) >= 8) {
-		App->fonts->BlitText(900, 320, App->fonts->red, "X");
-		App->fonts->BlitText(932, 320, App->fonts->red, multiplier);
-	}
-	
-
-	if (highScore > currentScore) {
-
-		App->fonts->BlitText(800, 115, App->fonts->white, high);
-		App->fonts->BlitText(800, 240, App->fonts->white, current);
-
-	}
-	else {
-		highScore = currentScore;
-		App->fonts->BlitText(800, 115, App->fonts->yellow, high);
-		App->fonts->BlitText(800, 240, App->fonts->yellow, current);
-	}
-
 	SDL_Rect recBall = { 229, 106, 31, 31 };
-	App->renderer->Blit(balls, 360, 875 + 3);
-	App->fonts->BlitText(390, 878 + 2, App->fonts->black, "X ");
-	App->fonts->BlitText(425, 878 + 2, App->fonts->black, ballsLeft);
+	App->renderer->Blit(balls, 360, 875 + 3);	
 
 	SDL_Rect frankLRect = { 9, 156, 50, 70 };
 	App->renderer->Blit(assets, 157, 330, &frankLRect);
 
 	SDL_Rect frankRRect = { 71, 155, 50, 70 };
 	App->renderer->Blit(assets, 350, 330, &frankRRect);
-	#pragma endregion
+
+	//Draw Chosen UI
+	if (App->debug->changeUI)
+		DrawUI_2();
+	else
+		DrawUI_1();
 
 	//TIME FUNCTION
-	if (time > 0) {
+	if (time > 0)
+	{
 		if (time > 3600) { time = 3600; }
 		SDL_Rect bar = { 71, 865, time*0.066666f, 60 };
 		//App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
@@ -242,53 +145,116 @@ update_status ModuleScene::Update()
 		App->renderer->Blit(timebar, 50, 860, &timerRect);
 		time--;
 	}
-	else {
+	else
 		timeOut = true;
-	}
 
 
-
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0 || timeOut)
-	{
-		App->fade->FadeBlack(this, (Module*)App->death, 90);
-		App->entityManager->Disable();
-	}
-
-
-	#pragma region RAYCAST
-	// Prepare for raycast ------------------------------------------------------
+	RayCast();
 	
-	// The target point of the raycast is the mouse current position (will change over game time)
-	iPoint mouse;
-	mouse.x = App->input->GetMouseX();
-	mouse.y = App->input->GetMouseY();
 
-	// Total distance of the raycast reference segment
-	int ray_hit = ray.DistanceTo(mouse);
-
-	// Declare a vector. We will draw the normal to the hit surface (if we hit something)
-	fVector normal(0.0f, 0.0f);
-
-	// Raycasts -----------------
-	if(ray_on == true)
-	{
-		// Compute the vector from the raycast origin up to the contact point (if we're hitting anything; otherwise this is the reference length)
-		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
-		destination.Normalize();
-		destination *= ray_hit;
-
-		// Draw a line from origin to the hit point (or reference length if we are not hitting anything)
-		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
-
-		// If we are hitting something with the raycast, draw the normal vector to the contact point
-		if(normal.x != 0.0f)
-			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-	}
-	#pragma endregion
-
-
-	// Keep playing
 	return UPDATE_CONTINUE;
+}
+
+int ModuleScene::AddScore(int score)
+{
+	if (App->lights->delayComboB > 0)
+	{
+		timeScore += score * scoreMultiplier * 10;
+		return score * scoreMultiplier * 10;
+	}
+
+	timeScore += score * scoreMultiplier;
+	return score * scoreMultiplier;
+}
+
+void ModuleScene::DrawUI_1()
+{
+	App->fonts->BlitText(390, 878 + 2, App->fonts->black, "X ");
+	App->fonts->BlitText(425, 878 + 2, App->fonts->black, ballsLeft);
+
+	//Draws variables
+	sprintf_s(high, 10, "%7d", highScore);
+	sprintf_s(current, 10, "%7d", currentScore);
+	sprintf_s(previous, 10, "%7d", previousScore);
+	sprintf_s(ballsLeft, 3, "%d", ballsCounter);
+	sprintf_s(multiplier, 5, "%2d", AddScore(1));
+
+	App->fonts->BlitText(600, 75, App->fonts->white, "HIGHSCORE");
+
+	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
+
+	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
+	App->fonts->BlitText(800, 905, App->fonts->grey, previous);
+
+	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
+
+
+	if ((AddScore(1)) < 2) {
+		App->fonts->BlitText(900, 320, App->fonts->white, "X");
+		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
+	}
+	else if ((AddScore(1)) >= 2 && (AddScore(1)) < 8) {
+		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
+		App->fonts->BlitText(932, 320, App->fonts->yellow, multiplier);
+	}
+	else if ((AddScore(1)) >= 8) {
+		App->fonts->BlitText(900, 320, App->fonts->red, "X");
+		App->fonts->BlitText(932, 320, App->fonts->red, multiplier);
+	}
+
+
+	if (highScore > currentScore) {
+
+		App->fonts->BlitText(800, 115, App->fonts->white, high);
+		App->fonts->BlitText(800, 240, App->fonts->white, current);
+	}
+	else {
+		highScore = currentScore;
+		App->fonts->BlitText(800, 115, App->fonts->yellow, high);
+		App->fonts->BlitText(800, 240, App->fonts->yellow, current);
+	}
+}
+
+void ModuleScene::DrawUI_2()
+{
+	//choose fonts
+	int multFont = App->fonts->red;
+	if (AddScore(1) < 2)
+		multFont = App->fonts->white;
+	else if (AddScore(1) < 8)
+		multFont = App->fonts->yellow;
+
+	int scores = App->fonts->white;
+	if (currentScore > highScore)
+	{
+		highScore = currentScore;
+		scores = App->fonts->yellow;
+	}
+
+	//Formating
+	sprintf_s(high, 10, "%0d", highScore);
+	sprintf_s(current, 10, "%0d", currentScore);
+	sprintf_s(previous, 10, "%0d", previousScore);
+	sprintf_s(ballsLeft, 3, "%0d", ballsCounter);
+	sprintf_s(multiplier, 5, "%0d", AddScore(1));
+
+	//Scores
+	App->fonts->BlitText(600, 75, App->fonts->white, "HIGHSCORE");
+	App->fonts->BlitText(600, 115, scores, high);
+
+	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
+	App->fonts->BlitText(600, 240, scores, current);
+
+	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
+	App->fonts->BlitText(600, 895, App->fonts->grey, previous);
+
+	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
+	std::string string = std::string("X") + std::string(multiplier);
+	App->fonts->BlitText(600, 365, multFont, string.c_str());
+
+	//Balls left
+	string = std::string("X") + std::string(ballsLeft);
+	App->fonts->BlitText(394, 880, App->fonts->black, string.c_str());
 }
 
 void ModuleScene::CreateColliders()
@@ -699,12 +665,6 @@ void ModuleScene::CreateSensors()
 	sensorComboB3->ctype = ColliderType::SENSOR_COMBO_B3;
 }
 
-void ModuleScene::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
-{
-
-	// Do something else. You can also check which bodies are colliding (sensor? ball? player?)
-}
-
 void ModuleScene::DeleteMap()
 {
 	delete bg;
@@ -771,4 +731,36 @@ void ModuleScene::DeleteMap()
 
 	delete sensorTime;
 	sensorDeath = nullptr;
+}
+
+void ModuleScene::RayCast()
+{
+	// Prepare for raycast ------------------------------------------------------
+
+	// The target point of the raycast is the mouse current position (will change over game time)
+	iPoint mouse;
+	mouse.x = App->input->GetMouseX();
+	mouse.y = App->input->GetMouseY();
+
+	// Total distance of the raycast reference segment
+	int ray_hit = ray.DistanceTo(mouse);
+
+	// Declare a vector. We will draw the normal to the hit surface (if we hit something)
+	fVector normal(0.0f, 0.0f);
+
+	// Raycasts -----------------
+	if (ray_on == true)
+	{
+		// Compute the vector from the raycast origin up to the contact point (if we're hitting anything; otherwise this is the reference length)
+		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
+		destination.Normalize();
+		destination *= ray_hit;
+
+		// Draw a line from origin to the hit point (or reference length if we are not hitting anything)
+		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
+
+		// If we are hitting something with the raycast, draw the normal vector to the contact point
+		if (normal.x != 0.0f)
+			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
+	}
 }
