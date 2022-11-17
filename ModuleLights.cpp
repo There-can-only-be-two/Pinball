@@ -34,10 +34,13 @@ update_status ModuleLights::Update()
 		App->scene_intro->sensorBlue_Sensed = true;
 		App->scene_intro->sensorYellow_Sensed = true;
 		App->scene_intro->sensorRed_Sensed = true;
-		//App->scene_intro->sensorX10_Sensed = true;
+
 		App->scene_intro->sensorTriLeft_Sensed = true;
 		App->scene_intro->sensorTriRight_Sensed = true;
+
 		App->scene_intro->sensorTime_Sensed = true;
+		//App->scene_intro->sensorX10_Sensed = true;
+
 		App->scene_intro->sensorComboA1_Sensed = true;
 		App->scene_intro->sensorComboA2_Sensed = true;
 		App->scene_intro->sensorComboA3_Sensed = true;
@@ -71,6 +74,31 @@ bool ModuleLights::CleanUp()
 	return true;
 }
 
+void ModuleLights::Arrows()
+{
+	if (true)
+	{
+		SDL_Rect rect = { 0, 0, 128, 275 };
+		App->renderer->Blit(arrows_left, 31, 99, &rect);
+	}
+	else
+	{
+		SDL_Rect rect = { 128, 0, 128, 275 };
+		App->renderer->Blit(arrows_left, 31, 99, &rect);
+	}
+
+	if (true)
+	{
+		SDL_Rect rect = { 0, 0, 48, 148 };
+		App->renderer->Blit(arrows_mid, 231, 522, &rect);
+	}
+	else
+	{
+		SDL_Rect rect = { 48, 0, 48, 148 };
+		App->renderer->Blit(arrows_mid, 231, 522, &rect);
+	}
+}
+
 void ModuleLights::CircleBouncer()
 {
 	//BLUE
@@ -78,7 +106,6 @@ void ModuleLights::CircleBouncer()
 	if (App->scene_intro->sensorBlue_Sensed)
 	{
 		delayBlue = 6;
-		App->scene_intro->currentScore += App->scene_intro->AddScore(25);
 		App->scene_intro->sensorBlue_Sensed = false;
 	}
 	if (delayBlue > 0)
@@ -97,7 +124,6 @@ void ModuleLights::CircleBouncer()
 	if (App->scene_intro->sensorYellow_Sensed)
 	{
 		delayYellow = 6;
-		App->scene_intro->currentScore += App->scene_intro->AddScore(50);
 		App->scene_intro->sensorYellow_Sensed = false;
 	}
 	if (delayYellow > 0)
@@ -116,7 +142,6 @@ void ModuleLights::CircleBouncer()
 	if (App->scene_intro->sensorRed_Sensed)
 	{
 		delayRed = 6;
-		App->scene_intro->currentScore += App->scene_intro->AddScore(100);
 		App->scene_intro->sensorRed_Sensed = false;
 	}
 	if (delayRed > 0)

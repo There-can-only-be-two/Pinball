@@ -58,6 +58,7 @@ bool Ball::CleanUp()
 // Update: draw background
 bool Ball::Update()
 {
+	//Need to Apply Restitution Coefficient !!!
 	if (bounce) {
 		bounceDir.Normalize();
 		ballBody->body->ApplyForce(intensity*bounceDir, ballBody->body->GetWorldCenter(), true);
@@ -121,7 +122,6 @@ bool Ball::PostUpdate()
 
 void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-
 	switch (bodyB->ctype)
 	{
 	case ColliderType::WALL:
@@ -130,8 +130,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::BLUE_25:
 		LOG("Collision BLUE_25");
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
 		app->scene_intro->sensorBlue_Sensed = true;
+		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(25);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->blue->body->GetWorldCenter() };
 		bounce = true;
 		intensity = 100;
@@ -139,8 +140,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::YELLOW_50:
 		LOG("Collision YELLOW_50");
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
 		app->scene_intro->sensorYellow_Sensed = true;
+		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(50);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->yellow->body->GetWorldCenter() };
 		bounce = true;
 		intensity = 100;
@@ -148,8 +150,9 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::RED_100:
 		LOG("Collision RED_100");
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
 		app->scene_intro->sensorRed_Sensed = true;
+		app->audio->PlayFx(app->scene_intro->sfx_bouncer_circle);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(100);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->red->body->GetWorldCenter() };
 		bounce = true;
 		intensity = 100;
@@ -157,9 +160,10 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::SENSOR_TRI_LEFT:
 		LOG("Collision TRIANGLE_LEFT");
+		app->scene_intro->sensorTriLeft_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
 		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
-		app->scene_intro->sensorTriLeft_Sensed = true;
+		app->scene_intro->currentScore += app->scene_intro->AddScore(10);
 		bounceDir = { 1.0f, -0.5f };
 		intensity = 180;
 		bounce = true;
@@ -167,21 +171,15 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::SENSOR_TRI_RIGHT:
 		LOG("Collision TRIANGLE_RIGHT");
+		app->scene_intro->sensorTriRight_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
 		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
-		app->scene_intro->sensorTriRight_Sensed = true;
+		app->scene_intro->currentScore += app->scene_intro->AddScore(10);
 		bounceDir = { -1.0f, -0.5f };
 		intensity = 180;
 		bounce = true;
 		break;
 
-	case ColliderType::FRANKFURTL:
-		LOG("Collision FRANKFURT");
-		break;
-
-	case ColliderType::FRANKFURTR:
-		LOG("Collision FRANKFURT");
-		break;
 
 
 		// SENSORS ===================================================
@@ -206,31 +204,38 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::SENSOR_COMBO_A1:
 		app->scene_intro->sensorComboA1_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_comboA, 0);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(200);
+
 		break;
 
 	case ColliderType::SENSOR_COMBO_A2:
 		app->scene_intro->sensorComboA2_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_comboA, 0);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(200);
 		break;
 
 	case ColliderType::SENSOR_COMBO_A3:
 		app->scene_intro->sensorComboA3_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_comboA, 0);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(200);
 		break;
 
 	case ColliderType::SENSOR_COMBO_B1:
 		app->scene_intro->sensorComboB1_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_trigger, 0);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(300);
 		break;
 
 	case ColliderType::SENSOR_COMBO_B2:
 		app->scene_intro->sensorComboB2_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_trigger, 0);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(300);
 		break;
 
 	case ColliderType::SENSOR_COMBO_B3:
 		app->scene_intro->sensorComboB3_Sensed = true;
 		app->audio->PlayFx(app->scene_intro->sfx_trigger, 0);
+		app->scene_intro->currentScore += app->scene_intro->AddScore(300);
 		break;
 		
 	case ColliderType::SENSOR_TIME:

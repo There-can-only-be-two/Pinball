@@ -24,6 +24,8 @@ public:
 	bool drawPhysics = false;
 	bool variables = false;
 	bool lightsON = false;
+	bool musicON = false;
+	bool sfxON = false;
 	bool changeUI = false;
 
 };

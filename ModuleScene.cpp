@@ -82,8 +82,8 @@ bool ModuleScene::Start()
 	scoreMultiplier = 1;
 	time = 60*60; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
-	App->entityManager->Enable();
 	App->lights->Enable();
+	App->entityManager->Enable();
 	return ret;
 }
 
@@ -225,7 +225,7 @@ void ModuleScene::DrawUI_2()
 		multFont = App->fonts->yellow;
 
 	int scores = App->fonts->white;
-	if (currentScore > highScore)
+	if (currentScore >= highScore)
 	{
 		highScore = currentScore;
 		scores = App->fonts->yellow;
@@ -439,7 +439,7 @@ void ModuleScene::CreateColliders()
 
 	blockerL = App->physics->CreateChain(0, 0, TOP_LEFT_BLOCKER, 12);
 	blockerL->body->SetType(b2BodyType::b2_staticBody);
-	blockerL->ctype = ColliderType::BLOCKER;
+	blockerL->ctype = ColliderType::WALL;
 
 	int TOP_RIGHT_BLOCKER[12] = {
 	258, 108,
@@ -452,7 +452,7 @@ void ModuleScene::CreateColliders()
 
 	blockerR = App->physics->CreateChain(0, 0, TOP_RIGHT_BLOCKER, 12);
 	blockerR->body->SetType(b2BodyType::b2_staticBody);
-	blockerR->ctype = ColliderType::BLOCKER;
+	blockerR->ctype = ColliderType::WALL;
 
 	int REBOUND_LEFT[28] =
 	{
@@ -512,7 +512,7 @@ void ModuleScene::CreateColliders()
 	};
 	frankfurt_left = App->physics->CreateChain(0, 0, FRANKFURT_LEFT, 24);
 	frankfurt_left->body->SetType(b2BodyType::b2_staticBody);
-	frankfurt_left->ctype = ColliderType::FRANKFURTL;
+	frankfurt_left->ctype = ColliderType::WALL;
 	
 	int FRANKFURT_RIGHT[22] =
 	{
@@ -530,7 +530,7 @@ void ModuleScene::CreateColliders()
 	};
 	frankfurt_right = App->physics->CreateChain(0, 0, FRANKFURT_RIGHT, 22);
 	frankfurt_right->body->SetType(b2BodyType::b2_staticBody);
-	frankfurt_right->ctype = ColliderType::FRANKFURTR;
+	frankfurt_right->ctype = ColliderType::WALL;
 
 	blue = App->physics->CreateCircle(190+37, 196+39, 25);
 	blue->body->SetType(b2BodyType::b2_staticBody);

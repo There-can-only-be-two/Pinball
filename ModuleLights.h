@@ -16,10 +16,11 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void ComboA();
-	void ComboB();
+	void Arrows();
 	void CircleBouncer();
 	void TriangleBouncer();
+	void ComboA();
+	void ComboB();
 	void Time();
 
 public:

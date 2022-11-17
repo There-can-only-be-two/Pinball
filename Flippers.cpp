@@ -29,8 +29,7 @@ bool Flippers::Start()
 
 	//FLIPPER LEFT
 	flipperLeft = app->physics->CreateRectangle(171, 697, 90, 30);
-	flipperLeft->listener = this;
-	flipperLeft->ctype = ColliderType::FLIPPERS;
+
 	b2RevoluteJointDef revoluteJointDef1;
 	revoluteJointDef1.bodyA = app->scene_intro->platformLeft->body;
 	revoluteJointDef1.bodyB = flipperLeft->body;
@@ -50,8 +49,6 @@ bool Flippers::Start()
 
 	// FLIPPER RIGHT
 	flipperRight = app->physics->CreateRectangle(360, 697, 90, 30);
-	flipperRight->listener = this;
-	flipperRight->ctype = ColliderType::FLIPPERS;
 
 	b2RevoluteJointDef revoluteJointDef2;
 	revoluteJointDef2.bodyA = app->scene_intro->platformRight->body;

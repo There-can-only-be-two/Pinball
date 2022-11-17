@@ -43,6 +43,14 @@ update_status ModuleDebug::Update()
 	//F2: Lights ON/OFF
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 		lightsON = !lightsON;
+
+	//F3: Music ON/OFF
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		musicON = !musicON;
+
+	//F4: Sfx ON/OFF
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		sfxON = !sfxON;
 	
 	//U: Chnage UI
 	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
