@@ -25,6 +25,7 @@ enum class ColliderType
 	DIAMOND,
 	FRANKFURTL,
 	FRANKFURTR,
+	BLOCKER,
 
 	//SENSORS
 	SENSOR_SPRING,

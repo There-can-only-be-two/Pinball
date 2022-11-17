@@ -235,7 +235,7 @@ update_status ModuleScene::Update()
 		if (time > 3600) { time = 3600; }
 		SDL_Rect bar = { 71, 865, time*0.066666f, 60 };
 		//App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
-		App->renderer->DrawQuad(bar, 119 + (3600-time)*0.027777f, time*0.056111f, time*0.066666f, 255, true);
+		App->renderer->DrawQuad(bar, 119 + (3600-time)*0.027777f, 40+time*0.045f, time*0.066666f, 255, true);
 		SDL_Rect timerRect = { 0, 0, 282, 65 };
 		App->renderer->Blit(timebar, 50, 860, &timerRect);
 		time--;
@@ -459,6 +459,32 @@ void ModuleScene::CreateColliders()
 	//diamond = App->physics->CreateChain(0, 0, DIAMOND, 34);
 	//diamond->body->SetType(b2BodyType::b2_staticBody);
 	//diamond->ctype = ColliderType::DIAMOND;
+
+	int TOP_LEFT_BLOCKER[12] = {
+		304, 106,
+		312, 114,
+		312, 162,
+		304, 171,
+		295, 163,
+		295, 115
+	};
+
+	blockerL = App->physics->CreateChain(0, 0, TOP_LEFT_BLOCKER, 12);
+	blockerL->body->SetType(b2BodyType::b2_staticBody);
+	blockerL->ctype = ColliderType::BLOCKER;
+
+	int TOP_RIGHT_BLOCKER[12] = {
+	248, 107,
+	256, 115,
+	256, 163,
+	248, 171,
+	239, 164,
+	239, 115
+	};
+
+	blockerR = App->physics->CreateChain(0, 0, TOP_RIGHT_BLOCKER, 12);
+	blockerR->body->SetType(b2BodyType::b2_staticBody);
+	blockerR->ctype = ColliderType::BLOCKER;
 
 	int REBOUND_LEFT[28] =
 	{

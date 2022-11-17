@@ -50,6 +50,8 @@ public:
 	PhysBody* blue;
 	PhysBody* yellow;
 	PhysBody* red;
+	PhysBody* blockerL;
+	PhysBody* blockerR;
 	//PhysBody* flipperLeft;
 	//PhysBody* flipperRight;
 
