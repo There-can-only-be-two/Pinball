@@ -15,7 +15,7 @@ ModuleFonts::~ModuleFonts() {
 }
 
 bool ModuleFonts::Start() {
-	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? ";
+	const char fontText[] = "ABCDEFGHIJKLNOPQRSTUVXYZ0123456789:!? MW";
 	black = App->fonts->Load("pinball/Fonts/black.png", fontText, 1);
 	grey = App->fonts->Load("pinball/Fonts/grey.png", fontText, 1);
 	white = App->fonts->Load("pinball/Fonts/white.png", fontText, 1);

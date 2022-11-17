@@ -193,18 +193,20 @@ update_status ModuleScene::Update()
 
 	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
 	
-	int a = AddScore(1);
-	switch (a) {
-	case 1:
-		App->fonts->BlitText(900, 320, App->fonts->red, "X");
-		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
-	case 2:
-		App->fonts->BlitText(900, 320, App->fonts->blue, "X");
-		App->fonts->BlitText(932, 320, App->fonts->blue, multiplier);
-	case 10:
-		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
+	
+	if ((AddScore(1)) < 2) {
+		App->fonts->BlitText(900, 320, App->fonts->white, "X");
 		App->fonts->BlitText(932, 320, App->fonts->white, multiplier);
 	}
+	else if ((AddScore(1)) >= 2 && (AddScore(1))<8) {
+		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
+		App->fonts->BlitText(932, 320, App->fonts->yellow, multiplier);
+	}
+	else if ((AddScore(1)) >= 8) {
+		App->fonts->BlitText(900, 320, App->fonts->red, "X");
+		App->fonts->BlitText(932, 320, App->fonts->red, multiplier);
+	}
+	
 
 	if (highScore > currentScore) {
 
