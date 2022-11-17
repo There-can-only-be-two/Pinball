@@ -7,9 +7,10 @@
 #include "ModuleTextures.h"
 #include "ModuleDebug.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
+#include "Animation.h"
 #include "Flippers.h"
 #include "Ball.h"
-#include "ModuleFonts.h"
 #include "Module.h"
 
 ModuleLights::ModuleLights(Application* app, bool start_enabled) : Module(app, start_enabled) {}
@@ -19,10 +20,14 @@ ModuleLights::~ModuleLights() {}
 bool ModuleLights::Start()
 {
 	arrows_left = App->textures->Load("pinball/Lights/arrows_left.png");
-	arrows_mid = App->textures->Load("pinball/Lights/arrows_mid.png");
+	arrows_mid_A = App->textures->Load("pinball/Lights/arrows_mid_A.png");
+	arrows_mid_B = App->textures->Load("pinball/Lights/arrows_mid_B.png");
 	combo_A = App->textures->Load("pinball/Lights/combo_A.png");
 	trigger = App->textures->Load("pinball/Lights/trigger.png");
 	x10 = App->textures->Load("pinball/Lights/x10.png");
+
+
+	LoadAnimations();
 
 	return true;
 }
@@ -54,6 +59,9 @@ update_status ModuleLights::Update()
 
 update_status ModuleLights::PostUpdate()
 {
+	ArrowLeft();
+	ArrowMid();
+
 	CircleBouncer();
 	TriangleBouncer();
 
@@ -67,35 +75,44 @@ update_status ModuleLights::PostUpdate()
 bool ModuleLights::CleanUp()
 {
 	App->textures->Unload(arrows_left);
-	App->textures->Unload(arrows_mid);
+	App->textures->Unload(arrows_mid_A);
+	App->textures->Unload(arrows_mid_B);
 	App->textures->Unload(combo_A);
 	App->textures->Unload(trigger);
 	App->textures->Unload(x10);
 	return true;
 }
 
-void ModuleLights::Arrows()
+void ModuleLights::ArrowLeft()
+{
+	if (App->scene_intro->sensorBlue_Sensed)
+	{
+		delayArrowsLeft = 120;
+		anim_Current = &anim_ArrowsMid;
+		App->scene_intro->sensorBlue_Sensed = false;
+	}
+
+	if (delayArrowsLeft > 0)
+	{
+		SDL_Rect rectArrowsLeft = anim_Current->GetCurrentFrame();
+		App->renderer->Blit(arrows_left, 31, 99, &rectArrowsLeft);
+		anim_Current->Update();
+
+		delayArrowsLeft--;
+	}
+}
+
+void ModuleLights::ArrowMid()
 {
 	if (true)
 	{
-		SDL_Rect rect = { 0, 0, 128, 275 };
-		App->renderer->Blit(arrows_left, 31, 99, &rect);
-	}
-	else
-	{
-		SDL_Rect rect = { 128, 0, 128, 275 };
-		App->renderer->Blit(arrows_left, 31, 99, &rect);
-	}
-
-	if (true)
-	{
 		SDL_Rect rect = { 0, 0, 48, 148 };
-		App->renderer->Blit(arrows_mid, 231, 522, &rect);
+		App->renderer->Blit(arrows_mid_A, 231, 522, &rect);
 	}
 	else
 	{
 		SDL_Rect rect = { 48, 0, 48, 148 };
-		App->renderer->Blit(arrows_mid, 231, 522, &rect);
+		App->renderer->Blit(arrows_mid_A, 231, 522, &rect);
 	}
 }
 
@@ -336,4 +353,22 @@ void ModuleLights::Time()
 
 		delayTime--;
 	}
+}
+
+void ModuleLights::LoadAnimations()
+{
+	//Arrow Left
+	anim_ArrowsMid.PushBack({   0, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 128, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 256, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 384, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 512, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 640, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 768, 0, 128, 275 });
+	anim_ArrowsMid.PushBack({ 896, 0, 128, 275 });
+	anim_ArrowsMid.speed = 0.3f;
+	anim_ArrowsMid.loop;
+
+	//Arrow Mid
+
 }

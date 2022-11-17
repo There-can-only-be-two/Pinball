@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Entity.h"
+#include "Animation.h"
 
 
 class ModuleLights : public Module
@@ -16,16 +17,21 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void Arrows();
+	void ArrowLeft();
+	void ArrowMid();
 	void CircleBouncer();
 	void TriangleBouncer();
 	void ComboA();
 	void ComboB();
 	void Time();
 
+	void LoadAnimations();
+
+
 public:
 	SDL_Texture* arrows_left = nullptr;
-	SDL_Texture* arrows_mid = nullptr;
+	SDL_Texture* arrows_mid_A = nullptr;
+	SDL_Texture* arrows_mid_B = nullptr;
 	SDL_Texture* combo_A = nullptr;
 	SDL_Texture* trigger = nullptr;
 	SDL_Texture* x10 = nullptr;
@@ -38,4 +44,9 @@ public:
 	int delayComboA;
 	int delayComboB;
 	int delayTime;
+	int delayArrowsLeft;
+	int delayArrowsMid;
+
+	Animation* anim_Current = nullptr;
+	Animation anim_ArrowsMid;
 };
