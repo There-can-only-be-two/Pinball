@@ -461,12 +461,12 @@ void ModuleScene::CreateColliders()
 	//diamond->ctype = ColliderType::DIAMOND;
 
 	int TOP_LEFT_BLOCKER[12] = {
-		304, 106,
-		312, 114,
-		312, 162,
-		304, 171,
-		295, 163,
-		295, 115
+		314, 107,
+		322, 115,
+		322, 163,
+		314, 172,
+		305, 164,
+		305, 116
 	};
 
 	blockerL = App->physics->CreateChain(0, 0, TOP_LEFT_BLOCKER, 12);
@@ -474,12 +474,12 @@ void ModuleScene::CreateColliders()
 	blockerL->ctype = ColliderType::BLOCKER;
 
 	int TOP_RIGHT_BLOCKER[12] = {
-	248, 107,
-	256, 115,
-	256, 163,
-	248, 171,
-	239, 164,
-	239, 115
+	258, 108,
+	266, 116,
+	266, 164,
+	258, 172,
+	249, 165,
+	249, 116
 	};
 
 	blockerR = App->physics->CreateChain(0, 0, TOP_RIGHT_BLOCKER, 12);
