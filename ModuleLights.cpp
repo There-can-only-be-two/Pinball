@@ -31,50 +31,26 @@ update_status ModuleLights::Update()
 {
 	if (App->debug->lightsON)
 	{
-		arrows_left_ON = true;
-		arrows_mid_ON = true;
-		combo_right_ON = true;
-		trigger_ON = true;
-		x10_ON = true;
+		App->scene_intro->sensorBlue_Sensed = true;
+		App->scene_intro->sensorYellow_Sensed = true;
+		App->scene_intro->sensorRed_Sensed = true;
+		//App->scene_intro->sensorX10_Sensed = true;
+		App->scene_intro->sensorTriLeft_Sensed = true;
+		App->scene_intro->sensorTriRight_Sensed = true;
+		App->scene_intro->sensorTime_Sensed = true;
+		App->scene_intro->sensorComboA1_Sensed = true;
+		App->scene_intro->sensorComboA2_Sensed = true;
+		App->scene_intro->sensorComboA3_Sensed = true;
+		App->scene_intro->sensorComboB1_Sensed = true;
+		App->scene_intro->sensorComboB2_Sensed = true;
+		App->scene_intro->sensorComboB3_Sensed = true;
 	}
-	else
-	{
-		arrows_left_ON = false;
-		arrows_mid_ON = false;
-		combo_right_ON = false;
-		trigger_ON = false;
-		x10_ON = false;
-	}
-	
+
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleLights::PostUpdate()
 {
-	//DEBUG
-	if (arrows_left_ON)
-	{
-		SDL_Rect rect = { 0, 0, 128, 275 };
-		App->renderer->Blit(arrows_left, 31, 99, &rect);
-	}
-	else
-	{
-		SDL_Rect rect = { 128, 0, 128, 275 };
-		App->renderer->Blit(arrows_left, 31, 99, &rect);
-	}
-
-	if (arrows_mid_ON)
-	{
-		SDL_Rect rect = { 0, 0, 48, 148 };
-		App->renderer->Blit(arrows_mid, 231, 522, &rect);
-	}
-	else
-	{
-		SDL_Rect rect = { 48, 0, 48, 148 };
-		App->renderer->Blit(arrows_mid, 231, 522, &rect);
-	}
-	
-
 	CircleBouncer();
 	TriangleBouncer();
 

@@ -29,12 +29,6 @@ public:
 	SDL_Texture* trigger = nullptr;
 	SDL_Texture* x10 = nullptr;
 
-	bool arrows_left_ON = false;
-	bool arrows_mid_ON = false;
-	bool combo_right_ON = false;
-	bool trigger_ON = false;
-	bool x10_ON = false;
-
 	int delayBlue;
 	int delayYellow;
 	int delayRed;

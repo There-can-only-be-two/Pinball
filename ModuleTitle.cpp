@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 #include "ModulePhysics.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleScene.h"
@@ -27,7 +28,7 @@ bool ModuleTitle::Start()
 	LOG("Loading Title assets");
 	bool ret = true;
 
-	timer = 120;
+	timer = 140;
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
@@ -48,7 +49,9 @@ bool ModuleTitle::CleanUp()
 update_status ModuleTitle::Update()
 {
 	App->renderer->Blit(logo, 280, 180);
-	// If user presses SPACE, enable RayCast
+	App->fonts->BlitText(320, 210, App->fonts->red, "THERE CAN ONLY");
+	App->fonts->BlitText(430, 590, App->fonts->red, "BE TWO");
+
 	
 	App->audio->PlayFx(App->scene_intro->sfx_bouncer_tri_1);
 
