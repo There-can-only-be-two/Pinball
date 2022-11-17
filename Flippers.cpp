@@ -28,14 +28,14 @@ bool Flippers::Start()
 	texture = app->textures->Load("pinball/assets.png");
 
 	//FLIPPER LEFT
-	flipperLeft = app->physics->CreateRectangle(171, 697, 90, 30);
+	flipperLeft = app->physics->CreateRectangle(171, 697, 92, 35);
 
 	b2RevoluteJointDef revoluteJointDef1;
 	revoluteJointDef1.bodyA = app->scene_intro->platformLeft->body;
 	revoluteJointDef1.bodyB = flipperLeft->body;
 	revoluteJointDef1.collideConnected = false;
-	revoluteJointDef1.localAnchorA.Set(PIXEL_TO_METERS(152), PIXEL_TO_METERS(712));
-	revoluteJointDef1.localAnchorB.Set(PIXEL_TO_METERS(-45), PIXEL_TO_METERS(7.5));
+	revoluteJointDef1.localAnchorA.Set(PIXEL_TO_METERS(174), PIXEL_TO_METERS(718));
+	revoluteJointDef1.localAnchorB.Set(PIXEL_TO_METERS(-30), PIXEL_TO_METERS(0));
 
 	revoluteJointDef1.enableMotor = false;
 	revoluteJointDef1.motorSpeed = 1000.0;
@@ -45,17 +45,18 @@ bool Flippers::Start()
 	revoluteJointDef1.referenceAngle = 10 * DEGTORAD;
 	revoluteJointDef1.lowerAngle = -45 * DEGTORAD;
 	revoluteJointDef1.upperAngle = 25 * DEGTORAD;
+
 	joint1 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef1);
 
 	// FLIPPER RIGHT
-	flipperRight = app->physics->CreateRectangle(360, 697, 90, 30);
+	flipperRight = app->physics->CreateRectangle(360, 697, 92, 35);
 
 	b2RevoluteJointDef revoluteJointDef2;
 	revoluteJointDef2.bodyA = app->scene_intro->platformRight->body;
 	revoluteJointDef2.bodyB = flipperRight->body;
 	revoluteJointDef2.collideConnected = false;
-	revoluteJointDef2.localAnchorA.Set(PIXEL_TO_METERS(358), PIXEL_TO_METERS(712));
-	revoluteJointDef2.localAnchorB.Set(PIXEL_TO_METERS(45), PIXEL_TO_METERS(7.5));
+	revoluteJointDef2.localAnchorA.Set(PIXEL_TO_METERS(332), PIXEL_TO_METERS(718));
+	revoluteJointDef2.localAnchorB.Set(PIXEL_TO_METERS(30), PIXEL_TO_METERS(0));
 
 	revoluteJointDef2.enableMotor = false;
 	revoluteJointDef2.motorSpeed = 1000.0;
@@ -108,11 +109,11 @@ bool Flippers::Update()
 		flipperRight->body->SetAngularVelocity(-1500 * DEGTORAD);
 	}
 
-	SDL_Rect rectL = { 4, 86, 86, 60 };
-	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 36, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 34, &rectL, 10.0f, flipperLeft->GetRotation(), 60, 30);
+	SDL_Rect rectL = { 6, 94, 92, 35 };
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 44, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 18, &rectL, 10.0f, flipperLeft->GetRotation(), 46, 15);
 
-	SDL_Rect rectR = { 118, 86, 86, 60 };
-	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 45, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 34, &rectR, 10.0f, flipperRight->GetRotation() , 21, 30);
+	SDL_Rect rectR = { 105, 94, 92, 35 };
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 44, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 18, &rectR, 10.0f, flipperRight->GetRotation() , 46, 15);
 
 	return true;
 }
