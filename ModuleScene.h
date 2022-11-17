@@ -118,6 +118,7 @@ public:
 	int scoreMultiplier;
 	int timeScore;
 	int time;
+	bool timeOut;
 
 	//SFX
 	uint sfx_intro;

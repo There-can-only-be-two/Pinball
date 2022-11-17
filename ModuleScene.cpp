@@ -124,11 +124,12 @@ bool ModuleScene::Start()
 
 
 	//Set variables
+	timeOut = false;
 	previousScore = currentScore;
 	currentScore = 0;
 	ballsCounter = 3;
 	scoreMultiplier = 1;
-	time = 3600; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
+	time = 60*60; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
 	App->entityManager->Enable();
 	App->lights->Enable();
@@ -157,8 +158,10 @@ bool ModuleScene::CleanUp()
 
 int ModuleScene::AddScore(int score) {
 	if (App->lights->delayComboB > 0){
+		timeScore += score * scoreMultiplier * 10;
 		return score * scoreMultiplier * 10;
 	}
+	timeScore += score * scoreMultiplier;
 	return score * scoreMultiplier;
 
 }
@@ -227,23 +230,23 @@ update_status ModuleScene::Update()
 	App->renderer->Blit(assets, 350, 330, &frankRRect);
 	#pragma endregion
 
-
-
 	//TIME FUNCTION
 	if (time > 0) {
-		SDL_Rect bar = { 71, 865, 240, 60 };
-		App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
+		if (time > 3600) { time = 3600; }
+		SDL_Rect bar = { 71, 865, time*0.066666f, 60 };
+		//App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
+		App->renderer->DrawQuad(bar, 119 + (3600-time)*0.027777f, time*0.056111f, time*0.066666f, 255, true);
 		SDL_Rect timerRect = { 0, 0, 282, 65 };
 		App->renderer->Blit(timebar, 50, 860, &timerRect);
 		time--;
 	}
 	else {
-		//GAME ENDS
+		timeOut = true;
 	}
 
 
 
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0 || timeOut)
 	{
 		App->fade->FadeBlack(this, (Module*)App->death, 90);
 		App->entityManager->Disable();

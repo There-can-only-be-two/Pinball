@@ -242,6 +242,8 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->scene_intro->sensorTime_Sensed = true;
 		app->scene_intro->timeLight.SetCurrentFrame(0);
 		app->scene_intro->scoreMultiplier = 1;
+		app->scene_intro->time += app->scene_intro->timeScore*0.06;
+		app->scene_intro->timeScore = 0;
 
 		break;
 
