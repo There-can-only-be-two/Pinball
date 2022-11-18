@@ -21,6 +21,8 @@ enum class ColliderType
 	BLUE_25,
 	YELLOW_50,
 	RED_100,
+	SAVER_LEFT,
+	SAVER_RIGHT,
 
 	//SENSORS
 	SENSOR_SPRING,

@@ -42,6 +42,8 @@ public:
 	PhysBody* platformLeft;
 	PhysBody* platformRight;
 	PhysBody* ballBody;
+	PhysBody* saverLeft;
+	PhysBody* saverRight;
 	
 	// Bounce
 	PhysBody* diamond;
@@ -66,6 +68,8 @@ public:
 	bool sensorBlue_Sensed;
 	bool sensorYellow_Sensed;
 	bool sensorRed_Sensed;
+	bool saverLeftSensed;
+	bool saverRightSensed;
 
 	PhysBody* sensorSpring;
 	bool sensorSpring_Sensed;
