@@ -28,13 +28,13 @@ bool Flippers::Start()
 	texture = app->textures->Load("pinball/assets.png");
 
 	//FLIPPER LEFT
-	flipperLeft = app->physics->CreateRectangle(171, 697, 92, 35);
+	flipperLeft = app->physics->CreateRectangle(171, 697, 88, 32);
 
 	b2RevoluteJointDef revoluteJointDef1;
 	revoluteJointDef1.bodyA = app->scene_intro->platformLeft->body;
 	revoluteJointDef1.bodyB = flipperLeft->body;
 	revoluteJointDef1.collideConnected = false;
-	revoluteJointDef1.localAnchorA.Set(PIXEL_TO_METERS(174), PIXEL_TO_METERS(718));
+	revoluteJointDef1.localAnchorA.Set(PIXEL_TO_METERS(170), PIXEL_TO_METERS(714));
 	revoluteJointDef1.localAnchorB.Set(PIXEL_TO_METERS(-30), PIXEL_TO_METERS(0));
 
 	revoluteJointDef1.enableMotor = false;
@@ -49,13 +49,13 @@ bool Flippers::Start()
 	joint1 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef1);
 
 	// FLIPPER RIGHT
-	flipperRight = app->physics->CreateRectangle(360, 697, 92, 35);
+	flipperRight = app->physics->CreateRectangle(360, 697, 88, 32);
 
 	b2RevoluteJointDef revoluteJointDef2;
 	revoluteJointDef2.bodyA = app->scene_intro->platformRight->body;
 	revoluteJointDef2.bodyB = flipperRight->body;
 	revoluteJointDef2.collideConnected = false;
-	revoluteJointDef2.localAnchorA.Set(PIXEL_TO_METERS(332), PIXEL_TO_METERS(718));
+	revoluteJointDef2.localAnchorA.Set(PIXEL_TO_METERS(342), PIXEL_TO_METERS(716));
 	revoluteJointDef2.localAnchorB.Set(PIXEL_TO_METERS(30), PIXEL_TO_METERS(0));
 
 	revoluteJointDef2.enableMotor = false;
@@ -67,7 +67,7 @@ bool Flippers::Start()
 	revoluteJointDef2.upperAngle = 45 * DEGTORAD;
 	revoluteJointDef2.enableLimit = true;
 	joint2 = (b2RevoluteJoint*)app->physics->world->CreateJoint(&revoluteJointDef2);
-		
+
 	return true;
 }
 
@@ -113,7 +113,7 @@ bool Flippers::Update()
 	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 44, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 18, &rectL, 10.0f, flipperLeft->GetRotation(), 46, 15);
 
 	SDL_Rect rectR = { 105, 94, 92, 35 };
-	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 44, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 18, &rectR, 10.0f, flipperRight->GetRotation() , 46, 15);
+	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperRight->body->GetPosition().x) - 48, METERS_TO_PIXELS(flipperRight->body->GetPosition().y) - 18, &rectR, 10.0f, flipperRight->GetRotation(), 46, 15);
 
 	return true;
 }
