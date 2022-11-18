@@ -239,7 +239,7 @@ void ModuleLights::ComboA()
 		{
 			delayComboA = 180;
 			App->scene_intro->currentScore += App->scene_intro->AddScore(2000);
-			App->scene_intro->scoreMultiplier *= 2;
+			App->scene_intro->scoreMultiplier += 2;
 		}
 	}
 	else
@@ -370,7 +370,7 @@ void ModuleLights::LoadAnimations()
 	anim_ArrowsLeft.loop;
 
 	//Arrow Mid
-	anim_ArrowsMid_A.PushBack({ 0, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({   0, 0, 128, 275 });
 	anim_ArrowsMid_A.PushBack({ 128, 0, 128, 275 });
 	anim_ArrowsMid_A.PushBack({ 256, 0, 128, 275 });
 	anim_ArrowsMid_A.PushBack({ 384, 0, 128, 275 });

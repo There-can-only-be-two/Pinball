@@ -79,7 +79,7 @@ bool ModuleScene::Start()
 	previousScore = currentScore;
 	currentScore = 0;
 	ballsCounter = 3;
-	scoreMultiplier = 1;
+	scoreMultiplier = 0;
 	time = 60*60; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
 	App->lights->Enable();
@@ -157,14 +157,12 @@ update_status ModuleScene::Update()
 
 int ModuleScene::AddScore(int score)
 {
-	if (App->lights->delayComboB > 0)
-	{
-		timeScore += score * scoreMultiplier * 10;
-		return score * scoreMultiplier * 10;
-	}
+	int resultScore = score;
+	resultScore *= scoreMultiplier > 0 ? scoreMultiplier : 1;
+	resultScore *= App->lights->delayComboB > 0 ? 10 : 1;
+	timeScore += resultScore;
 
-	timeScore += score * scoreMultiplier;
-	return score * scoreMultiplier;
+	return resultScore;
 }
 
 void ModuleScene::DrawUI_1()

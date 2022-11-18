@@ -240,7 +240,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		
 	case ColliderType::SENSOR_TIME:
 		app->scene_intro->sensorTime_Sensed = true;
-		app->scene_intro->scoreMultiplier = 1;
+		app->scene_intro->scoreMultiplier = 0;
 		app->scene_intro->time += app->scene_intro->timeScore*0.06;
 		app->scene_intro->timeScore = 0;
 
