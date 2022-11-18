@@ -110,7 +110,7 @@ bool ModuleScene::CleanUp()
 update_status ModuleScene::Update()
 {
 	//Check out of balls
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0)
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN || ballsCounter == 0 || timeOut)
 	{
 		App->fade->FadeBlack(this, (Module*)App->death, 90);
 		App->entityManager->Disable();
@@ -145,8 +145,10 @@ update_status ModuleScene::Update()
 		App->renderer->Blit(timebar, 50, 860, &timerRect);
 		time--;
 	}
-	else
+	else {
 		timeOut = true;
+	}
+
 
 
 	RayCast();
