@@ -88,7 +88,7 @@ void ModuleLights::ArrowLeft()
 	if (App->scene_intro->sensorBlue_Sensed)
 	{
 		delayArrowsLeft = 120;
-		anim_Current = &anim_ArrowsMid;
+		anim_Current = &anim_ArrowsLeft;
 		App->scene_intro->sensorBlue_Sensed = false;
 	}
 
@@ -358,17 +358,26 @@ void ModuleLights::Time()
 void ModuleLights::LoadAnimations()
 {
 	//Arrow Left
-	anim_ArrowsMid.PushBack({   0, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 128, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 256, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 384, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 512, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 640, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 768, 0, 128, 275 });
-	anim_ArrowsMid.PushBack({ 896, 0, 128, 275 });
-	anim_ArrowsMid.speed = 0.3f;
-	anim_ArrowsMid.loop;
+	anim_ArrowsLeft.PushBack({   0, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 128, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 256, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 384, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 512, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 640, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 768, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({ 896, 0, 128, 275 });
+	anim_ArrowsLeft.speed = 0.3f;
+	anim_ArrowsLeft.loop;
 
 	//Arrow Mid
-
+	anim_ArrowsMid_A.PushBack({ 0, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 128, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 256, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 384, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 512, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 640, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 768, 0, 128, 275 });
+	anim_ArrowsMid_A.PushBack({ 896, 0, 128, 275 });
+	anim_ArrowsMid_A.speed = 0.3f;
+	anim_ArrowsMid_A.loop;
 }
