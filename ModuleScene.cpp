@@ -547,6 +547,15 @@ void ModuleScene::CreateColliders()
 	yellow = App->physics->CreateCircle(246 + 37, 294 + 37, 25);
 	yellow->body->SetType(b2BodyType::b2_staticBody);
 	yellow->ctype = ColliderType::YELLOW_50;
+
+	saverLeft = App->physics->CreateRectangle(42, 650, 25, 10);
+	saverLeft->body->SetType(b2BodyType::b2_staticBody);
+	saverLeft->ctype = ColliderType::SAVER_LEFT;
+
+	saverRight = App->physics->CreateRectangleSensor(468, 650, 25, 10);
+	saverRight->body->SetType(b2BodyType::b2_staticBody);
+	saverRight->ctype = ColliderType::SAVER_RIGHT;
+
 }
 
 void ModuleScene::CreateSensors()
@@ -741,6 +750,11 @@ void ModuleScene::DeleteMap()
 
 	delete blockerR;
 	blockerR = nullptr;
+
+	delete saverLeft;
+	saverLeft = nullptr;
+	delete saverRight;
+	saverRight = nullptr;
 }
 
 void ModuleScene::RayCast()
