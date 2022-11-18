@@ -48,5 +48,6 @@ public:
 	int delayArrowsMid;
 
 	Animation* anim_Current = nullptr;
-	Animation anim_ArrowsMid;
+	Animation anim_ArrowsMid_A, anim_ArrowsMid_B;
+	Animation anim_ArrowsLeft;
 };
