@@ -24,7 +24,7 @@ Ball::~Ball()
 bool Ball::Start()
 {
 	LOG("Loading player");
-	p.x = 500; 
+	p.x = 515; 
 	p.y = 726;
 	ballBody = app->physics->CreateCircle(p.x, p.y, 15);
 	ballBody->body->SetType(b2_dynamicBody);
@@ -103,7 +103,22 @@ bool Ball::Update()
 		app->scene_intro->ballsCounter--;
 		app->scene_intro->sensorDeath_Sensed = false;
 		app->audio->PlayFx(app->scene_intro->sfx_death);
+	}
 
+	if (app->scene_intro->saverLeftSensed)
+	{
+		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
+		app->scene_intro->saverLeftSensed = false;
+		delete app->scene_intro->saverLeft;
+		app->scene_intro->saverLeft = nullptr;
+	}
+
+	if (app->scene_intro->saverRightSensed)
+	{
+		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
+		app->scene_intro->saverRightSensed = false;
+		delete app->scene_intro->saverRight;
+		app->scene_intro->saverRight = nullptr;
 	}
 
 	return true;
@@ -240,9 +255,19 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		
 	case ColliderType::SENSOR_TIME:
 		app->scene_intro->sensorTime_Sensed = true;
-		app->scene_intro->scoreMultiplier = 1;
+		app->scene_intro->scoreMultiplier = 0;
 		app->scene_intro->time += app->scene_intro->timeScore*0.06;
 		app->scene_intro->timeScore = 0;
+
+		break;
+
+	case ColliderType::SAVER_LEFT:
+		app->scene_intro->saverLeftSensed = true;
+
+		break;
+
+	case ColliderType::SAVER_RIGHT:
+		app->scene_intro->saverRightSensed = true;
 
 		break;
 

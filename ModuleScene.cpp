@@ -79,7 +79,7 @@ bool ModuleScene::Start()
 	previousScore = currentScore;
 	currentScore = 0;
 	ballsCounter = 3;
-	scoreMultiplier = 1;
+	scoreMultiplier = 0;
 	time = 60*60; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
 	App->lights->Enable();
@@ -159,14 +159,12 @@ update_status ModuleScene::Update()
 
 int ModuleScene::AddScore(int score)
 {
-	if (App->lights->delayComboB > 0)
-	{
-		timeScore += score * scoreMultiplier * 10;
-		return score * scoreMultiplier * 10;
-	}
+	int resultScore = score;
+	resultScore *= scoreMultiplier > 0 ? scoreMultiplier : 1;
+	resultScore *= App->lights->delayComboB > 0 ? 10 : 1;
+	timeScore += resultScore;
 
-	timeScore += score * scoreMultiplier;
-	return score * scoreMultiplier;
+	return resultScore;
 }
 
 void ModuleScene::DrawUI_1()
@@ -302,7 +300,7 @@ void ModuleScene::CreateColliders()
 		484, 751,
 		484, 488,
 		469, 464,
-		473, 432,//
+		473, 432,
 		461, 418,
 		432, 428,
 		420, 411,
@@ -549,6 +547,15 @@ void ModuleScene::CreateColliders()
 	yellow = App->physics->CreateCircle(246 + 37, 294 + 37, 25);
 	yellow->body->SetType(b2BodyType::b2_staticBody);
 	yellow->ctype = ColliderType::YELLOW_50;
+
+	saverLeft = App->physics->CreateRectangle(42, 650, 25, 10);
+	saverLeft->body->SetType(b2BodyType::b2_staticBody);
+	saverLeft->ctype = ColliderType::SAVER_LEFT;
+
+	saverRight = App->physics->CreateRectangleSensor(468, 650, 25, 10);
+	saverRight->body->SetType(b2BodyType::b2_staticBody);
+	saverRight->ctype = ColliderType::SAVER_RIGHT;
+
 }
 
 void ModuleScene::CreateSensors()
@@ -743,6 +750,11 @@ void ModuleScene::DeleteMap()
 
 	delete blockerR;
 	blockerR = nullptr;
+
+	delete saverLeft;
+	saverLeft = nullptr;
+	delete saverRight;
+	saverRight = nullptr;
 }
 
 void ModuleScene::RayCast()
