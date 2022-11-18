@@ -33,6 +33,7 @@ public:
 	void InFileRank(Scores l[]);
 	// Extract names out of the.txt
 	void OutFileRank(Scores l[]);
+	void ResetRank(Scores l[]);
 
 public:
 

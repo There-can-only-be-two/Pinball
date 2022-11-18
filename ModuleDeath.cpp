@@ -43,7 +43,7 @@ bool ModuleDeath::Start()
 	OutFileRank(ranking);
 	//SwapRank(ranking);
 	AddScore(ranking, score);
-	InFileRank(ranking);
+	
 	return ret;
 }
 
@@ -51,6 +51,7 @@ bool ModuleDeath::CleanUp()
 {
 	LOG("Unloading Death scene");
 	App->textures->Unload(img);
+	InFileRank(ranking);
 	return true;
 }
 
@@ -79,6 +80,10 @@ update_status ModuleDeath::Update()
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		App->fade->FadeBlack(this, (Module*)App->title, 90);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		ResetRank(ranking);
 	}
 
 	// Keep playing
@@ -147,4 +152,12 @@ void ModuleDeath::OutFileRank(Scores l[]) {
 		l[j].name =  a[j];
 	}
 	myfile.close();
+}
+
+void ModuleDeath::ResetRank(Scores l[]) {
+	ranking[0] = { "XAVI", 1000000 };
+	ranking[1] = { "HECTOR", 99000 };
+	ranking[2] = { "JULS", 69000 };
+	ranking[3] = { "JAN", 42000 };
+	ranking[4] = { "YOU", 0 };
 }
