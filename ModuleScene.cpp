@@ -197,9 +197,13 @@ void ModuleScene::DrawUI_1()
 		App->fonts->BlitText(900, 320, App->fonts->yellow, "X");
 		App->fonts->BlitText(932, 320, App->fonts->yellow, multiplier);
 	}
-	else if ((AddScore(1)) >= 8) {
+	else if ((AddScore(1)) >= 8 && (AddScore(1)) < 16) {
 		App->fonts->BlitText(900, 320, App->fonts->red, "X");
 		App->fonts->BlitText(932, 320, App->fonts->red, multiplier);
+	}
+	else if ((AddScore(1)) >= 16) {
+		App->fonts->BlitText(900, 320, App->fonts->blue, "X");
+		App->fonts->BlitText(932, 320, App->fonts->blue, multiplier);
 	}
 
 
@@ -731,6 +735,12 @@ void ModuleScene::DeleteMap()
 
 	delete sensorTime;
 	sensorDeath = nullptr;
+
+	delete blockerL;
+	blockerL = nullptr;
+
+	delete blockerR;
+	blockerR = nullptr;
 }
 
 void ModuleScene::RayCast()
