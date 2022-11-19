@@ -183,8 +183,8 @@ void ModuleScene::DrawUI_1()
 
 	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
 
-	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
-	App->fonts->BlitText(800, 905, App->fonts->grey, previous);
+	App->fonts->BlitText(600, 800, App->fonts->grey, "PREVIOUS SCORE");
+	App->fonts->BlitText(800, 865, App->fonts->grey, previous);
 
 	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
 
@@ -249,8 +249,8 @@ void ModuleScene::DrawUI_2()
 	App->fonts->BlitText(600, 195, App->fonts->white, "CURRENT SCORE");
 	App->fonts->BlitText(600, 240, scores, current);
 
-	App->fonts->BlitText(600, 850, App->fonts->grey, "PREVIOUS SCORE");
-	App->fonts->BlitText(600, 895, App->fonts->grey, previous);
+	App->fonts->BlitText(600, 800, App->fonts->grey, "PREVIOUS SCORE");
+	App->fonts->BlitText(600, 865, App->fonts->grey, previous);
 
 	App->fonts->BlitText(600, 320, App->fonts->white, "MULTIPLIER");
 	std::string string = std::string("X") + std::string(multiplier);
