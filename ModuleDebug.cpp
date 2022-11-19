@@ -34,15 +34,16 @@ update_status ModuleDebug::Update()
 	{
 		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 			variables = !variables;
-	}
 
-	// F1: View colliders / logic
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		drawPhysics = !drawPhysics;
+		// F1: View colliders / logic
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+			drawPhysics = !drawPhysics;
+
+		//F2: Lights ON/OFF
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+			lightsON = !lightsON;
+	}
 	
-	//F2: Lights ON/OFF
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-		lightsON = !lightsON;
 
 	//F3: Music ON/OFF
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)

@@ -133,8 +133,7 @@ public:
 	uint sfx_flipper;
 	uint sfx_spring;
 	uint sfx_bouncer_circle;
-	uint sfx_bouncer_tri_1;
-	uint sfx_bouncer_tri_2;
+	uint sfx_bouncer_tri;
 	uint sfx_trigger;
 	uint sfx_comboA;
 	uint sfx_new_ball;
