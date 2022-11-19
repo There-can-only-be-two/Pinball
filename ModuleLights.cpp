@@ -28,6 +28,9 @@ bool ModuleLights::Start()
 
 
 	LoadAnimations();
+	anim_CurrentArrowsLeft = &anim_ArrowsLeft;
+	anim_CurrentArrowsMid_A = &anim_ArrowsMid_A;
+
 
 	return true;
 }
@@ -59,15 +62,15 @@ update_status ModuleLights::Update()
 
 update_status ModuleLights::PostUpdate()
 {
-	ArrowLeft();
-	ArrowMid();
-
 	CircleBouncer();
 	TriangleBouncer();
 
 	ComboA();
 	ComboB();
 	Time();
+
+	ArrowLeft();
+	ArrowMid_A();
 
 	return UPDATE_CONTINUE;
 }
@@ -81,39 +84,6 @@ bool ModuleLights::CleanUp()
 	App->textures->Unload(trigger);
 	App->textures->Unload(x10);
 	return true;
-}
-
-void ModuleLights::ArrowLeft()
-{
-	if (App->scene_intro->sensorBlue_Sensed)
-	{
-		delayArrowsLeft = 120;
-		anim_Current = &anim_ArrowsLeft;
-		App->scene_intro->sensorBlue_Sensed = false;
-	}
-
-	if (delayArrowsLeft > 0)
-	{
-		SDL_Rect rectArrowsLeft = anim_Current->GetCurrentFrame();
-		App->renderer->Blit(arrows_left, 31, 99, &rectArrowsLeft);
-		anim_Current->Update();
-
-		delayArrowsLeft--;
-	}
-}
-
-void ModuleLights::ArrowMid()
-{
-	if (true)
-	{
-		SDL_Rect rect = { 0, 0, 48, 148 };
-		App->renderer->Blit(arrows_mid_A, 231, 522, &rect);
-	}
-	else
-	{
-		SDL_Rect rect = { 48, 0, 48, 148 };
-		App->renderer->Blit(arrows_mid_A, 231, 522, &rect);
-	}
 }
 
 void ModuleLights::CircleBouncer()
@@ -355,9 +325,69 @@ void ModuleLights::Time()
 	}
 }
 
+void ModuleLights::ArrowLeft()
+{
+	if (App->scene_intro->time < 800)
+	{
+		delayArrowsLeft = 1;
+		anim_CurrentArrowsLeft->Update();
+	}
+	else
+	{
+		delayArrowsLeft = 0;
+		anim_CurrentArrowsLeft->Reset();
+	}
+
+	SDL_Rect rectArrowsLeft = anim_CurrentArrowsLeft->GetCurrentFrame();
+	App->renderer->Blit(arrows_left, 31, 99, &rectArrowsLeft);
+}
+
+void ModuleLights::ArrowMid_A()
+{
+	if (App->scene_intro->sensorX10_Sensed)
+		delayArrowsMid_A = 1;
+
+	if (delayArrowsMid_A == 1)
+	{
+		anim_CurrentArrowsMid_A->Update();
+		
+		if (anim_CurrentArrowsMid_A->GetCurrentFrameint() == 5)
+		{
+			delayArrowsMid_A = 0;
+			anim_CurrentArrowsMid_A->Reset();
+		}
+	}
+
+	SDL_Rect rectArrowsMidA = anim_CurrentArrowsMid_A->GetCurrentFrame();
+	App->renderer->Blit(arrows_mid_A, 231, 522, &rectArrowsMidA);
+}
+
+void ModuleLights::ArrowMid_B()
+{
+	if (App->scene_intro->sensorTime_Sensed)
+	{
+		delayArrowsMid_B = 120;
+		anim_CurrentArrowsMid_B->Update();
+	}
+	else
+	{
+		delayArrowsLeft = 0;
+		anim_CurrentArrowsLeft->Reset();
+	}
+
+	SDL_Rect rectArrowsLeft = anim_CurrentArrowsLeft->GetCurrentFrame();
+	App->renderer->Blit(arrows_left, 31, 99, &rectArrowsLeft);
+}
+
 void ModuleLights::LoadAnimations()
 {
-	//Arrow Left
+	//Time
+	anim_Time.PushBack({ 444, 248, 50, 50 });
+	anim_Time.PushBack({ 501, 248, 50, 50 });
+	anim_Time.speed = 0.2f;
+	anim_Time.loop = false;
+
+	//Arrows Left
 	anim_ArrowsLeft.PushBack({   0, 0, 128, 275 });
 	anim_ArrowsLeft.PushBack({ 128, 0, 128, 275 });
 	anim_ArrowsLeft.PushBack({ 256, 0, 128, 275 });
@@ -366,18 +396,27 @@ void ModuleLights::LoadAnimations()
 	anim_ArrowsLeft.PushBack({ 640, 0, 128, 275 });
 	anim_ArrowsLeft.PushBack({ 768, 0, 128, 275 });
 	anim_ArrowsLeft.PushBack({ 896, 0, 128, 275 });
+	anim_ArrowsLeft.PushBack({   0, 0, 128, 275 });
 	anim_ArrowsLeft.speed = 0.3f;
 	anim_ArrowsLeft.loop;
 
-	//Arrow Mid
-	anim_ArrowsMid_A.PushBack({   0, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 128, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 256, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 384, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 512, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 640, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 768, 0, 128, 275 });
-	anim_ArrowsMid_A.PushBack({ 896, 0, 128, 275 });
-	anim_ArrowsMid_A.speed = 0.3f;
-	anim_ArrowsMid_A.loop;
+	//Arrows Mid_A
+	anim_ArrowsMid_A.PushBack({   0, 0, 48, 148 });
+	anim_ArrowsMid_A.PushBack({  48, 0, 48, 148 });
+	anim_ArrowsMid_A.PushBack({  96, 0, 48, 148 });
+	anim_ArrowsMid_A.PushBack({ 144, 0, 48, 148 });
+	anim_ArrowsMid_A.PushBack({ 192, 0, 48, 148 });
+	anim_ArrowsMid_A.PushBack({   0, 0, 48, 148 });
+	anim_ArrowsMid_A.speed = 0.02f;
+	anim_ArrowsMid_A.loop = false;
+
+	//Arrows Mid_B
+	anim_ArrowsMid_B.PushBack({   0, 0, 48, 148 });
+	anim_ArrowsMid_B.PushBack({  48, 0, 48, 148 });
+	anim_ArrowsMid_B.PushBack({  96, 0, 48, 148 });
+	anim_ArrowsMid_B.PushBack({ 144, 0, 48, 148 });
+	anim_ArrowsMid_B.PushBack({ 192, 0, 48, 148 });
+	anim_ArrowsMid_B.PushBack({   0, 0, 48, 148 });
+	anim_ArrowsMid_B.speed = 0.2f;
+	anim_ArrowsMid_B.loop;
 }

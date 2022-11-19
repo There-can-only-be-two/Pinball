@@ -36,16 +36,20 @@ bool ModuleScene::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	flipperL = (Flippers*)App->entityManager->CreateEntity(EntityType::FLIPPERS);
-	ball = (Ball*)App->entityManager->CreateEntity(EntityType::BALL);
-
 	// Set camera position
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 	springForce = 0;
 
+
+	//Create Colliders/Sensors
 	CreateColliders();
 	CreateSensors();
 
+	//Create Entities
+	flipperL = (Flippers*)App->entityManager->CreateEntity(EntityType::FLIPPERS);
+	ball = (Ball*)App->entityManager->CreateEntity(EntityType::BALL);
+
+	
 	// Load textures
 	//img = App->textures->Load("pinball/pinball_composition.png");
 	img = App->textures->Load("pinball/background.png");
@@ -64,8 +68,7 @@ bool ModuleScene::Start()
 	sfx_flipper = App->audio->LoadFx("pinball/Audio/flipper.wav");
 	sfx_spring = App->audio->LoadFx("pinball/Audio/spring.wav");
 	sfx_bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
-	sfx_bouncer_tri_1 = App->audio->LoadFx("pinball/Audio/bouncer_tri_1.wav");
-	sfx_bouncer_tri_2 = App->audio->LoadFx("pinball/Audio/bouncer_tri_2.wav");
+	sfx_bouncer_tri = App->audio->LoadFx("pinball/Audio/bouncer_tri.wav");
 	sfx_trigger = App->audio->LoadFx("pinball/Audio/trigger.wav");
 	sfx_comboA = App->audio->LoadFx("pinball/Audio/comboA.wav");
 	sfx_new_ball = App->audio->LoadFx("pinball/Audio/new_ball.wav");
@@ -82,6 +85,24 @@ bool ModuleScene::Start()
 	scoreMultiplier = 0;
 	time = 60*60; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
 	
+
+	//Set Sensors
+	App->scene_intro->sensorBlue_Sensed = false;
+	App->scene_intro->sensorYellow_Sensed = false;
+	App->scene_intro->sensorRed_Sensed = false;
+	App->scene_intro->sensorTriLeft_Sensed = false;
+	App->scene_intro->sensorTriRight_Sensed = false;
+	App->scene_intro->sensorTime_Sensed = false;
+	App->scene_intro->sensorX10_Sensed = false;
+	App->scene_intro->sensorComboA1_Sensed = false;
+	App->scene_intro->sensorComboA2_Sensed = false;
+	App->scene_intro->sensorComboA3_Sensed = false;
+	App->scene_intro->sensorComboB1_Sensed = false;
+	App->scene_intro->sensorComboB2_Sensed = false;
+	App->scene_intro->sensorComboB3_Sensed = false;
+
+
+	//Enable/Disable Modules
 	App->lights->Enable();
 	App->entityManager->Enable();
 	return ret;

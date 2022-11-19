@@ -161,8 +161,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::SENSOR_TRI_LEFT:
 		LOG("Collision TRIANGLE_LEFT");
 		app->scene_intro->sensorTriLeft_Sensed = true;
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
-		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
+		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri);
 		app->scene_intro->currentScore += app->scene_intro->AddScore(10);
 		bounceDir = { 1.0f, -0.5f };
 		intensity = 180;
@@ -172,8 +171,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	case ColliderType::SENSOR_TRI_RIGHT:
 		LOG("Collision TRIANGLE_RIGHT");
 		app->scene_intro->sensorTriRight_Sensed = true;
-		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_1);
-		//app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri_2);
+		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri);
 		app->scene_intro->currentScore += app->scene_intro->AddScore(10);
 		bounceDir = { -1.0f, -0.5f };
 		intensity = 180;

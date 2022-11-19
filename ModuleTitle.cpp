@@ -53,7 +53,7 @@ update_status ModuleTitle::Update()
 	App->fonts->BlitText(430, 590, App->fonts->red, "BE TWO");
 
 	
-	App->audio->PlayFx(App->scene_intro->sfx_bouncer_tri_1);
+	//App->audio->PlayFx(App->scene_intro->sfx_bouncer_tri);
 
 	// Keep playing
 	return UPDATE_CONTINUE;

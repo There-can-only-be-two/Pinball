@@ -17,13 +17,14 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void ArrowLeft();
-	void ArrowMid();
 	void CircleBouncer();
 	void TriangleBouncer();
 	void ComboA();
 	void ComboB();
 	void Time();
+	void ArrowLeft();
+	void ArrowMid_A();
+	void ArrowMid_B();
 
 	void LoadAnimations();
 
@@ -45,9 +46,15 @@ public:
 	int delayComboB;
 	int delayTime;
 	int delayArrowsLeft;
-	int delayArrowsMid;
+	int delayArrowsMid_A;
+	int delayArrowsMid_B;
 
-	Animation* anim_Current = nullptr;
-	Animation anim_ArrowsMid_A, anim_ArrowsMid_B;
+	Animation* anim_CurrentTime = nullptr;
+	Animation* anim_CurrentArrowsLeft = nullptr;
+	Animation* anim_CurrentArrowsMid_A = nullptr;
+	Animation* anim_CurrentArrowsMid_B = nullptr;
+	Animation anim_Time;
 	Animation anim_ArrowsLeft;
+	Animation anim_ArrowsMid_A;
+	Animation anim_ArrowsMid_B;
 };
