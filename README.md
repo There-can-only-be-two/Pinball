@@ -1,7 +1,7 @@
 # Pinball
 by There can only be two.
 
-## Developers (poseu els gits)
+## Developers
 - Xavi Alcañiz Carrillo (@StarvinXarvin)
 - Héctor Báscones Zamora (@Hekbas)
 - Jan Neto Llorens (@JanNEtoLlorens)
