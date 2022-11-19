@@ -1,10 +1,23 @@
 # Pinball
+by There can only be two.
 
 ## Developers (poseu els gits)
-- Xavi Alcañiz Carrillo 
-- Héctor Báscones Zamora
-- Jan Neto Llorens
+- Xavi Alcañiz Carrillo (@StarvinXarvin)
+- Héctor Báscones Zamora (@Hekbas)
+- Jan Neto Llorens (@JanNEtoLlorens)
 - Júlia Serra Trujillo (@softdrawss)
+
+## Keys
+- LEFT AND RIGHT ARROWS: Flippers
+- DOWN ARROW: Kicker
+
+### Debug
+- F1: Draw all shapes and allow to use a mouse joint
+- F2: Turn the lights of the pinball ON/OFF
+- F3: Turn the music of the pinball ON/OFF
+- TAB: Displays information about colliders, lights and variables 
+  - TAB, V: Displays information about the position of the ball and the force of the spring
+- U: Change display of the UI
 
 ## Requirements
 - Debug features: pressing F1 should draw all shapes and allow to use a mouse joint.
