@@ -46,6 +46,4 @@ public:
 	
 	// FX
 	uint currentScore;
-	// to store each highscore
-	uint* ranks;
 };

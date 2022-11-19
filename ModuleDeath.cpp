@@ -79,7 +79,7 @@ update_status ModuleDeath::Update()
 	// If user presses SPACE, enable RayCast
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		App->fade->FadeBlack(this, (Module*)App->title, 90);
+		App->fade->FadeBlack(this, (Module*)App->scene_intro, 90);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
@@ -121,6 +121,9 @@ void ModuleDeath::SwapRank(Scores l[]) {
 }
 
 void ModuleDeath::InFileRank(Scores l[]) {
+	//Copy the highscore to appear on scene_intro
+	App->scene_intro->highScore = l[0].score;
+
 	// Ranking text
 	ofstream myfile;
 	myfile.open("RANKING.txt");
@@ -155,9 +158,9 @@ void ModuleDeath::OutFileRank(Scores l[]) {
 }
 
 void ModuleDeath::ResetRank(Scores l[]) {
-	ranking[0] = { "XAVI", 1000000 };
-	ranking[1] = { "HECTOR", 99000 };
-	ranking[2] = { "JULS", 69000 };
-	ranking[3] = { "JAN", 42000 };
+	ranking[0] = { "XAVI", 10000 };
+	ranking[1] = { "HECTOR", 990 };
+	ranking[2] = { "JULS", 690 };
+	ranking[3] = { "JAN", 420 };
 	ranking[4] = { "YOU", 0 };
 }
