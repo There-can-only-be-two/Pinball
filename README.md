@@ -4,12 +4,13 @@ by There can only be two.
 ## Developers
 - Xavi Alcañiz Carrillo (@StarvinXarvin)
 - Héctor Báscones Zamora (@Hekbas)
-- Jan Neto Llorens (@JanNEtoLlorens)
+- Jan Neto Llorens (@JanNetoLlorens)
 - Júlia Serra Trujillo (@softdrawss)
 
 ## Keys
 - LEFT AND RIGHT ARROWS: Flippers
 - DOWN ARROW: Kicker
+- SPACE: Go through scenes
 
 ### Debug
 - F1: Draw all shapes and allow to use a mouse joint
@@ -18,6 +19,7 @@ by There can only be two.
 - TAB: Displays information about colliders, lights and variables 
   - TAB, V: Displays information about the position of the ball and the force of the spring
 - U: Change display of the UI
+- R: Resets ranking to default (Only after thegame has finished and the ranking is displayed)
 
 ## Requirements
 - Debug features: pressing F1 should draw all shapes and allow to use a mouse joint.
