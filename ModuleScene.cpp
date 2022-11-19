@@ -52,12 +52,15 @@ bool ModuleScene::Start()
 	
 	// Load textures
 	//img = App->textures->Load("pinball/pinball_composition.png");
-	img = App->textures->Load("pinball/background.png");
+	img = App->textures->Load("pinball/backgroundHole.png");
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
 	timebar = App->textures->Load("pinball/Barra.png");
+	spring = App->textures->Load("pinball/assets.png");
 
+	springY = 78;
+	springYpos = 826;
 
 	//Audio
 	Mix_Volume(-1, 32);
@@ -137,6 +140,25 @@ update_status ModuleScene::Update()
 		App->entityManager->Disable();
 	}
 
+	//Draw spring
+	SDL_Rect springRect;
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && sensorSpring_Sensed && springForce != 420)
+	{
+		springY = springY == 30 ? 30 : springY -= 0.5;
+		springYpos = springYpos == 874 ? 874 : springYpos += 1;
+		LOG("%d", springY);
+		springRect = { 546, 109, 14, springY };
+		App->renderer->Blit(spring, 505, springYpos, &springRect);
+	}
+	else
+	{
+		springRect = { 546, 109, 14, 78 };
+		App->renderer->Blit(spring, 505, 826, &springRect);
+		springY = 78;
+		springYpos = 826;
+	}
+
 	//Draw map
 	App->renderer->Blit(img, 10, 0);
 	
@@ -168,9 +190,7 @@ update_status ModuleScene::Update()
 	}
 	else {
 		timeOut = true;
-	}
-
-
+	}	
 
 	RayCast();
 	

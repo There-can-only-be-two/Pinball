@@ -105,6 +105,9 @@ public:
 	SDL_Texture* assets;
 	SDL_Texture* timebar;
 
+	SDL_Texture* spring;
+	int springY, springYpos;
+
 	//Animations
 	Animation blueLight;
 	Animation redLight;
