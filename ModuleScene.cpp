@@ -174,6 +174,8 @@ update_status ModuleScene::Update()
 	SDL_Rect frankRRect = { 71, 155, 50, 70 };
 	App->renderer->Blit(assets, 350, 330, &frankRRect);
 
+	App->renderer->Blit(balls, 360, 878);
+
 	//Draw Chosen UI
 	if (App->debug->changeUI)
 		DrawUI_1();
