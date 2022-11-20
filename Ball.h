@@ -26,9 +26,11 @@ public:
 	int intensity;
 	
 	b2RevoluteJoint* joint;
-	int scorex10finished;
 	bool separed, jointCreated;
 
+	int scorex10finished;
+	int delayNewBall;
+	int delaySaved;
+
 private:
-	SDL_Texture* texture = nullptr;
 };
