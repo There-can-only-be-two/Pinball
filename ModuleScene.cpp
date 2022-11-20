@@ -58,6 +58,7 @@ bool ModuleScene::Start()
 	balls = App->textures->Load("pinball/prova.png");
 	lower = App->textures->Load("pinball/lower.png");
 	timebar = App->textures->Load("pinball/Barra.png");
+	savers = App->textures->Load("pinball/savers.png");
 
 
 	//Audio
@@ -120,6 +121,7 @@ bool ModuleScene::CleanUp()
 	App->textures->Unload(top);
 	App->textures->Unload(balls);
 	App->textures->Unload(lower);
+	App->textures->Unload(savers);
 
 	App->lights->Disable();
 	blueLight.FullReset();

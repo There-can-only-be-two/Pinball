@@ -142,7 +142,7 @@ bool Ball::Update()
 		app->audio->PlayFx(app->scene_intro->sfx_spring);
 		delete app->scene_intro->saverLeft;
 		app->scene_intro->saverLeft = nullptr;
-		delaySaverLeft--;
+		delaySaverLeft = -255;
 	}
 
 	//Delay Saver Right
@@ -154,7 +154,7 @@ bool Ball::Update()
 		app->audio->PlayFx(app->scene_intro->sfx_spring);
 		delete app->scene_intro->saverRight;
 		app->scene_intro->saverRight = nullptr;
-		delaySaverRight--;
+		delaySaverRight = -255;
 	}
 
 	
@@ -169,6 +169,23 @@ bool Ball::PostUpdate()
 	SDL_Rect rectTop = { 0, 0, 115, 335 };
 	app->renderer->Blit(app->scene_intro->top, 434, 122, &rectTop);
 
+	//Left saver
+	SDL_Rect leftSaver;
+	if (delaySaverLeft == -255)
+		leftSaver = { 0, 0, 52, 20 };
+	else
+		leftSaver = { 0, 20, 52, 20 };
+	app->renderer->Blit(app->scene_intro->savers, 9, 630, &leftSaver);
+
+	//Right Savers
+	SDL_Rect rightSaver;
+	if (delaySaverRight == -255)
+		rightSaver = { 52, 0, 52, 20 };
+	else
+		rightSaver = { 52, 20, 52, 20 };
+	app->renderer->Blit(app->scene_intro->savers, 450, 630, &rightSaver);
+
+	//Lower part where game info is
 	SDL_Rect rectLower = { 0, 0, 462, 207 };
 	app->renderer->Blit(app->scene_intro->lower, 24, 730, &rectLower);
 
