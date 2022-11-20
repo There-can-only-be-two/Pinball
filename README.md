@@ -25,7 +25,7 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
   - Frame Control: (Q-/E+)
   - Gravity: (S-/W+)
   - Bounce coef: (A-/D+)
-  - V: Displays the following variables - Ball(x, y), Spring force
+  - V: Displays the following variables - Ball(x, y), Spring force, Gravity and Bounce coef
   - F: Finishes the game and displays rankings
   - U: Change display of the UI
   - R: Resets ranking to default (Only after the game has finished and the ranking is displayed)
@@ -37,7 +37,7 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
   - Time remaining is displayed at the bottom left of the pinball.
   
 ## Combos and Feautures
-- EXTRA KIKCERS: Once activated, the kicker used disappears.
+- EXTRA KIKCERS: Automatically shoots the ball when touched. Once activated, the kicker used turns off and will not activate again.
 - EXTRA TIME: Passing through the Time feauture rewards the player extra time. However, Extra Time cancels the X2 multiplier and equals it to 1.
 - MULTIPLIER: 
   - X2: Activating the three parts in the upper right zone of the map will sum 2 to the current value of the multiplier.
