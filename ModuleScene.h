@@ -133,7 +133,8 @@ public:
 
 	//SFX
 	uint sfx_intro;
-	uint sfx_flipper;
+	uint sfx_flipper_up;
+	uint sfx_flipper_down;
 	uint sfx_spring;
 	uint sfx_bouncer_circle;
 	uint sfx_bouncer_tri;

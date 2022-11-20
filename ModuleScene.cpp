@@ -67,7 +67,8 @@ bool ModuleScene::Start()
 	//App->audio->PlayMusic("Assets/Audio/", 0);
 	//App->audio->LoadFx("Assets/Audio/");
 	sfx_intro = App->audio->LoadFx("pinball/Audio/intro.wav");
-	sfx_flipper = App->audio->LoadFx("pinball/Audio/flipper.wav");
+	sfx_flipper_up = App->audio->LoadFx("pinball/Audio/flipper_up.wav");
+	sfx_flipper_down = App->audio->LoadFx("pinball/Audio/flipper_down.wav");
 	sfx_spring = App->audio->LoadFx("pinball/Audio/spring.wav");
 	sfx_bouncer_circle = App->audio->LoadFx("pinball/Audio/bouncer_circle.wav");
 	sfx_bouncer_tri = App->audio->LoadFx("pinball/Audio/bouncer_tri.wav");

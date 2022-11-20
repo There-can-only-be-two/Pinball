@@ -28,4 +28,10 @@ public:
 private:
 	SDL_Texture* texture = nullptr;
 	const char* texturePath;
+
+	bool flipperLeft_up;
+	bool flipperLeft_down;
+
+	bool flipperRight_up;
+	bool flipperRight_down;
 };
