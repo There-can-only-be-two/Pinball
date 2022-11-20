@@ -142,6 +142,7 @@ public:
 	uint sfx_bouncer_tri;
 	uint sfx_trigger;
 	uint sfx_comboA;
+	uint sfx_comboA_done;
 	uint sfx_new_ball;
 	uint sfx_death;
 	uint sfx_game_over;

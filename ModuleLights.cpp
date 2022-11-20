@@ -211,6 +211,7 @@ void ModuleLights::ComboA()
 			App->scene_intro->sensorComboA3_Sensed)
 		{
 			delayComboA = 180;
+			App->audio->PlayFx(App->scene_intro->sfx_comboA_done);
 			App->scene_intro->currentScore += App->scene_intro->AddScore(2000);
 			App->scene_intro->scoreMultiplier += 2;
 		}

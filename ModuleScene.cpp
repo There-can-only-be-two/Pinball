@@ -75,6 +75,7 @@ bool ModuleScene::Start()
 	sfx_bouncer_tri = App->audio->LoadFx("pinball/Audio/bouncer_tri.wav");
 	sfx_trigger = App->audio->LoadFx("pinball/Audio/trigger.wav");
 	sfx_comboA = App->audio->LoadFx("pinball/Audio/comboA.wav");
+	sfx_comboA_done = App->audio->LoadFx("pinball/Audio/comboA_done.wav");
 	sfx_new_ball = App->audio->LoadFx("pinball/Audio/new_ball.wav");
 	sfx_death = App->audio->LoadFx("pinball/Audio/death.wav");
 	sfx_spring = App->audio->LoadFx("pinball/Audio/spring.wav");
