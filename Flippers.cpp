@@ -91,6 +91,7 @@ bool Flippers::Update()
 {
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
+		flipperLeft_up = true;
 		flipperLeft->body->SetAngularVelocity(-1500 * DEGTORAD);
 		LOG("%f", flipperLeft->GetRotation());
 	}
@@ -109,6 +110,19 @@ bool Flippers::Update()
 		flipperRight->body->SetAngularVelocity(-1500 * DEGTORAD);
 	}
 
+
+	//SFX
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		app->audio->PlayFx(app->scene_intro->sfx_flipper_up);
+	else if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+		app->audio->PlayFx(app->scene_intro->sfx_flipper_down);
+
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		app->audio->PlayFx(app->scene_intro->sfx_flipper_up);
+	else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+		app->audio->PlayFx(app->scene_intro->sfx_flipper_down);
+
+
 	SDL_Rect rectL = { 6, 94, 92, 35 };
 	app->renderer->Blit(texture, METERS_TO_PIXELS(flipperLeft->body->GetPosition().x) - 44, METERS_TO_PIXELS(flipperLeft->body->GetPosition().y) - 18, &rectL, 10.0f, flipperLeft->GetRotation(), 46, 15);
 
@@ -117,5 +131,3 @@ bool Flippers::Update()
 
 	return true;
 }
-
-
