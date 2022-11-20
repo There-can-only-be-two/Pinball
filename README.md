@@ -18,10 +18,16 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
 - ESC: Quit
 
 ### Debug
+- GRAVITY
+  - W
+  - S
+- BOUNCE
+  - A
+  - D
 - F: Go directly to the Ranking without having to finish the game
 - F1: Draw all shapes and allow to use a mouse joint
 - TAB: Displays information about colliders, lights and variables 
-  - TAB, V: Displays information about the position of the ball and the force of the spring
+  - TAB, V: Displays information about the position of the ball, the force of the spring, frames, 
   - TAB, F2: Turn the lights of the pinball ON/OFF
   - TAB, F3: Turn the music of the pinball ON/OFF
 - U: Change display of the UI
@@ -32,7 +38,6 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
   - Number of balls remaining is displayed at the bottom of the pinball.
 - TIME: Even though game finishes when the player is out of balls, it can also finish when the player is out of time.
   - Time remaining is displayed at the bottom left of the pinball.
-  
   
 ## Combos and Feautures
 - EXTRA KIKCERS: Once activated, the kicker used disappears.
