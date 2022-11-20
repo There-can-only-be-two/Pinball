@@ -158,7 +158,7 @@ void ModuleDeath::OutFileRank(Scores l[]) {
 }
 
 void ModuleDeath::ResetRank(Scores l[]) {
-	ranking[0] = { "XAVI", 10000 };
+	ranking[0] = { "XAVI", 1000 };
 	ranking[1] = { "HECTOR", 990 };
 	ranking[2] = { "JULS", 690 };
 	ranking[3] = { "JAN", 420 };

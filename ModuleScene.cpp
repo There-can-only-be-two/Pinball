@@ -20,7 +20,7 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	// Initialise all the internal class variables, at least to NULL pointer
 	ray_on = false;
 
-	highScore = 10000;
+	highScore = 1000;
 	currentScore = 0;
 	previousScore = 0;
 	ballsCounter = 3;
