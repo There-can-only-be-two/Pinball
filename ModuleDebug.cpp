@@ -13,6 +13,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleDeath.h"
 #include "ModuleTitle.h"
+#include "EntityManager.h"
 
 #include <chrono>
 using namespace std::chrono;
@@ -147,6 +148,9 @@ void ModuleDebug::DrawDebug()
 		
 		string = std::string("GRAVITY.Y = ") + std::to_string((int)-App->physics->gravity);
 		App->fonts->BlitText(debugX, debugY + 220, fontId, string.c_str());
+
+		string = std::string("INTENSITY BOUNCE = ") + std::to_string(App->scene_intro->ball->intensity);
+		App->fonts->BlitText(debugX, debugY + 240, fontId, string.c_str());
 	}	
 }
 

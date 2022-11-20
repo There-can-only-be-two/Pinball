@@ -34,7 +34,7 @@ bool Ball::Start()
 	
 	bounce = false;
 	bounceDir = { 0.0f, 0.0f };
-	intensity = 0;
+	intensity = 100;
 
 	separed = false;
 	jointCreated = false;
@@ -94,6 +94,15 @@ bool Ball::Update()
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		app->physics->gravity -= 0.5;
 		app->physics->world->SetGravity(b2Vec2(GRAVITY_X, app->physics->gravity));
+	}
+
+	// Bounce
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		intensity += 10;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		intensity -= 10;
+		
 	}
 
 	//Right hole combo
@@ -177,7 +186,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->scene_intro->currentScore += app->scene_intro->AddScore(25);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->blue->body->GetWorldCenter() };
 		bounce = true;
-		intensity = 100;
+		
 		break;
 
 	case ColliderType::YELLOW_50:
@@ -187,7 +196,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->scene_intro->currentScore += app->scene_intro->AddScore(50);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->yellow->body->GetWorldCenter() };
 		bounce = true;
-		intensity = 100;
+		
 		break;
 
 	case ColliderType::RED_100:
@@ -197,7 +206,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->scene_intro->currentScore += app->scene_intro->AddScore(100);
 		bounceDir = { ballBody->body->GetWorldCenter() - app->scene_intro->red->body->GetWorldCenter() };
 		bounce = true;
-		intensity = 100;
+		
 		break;
 
 	case ColliderType::SENSOR_TRI_LEFT:
@@ -206,7 +215,6 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri);
 		app->scene_intro->currentScore += app->scene_intro->AddScore(10);
 		bounceDir = { 1.0f, -0.5f };
-		intensity = 180;
 		bounce = true;
 		break;
 
@@ -216,7 +224,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		app->audio->PlayFx(app->scene_intro->sfx_bouncer_tri);
 		app->scene_intro->currentScore += app->scene_intro->AddScore(10);
 		bounceDir = { -1.0f, -0.5f };
-		intensity = 180;
+		
 		bounce = true;
 		break;
 
