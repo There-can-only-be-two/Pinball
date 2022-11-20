@@ -27,9 +27,8 @@ public:
 	bool variables = false;
 	bool lightsON = false;
 	bool musicON = false;
-	bool sfxON = false;
+	bool sfxON = true;
 	bool changeUI = false;
-	bool fps = false;
 
 	microseconds timePerCycle;
 	microseconds elapsedFrame;

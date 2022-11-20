@@ -173,9 +173,9 @@ update_status ModuleScene::Update()
 
 	//Draw Chosen UI
 	if (App->debug->changeUI)
-		DrawUI_2();
-	else
 		DrawUI_1();
+	else
+		DrawUI_2();
 
 	//TIME FUNCTION
 	if (time > 0)

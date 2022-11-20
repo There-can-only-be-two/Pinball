@@ -34,47 +34,41 @@ update_status ModuleDebug::Update()
 	if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		drawDebug = !drawDebug;
 
-	// F1: View colliders / logic
-		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-			drawPhysics = !drawPhysics;
 
 	if (drawDebug)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
-			variables = !variables;
-
-		
+		// F1: View colliders / logic
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+			drawPhysics = !drawPhysics;
 
 		//F2: Lights ON/OFF
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 			lightsON = !lightsON;
 
-		//F: Change Frames ON/OFF
-		if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-			fps = !fps;
+		//FPS
+		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && desiredFPS < 120)
+			desiredFPS += 5;
+		else if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && desiredFPS > 10)
+			desiredFPS -= 5;
+
+		//F4: Sfx ON/OFF
+		if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+			sfxON = !sfxON;
+
+		if (sfxON)
+			Mix_Volume(-1, 32);
+		else
+			Mix_Volume(-1, 0);
+
+		//U: Chnage UI
+		if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+			changeUI = !changeUI;
+
+		if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
+			variables = !variables;
 	}
+
 	
-	 
-	if (fps == true)
-	{
-		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && desiredFPS < 120)
-			desiredFPS += 1;
-		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && desiredFPS > 10)
-			desiredFPS -= 1;
-	}
-
-	//F3: Music ON/OFF
-	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-		musicON = !musicON;
-
-	//F4: Sfx ON/OFF
-	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-		sfxON = !sfxON;
-	
-	//U: Chnage UI
-	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
-		changeUI = !changeUI;
-
 	return UPDATE_CONTINUE;
 }
 
@@ -93,7 +87,7 @@ void ModuleDebug::DrawDebug()
 {
 	int fontId = 6;
 	int debugX = 600;
-	int debugY = 500;
+	int debugY = 420;
 
 
 	App->fonts->BlitText(debugX, debugY + 0, fontId, "#DEBUG MODE (TAB)  ON/OFF");
@@ -110,47 +104,55 @@ void ModuleDebug::DrawDebug()
 	else
 		App->fonts->BlitText(debugX, debugY + 40, fontId, "#LIGHTS     (F2)   OFF");
 
+
 	//Frames
-	if (fps)
-		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F5)   ON");
+	std::string string = std::string("#FRAMESPS   (Q-/E+)  ") + std::to_string(desiredFPS);
+	App->fonts->BlitText(debugX, debugY + 80, fontId, string.c_str());
+
+	//Gravity
+	string = std::string("#GRAVITY.Y  (S-/W+)  ") + std::to_string((int)-App->physics->gravity);
+	App->fonts->BlitText(debugX, debugY + 100, fontId, string.c_str());
+
+	//Bounce coef
+	string = std::string("#BOUNCE COEF(A-/D+)  ") + std::to_string(App->scene_intro->ball->intensity);
+	App->fonts->BlitText(debugX, debugY + 120, fontId, string.c_str());
+
+
+
+	//Change UI
+	if (changeUI)
+		App->fonts->BlitText(debugX, debugY + 160, fontId, "#CHANGE UI  (U)    ON");
 	else
-		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F5)   OFF");
+		App->fonts->BlitText(debugX, debugY + 160, fontId, "#CHANGE UI  (U)    OFF");
+
+	//Mute SFX
+	if (sfxON)
+		App->fonts->BlitText(debugX, debugY + 180, fontId, "#SFX        (M)    ON");
+	else
+		App->fonts->BlitText(debugX, debugY + 180, fontId, "#SFX        (M)    OFF");
 
 	//Variables
 	if (variables)
-		App->fonts->BlitText(debugX, debugY + 80, fontId, "#VARIABLES  (V)    ON");
+		App->fonts->BlitText(debugX, debugY + 200, fontId, "#VARIABLES  (V)    ON");
 	else
-		App->fonts->BlitText(debugX, debugY + 80, fontId, "#VARIABLES  (V)    OFF");
+		App->fonts->BlitText(debugX, debugY + 200, fontId, "#VARIABLES  (V)    OFF");
 
-
-	if (fps)
-	{
-		//Frames
-		std::string string = std::string("FRAMES = ") + std::to_string(desiredFPS);
-		App->fonts->BlitText(debugX, debugY + 120, fontId, string.c_str());
-	}
 
 	if (variables)
 	{
 		//Ball x, y
 		std::string string = std::string("BALL.X = ") + std::to_string(App->scene_intro->ball->position.x);
-		App->fonts->BlitText(debugX, debugY + 160, fontId, string.c_str());
+		App->fonts->BlitText(debugX + 16, debugY + 220, fontId, string.c_str());
 
 		string = std::string("BALL.Y = ") + std::to_string(App->scene_intro->ball->position.y);
-		App->fonts->BlitText(debugX, debugY + 180, fontId, string.c_str());
+		App->fonts->BlitText(debugX + 16, debugY + 240, fontId, string.c_str());
 
 		//Spring force
 		if (App->scene_intro->springForce == 420)
 			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce) + "  X)";
 		else
 			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce);
-		App->fonts->BlitText(debugX, debugY + 200, fontId, string.c_str());
-		
-		string = std::string("GRAVITY.Y = ") + std::to_string((int)-App->physics->gravity);
-		App->fonts->BlitText(debugX, debugY + 220, fontId, string.c_str());
-
-		string = std::string("INTENSITY BOUNCE = ") + std::to_string(App->scene_intro->ball->intensity);
-		App->fonts->BlitText(debugX, debugY + 240, fontId, string.c_str());
+		App->fonts->BlitText(debugX + 16, debugY + 260, fontId, string.c_str());
 	}	
 }
 
