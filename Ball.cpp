@@ -31,16 +31,16 @@ bool Ball::Start()
 	ballBody->ctype = ColliderType::BALL;
 	//app->scene_intro->boxes.add(ballBody);
 	ballBody->listener = this;
-	texture = app->textures->Load("pinball/assets.png");
 	
 	bounce = false;
 	bounceDir = { 0.0f, 0.0f };
 	intensity = 0;
 
-	scorex10finished = 0;
 	separed = false;
 	jointCreated = false;
 	
+	scorex10finished = 0;
+	delayNewBall = -1;
 
 	return true;
 }
@@ -77,6 +77,7 @@ bool Ball::Update()
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && app->scene_intro->sensorSpring_Sensed && springForce > 60)
 	{
+		app->audio->PlayFx(app->scene_intro->sfx_spring);
 		ballBody->body->ApplyForceToCenter(b2Vec2(0, -springForce), true);
 		app->scene_intro->springForce = 0;
 		app->scene_intro->sensorSpring_Sensed = false;
@@ -85,6 +86,8 @@ bool Ball::Update()
 	else
 		app->scene_intro->springForce = 0;
 
+
+	//Right hole combo
 	if (app->scene_intro->sensorX10_Sensed)
 	{
 		ballBody->body->ApplyForce(b2Vec2(100, -100), ballBody->body->GetWorldCenter(), true);
@@ -97,14 +100,20 @@ bool Ball::Update()
 		app->scene_intro->sensorX10_Sensed = false;
 	}
 	
-	if (app->scene_intro->sensorDeath_Sensed)
-	{		
+	//Delay New Ball
+	if (delayNewBall > 0)
+		delayNewBall--;
+	else if (delayNewBall == 0)
+	{
 		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
 		app->scene_intro->ballsCounter--;
-		app->scene_intro->sensorDeath_Sensed = false;
-		app->audio->PlayFx(app->scene_intro->sfx_death);
+		delayNewBall--;
+
+		if (app->scene_intro->ballsCounter > 0)
+			app->audio->PlayFx(app->scene_intro->sfx_new_ball);
 	}
 
+	//Savers
 	if (app->scene_intro->saverLeftSensed)
 	{
 		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
@@ -126,11 +135,17 @@ bool Ball::Update()
 
 bool Ball::PostUpdate()
 {
-	SDL_Rect rect = { 229, 106, 31, 31 };
-	app->renderer->Blit(texture, position.x, position.y, &rect);
+	SDL_Rect rectBall = { 229, 106, 31, 31 };
+	app->renderer->Blit(app->scene_intro->assets, position.x, position.y, &rectBall);
 
-	SDL_Rect rect2 = { 0, 0, 115, 335 };
-	app->renderer->Blit(app->scene_intro->top, 434, 122, &rect2);
+	SDL_Rect rectTop = { 0, 0, 115, 335 };
+	app->renderer->Blit(app->scene_intro->top, 434, 122, &rectTop);
+
+	//Time bar
+	SDL_Rect bar = { 71, 865, app->scene_intro->time * 0.066666f, 60 };
+	app->renderer->DrawQuad(bar, 119 + (3600 - app->scene_intro->time) * 0.027777f, 40 + app->scene_intro->time * 0.045f, app->scene_intro->time * 0.066666f, 255, true);
+	SDL_Rect timerRect = { 0, 0, 282, 65 };
+	app->renderer->Blit(app->scene_intro->timebar, 50, 860, &timerRect);
 
 	return true;
 }
@@ -210,8 +225,12 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	case ColliderType::SENSOR_DEATH:
 		LOG("Collision DEATH");
-		if (!app->scene_intro->ray_on)
+		if (!app->scene_intro->ray_on && delayNewBall == -1)
+		{
+			app->audio->PlayFx(app->scene_intro->sfx_death);
+			delayNewBall = 120;
 			app->scene_intro->sensorDeath_Sensed = true;
+		}
 		break;
 	
 	case ColliderType::SENSOR_COMBO_A1:

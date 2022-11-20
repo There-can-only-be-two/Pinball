@@ -161,9 +161,6 @@ update_status ModuleScene::Update()
 
 	//Draw map
 	App->renderer->Blit(img, 10, 0);
-	
-	SDL_Rect recBall = { 229, 106, 31, 31 };
-	App->renderer->Blit(balls, 360, 875 + 3);	
 
 	SDL_Rect frankLRect = { 9, 156, 50, 70 };
 	App->renderer->Blit(assets, 157, 330, &frankLRect);
@@ -181,16 +178,11 @@ update_status ModuleScene::Update()
 	if (time > 0)
 	{
 		if (time > 3600) { time = 3600; }
-		SDL_Rect bar = { 71, 865, time*0.066666f, 60 };
-		//App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
-		App->renderer->DrawQuad(bar, 119 + (3600-time)*0.027777f, 40+time*0.045f, time*0.066666f, 255, true);
-		SDL_Rect timerRect = { 0, 0, 282, 65 };
-		App->renderer->Blit(timebar, 50, 860, &timerRect);
 		time--;
 	}
-	else {
+	else
 		timeOut = true;
-	}	
+
 
 	RayCast();
 	
@@ -307,39 +299,39 @@ void ModuleScene::CreateColliders()
 	//Map
 	int BG[120] =
 	{
-		273, 876,
-		273, 842,
-		449, 751,
-		484, 751,
-		484, 488,
-		469, 464,
-		473, 432,
-		461, 418,
-		432, 428,
-		420, 411,
-		418, 393,
-		430, 362,
-		445, 329,
-		450, 312,
-		452, 292,
-		450, 269,
-		444, 247,
-		431, 220,
-		407, 193,
-		370, 163,
-		361, 149,
-		363, 130,
+		276, 928,
+		276, 842,
+		450, 753,
+		486, 753,
+		486, 483,
+		469, 462,
+		480, 437,
+		458, 414,
+		436, 428,
+		422, 409,
+		423, 392,
+		434, 367,
+		447, 332,
+		453, 314,
+		456, 292,
+		455, 270,
+		449, 245,
+		434, 218,
+		409, 189,
+		372, 162,
+		362, 150,
+		364, 131,
 		379, 122,
-		402, 129,
-		427, 146,
-		447, 165,
-		472, 197,
-		483, 217,
-		491, 240,
-		496, 266,
+		401, 131,
+		425, 147,
+		446, 168,
+		470, 200,
+		480, 220,
+		489, 243,
+		494, 266,
 		497, 295,
 		497, 806,
-		534, 806,
+		535, 807,
 		534, 216,
 		523, 186,
 		501, 152,
@@ -352,21 +344,20 @@ void ModuleScene::CreateColliders()
 		80, 127,
 		51, 164,
 		24, 214,
-		24, 314,
-		31, 361,
-		44, 399,
-		64, 436,
-		79, 456,
-		81, 468,
-		77, 482,
-		60, 500,
+		20, 296,
+		29, 363,
+		42, 403,
+		61, 440,
+		78, 459,
+		81, 470,
+		74, 482,
+		56, 499,
 		40, 524,
 		24, 553,
 		24, 753,
-		24, 753,
 		62, 753,
-		234, 841,
-		234, 875
+		232, 840,
+		232, 928
 	};
 	int WALL_LEFT[64] =
 	{
@@ -439,7 +430,7 @@ void ModuleScene::CreateColliders()
 	};
 
 
-	bg = App->physics->CreateChain(0, 0, BG, 120);
+	bg = App->physics->CreateChain(0, 0, BG, 118);
 	bg->body->SetType(b2BodyType::b2_staticBody);
 
 	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 64);
