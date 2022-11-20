@@ -169,8 +169,8 @@ bool Ball::PostUpdate()
 	SDL_Rect rectTop = { 0, 0, 115, 335 };
 	app->renderer->Blit(app->scene_intro->top, 434, 122, &rectTop);
 
-	SDL_Rect rectLower = { 0, 0, 462, 187 };
-	app->renderer->Blit(app->scene_intro->lower, 24, 750, &rectLower);
+	SDL_Rect rectLower = { 0, 0, 462, 207 };
+	app->renderer->Blit(app->scene_intro->lower, 24, 730, &rectLower);
 
 	//Time bar
 	SDL_Rect bar = { 71, 865, app->scene_intro->time * 0.066666f, 60 };
