@@ -20,7 +20,8 @@ ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, sta
 	// Initialise all the internal class variables, at least to NULL pointer
 	ray_on = false;
 
-	highScore = 1000;
+	App->death->OutFileRank(l);
+	highScore = l[0].score;
 	currentScore = 0;
 	previousScore = 0;
 	ballsCounter = 3;
@@ -143,7 +144,9 @@ update_status ModuleScene::Update()
 		App->fade->FadeBlack(this, (Module*)App->death, 90);
 		App->entityManager->Disable();
 	}
-
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_UP) {
+		App->death->InFileRank(l);
+	}
 	//Draw spring
 	SDL_Rect springRect;
 

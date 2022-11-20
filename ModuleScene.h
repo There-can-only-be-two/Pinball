@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "Entity.h"
 #include "Animation.h"
+#include "ModuleDeath.h"
 
 class PhysBody;
 
@@ -130,6 +131,7 @@ public:
 	int timeScore;
 	int time;
 	bool timeOut;
+	Scores l[5];
 
 	//SFX
 	uint sfx_intro;
