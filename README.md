@@ -57,4 +57,4 @@ Sometimes one of us had another idea to write some code, and we can see that in 
 
 Overall, even the bugs and issues we found eventually during development, we spent lots of hours coding, editing and testing in class and as a group we are very happy with the result. 
 
-- There can only be two
+-There can only be two
