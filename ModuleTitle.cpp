@@ -60,9 +60,8 @@ bool ModuleTitle::CleanUp()
 
 update_status ModuleTitle::Update()
 {
-	App->renderer->Blit(logo, 280, 180);
-	App->fonts->BlitText(320, 210, App->fonts->red, "THERE CAN ONLY");
-	App->fonts->BlitText(430, 590, App->fonts->red, "BE TWO");
+	App->renderer->Blit(logo, 0, 0);
+	
 
 	
 
