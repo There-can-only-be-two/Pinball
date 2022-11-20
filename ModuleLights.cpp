@@ -24,12 +24,13 @@ bool ModuleLights::Start()
 	arrows_mid_B = App->textures->Load("pinball/Lights/arrows_mid_B.png");
 	combo_A = App->textures->Load("pinball/Lights/combo_A.png");
 	trigger = App->textures->Load("pinball/Lights/trigger.png");
-	x10 = App->textures->Load("pinball/Lights/x10.png");
+	x10 = App->textures->Load("pinball/Lights/x10_2.png");
 
 
 	LoadAnimations();
 	anim_CurrentArrowsLeft = &anim_ArrowsLeft;
 	anim_CurrentArrowsMid_A = &anim_ArrowsMid_A;
+	anim_Currentx10 = &anim_x10;
 
 
 	return true;
@@ -47,7 +48,7 @@ update_status ModuleLights::Update()
 		App->scene_intro->sensorTriRight_Sensed = true;
 
 		App->scene_intro->sensorTime_Sensed = true;
-		//App->scene_intro->sensorX10_Sensed = true;
+		App->scene_intro->sensorX10_Sensed = true;
 
 		App->scene_intro->sensorComboA1_Sensed = true;
 		App->scene_intro->sensorComboA2_Sensed = true;
@@ -71,6 +72,8 @@ update_status ModuleLights::PostUpdate()
 
 	ArrowLeft();
 	ArrowMid_A();
+
+	X10Bonus();
 
 	return UPDATE_CONTINUE;
 }
@@ -297,6 +300,26 @@ void ModuleLights::ComboB()
 	}
 }
 
+void ModuleLights::X10Bonus()
+{
+	if (App->scene_intro->sensorX10_Sensed)
+		delayx10 = 1;
+
+	if (delayx10 == 1)
+	{
+		anim_Currentx10->Update();
+
+		if (anim_Currentx10->GetCurrentFrameint() == 5)
+		{
+			delayx10 = 0;
+			anim_Currentx10->Reset();
+		}
+	}
+
+	SDL_Rect rectx10 = anim_Currentx10->GetCurrentFrame();
+	App->renderer->Blit(x10, 353, 442, &rectx10);
+}
+
 void ModuleLights::Time()
 {
 	SDL_Rect rect;
@@ -351,7 +374,7 @@ void ModuleLights::ArrowMid_A()
 	{
 		anim_CurrentArrowsMid_A->Update();
 		
-		if (anim_CurrentArrowsMid_A->GetCurrentFrameint() == 5)
+		if (anim_CurrentArrowsMid_A->GetCurrentFrameint() == 6)
 		{
 			delayArrowsMid_A = 0;
 			anim_CurrentArrowsMid_A->Reset();
@@ -419,4 +442,14 @@ void ModuleLights::LoadAnimations()
 	anim_ArrowsMid_B.PushBack({   0, 0, 48, 148 });
 	anim_ArrowsMid_B.speed = 0.2f;
 	anim_ArrowsMid_B.loop;
+
+	//10k Bonus
+	anim_x10.PushBack({ 0, 0, 99, 90});
+	anim_x10.PushBack({ 99, 0, 99, 90});
+	anim_x10.PushBack({ 0, 0, 99, 90 });
+	anim_x10.PushBack({ 99, 0, 99, 90 });
+	anim_x10.PushBack({ 0, 0, 99, 90 });
+	anim_x10.PushBack({ 99, 0, 99, 90 });
+	anim_x10.speed = 0.1f;
+	anim_x10.loop = false;
 }

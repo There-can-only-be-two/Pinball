@@ -25,6 +25,7 @@ public:
 	void ArrowLeft();
 	void ArrowMid_A();
 	void ArrowMid_B();
+	void X10Bonus();
 
 	void LoadAnimations();
 
@@ -48,13 +49,17 @@ public:
 	int delayArrowsLeft;
 	int delayArrowsMid_A;
 	int delayArrowsMid_B;
+	int delayx10;
 
 	Animation* anim_CurrentTime = nullptr;
 	Animation* anim_CurrentArrowsLeft = nullptr;
 	Animation* anim_CurrentArrowsMid_A = nullptr;
 	Animation* anim_CurrentArrowsMid_B = nullptr;
+	Animation* anim_Currentx10 = nullptr;
 	Animation anim_Time;
 	Animation anim_ArrowsLeft;
 	Animation anim_ArrowsMid_A;
 	Animation anim_ArrowsMid_B;
+	Animation anim_x10;
+
 };
