@@ -32,6 +32,7 @@ public:
 public:
 	//Variables
 	int springForce;
+	int springY, springYpos;
 
 	// Lists of physics objects
 	p2List<PhysBody*> entityList;
@@ -103,10 +104,8 @@ public:
 	SDL_Texture* top;
 	SDL_Texture* balls;
 	SDL_Texture* assets;
+	SDL_Texture* lower;
 	SDL_Texture* timebar;
-
-	SDL_Texture* spring;
-	int springY, springYpos;
 
 	//Animations
 	Animation blueLight;

@@ -56,8 +56,8 @@ bool ModuleScene::Start()
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
+	lower = App->textures->Load("pinball/lower.png");
 	timebar = App->textures->Load("pinball/Barra.png");
-	spring = App->textures->Load("pinball/assets.png");
 
 	springY = 78;
 	springYpos = 826;
@@ -86,7 +86,7 @@ bool ModuleScene::Start()
 	currentScore = 0;
 	ballsCounter = 3;
 	scoreMultiplier = 0;
-	time = 60*60; //NOTA IMPORTANTE, aqui es 60*60 porque va a 60fps. En el fps control, time deberia ser igual a 60*fps
+	time = 60*60;
 	
 
 	//Set Sensors
@@ -116,8 +116,10 @@ bool ModuleScene::CleanUp()
 	LOG("Unloading Intro scene");
 	App->textures->Unload(img);
 	App->textures->Unload(assets);
-
 	App->textures->Unload(timebar);
+	App->textures->Unload(top);
+	App->textures->Unload(balls);
+	App->textures->Unload(lower);
 
 	App->lights->Disable();
 	blueLight.FullReset();
@@ -148,12 +150,12 @@ update_status ModuleScene::Update()
 		springY = springY == 30 ? 30 : springY -= 0.5;
 		springYpos = springYpos == 874 ? 874 : springYpos += 1;
 		springRect = { 546, 109, 14, springY };
-		App->renderer->Blit(spring, 505, springYpos, &springRect);
+		App->renderer->Blit(assets, 505, springYpos, &springRect);
 	}
 	else
 	{
 		springRect = { 546, 109, 14, 78 };
-		App->renderer->Blit(spring, 505, 826, &springRect);
+		App->renderer->Blit(assets, 505, 826, &springRect);
 		springY = 78;
 		springYpos = 826;
 	}
@@ -298,7 +300,7 @@ void ModuleScene::CreateColliders()
 	//Map
 	int BG[118] =
 	{
-		276, 928,
+		276, 930,
 		276, 842,
 		450, 753,
 		486, 753,
@@ -306,7 +308,7 @@ void ModuleScene::CreateColliders()
 		469, 462,
 		480, 437,
 		458, 414,
-		436, 428,
+		436, 429,
 		422, 409,
 		423, 392,
 		434, 367,
@@ -329,7 +331,7 @@ void ModuleScene::CreateColliders()
 		489, 243,
 		494, 266,
 		497, 295,
-		497, 806,
+		497, 807,
 		535, 807,
 		534, 216,
 		523, 186,
@@ -356,7 +358,7 @@ void ModuleScene::CreateColliders()
 		24, 753,
 		62, 753,
 		232, 840,
-		232, 928
+		232, 930
 	};
 
 	int WALL_LEFT[64] =

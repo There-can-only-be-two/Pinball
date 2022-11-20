@@ -141,6 +141,9 @@ bool Ball::PostUpdate()
 	SDL_Rect rectTop = { 0, 0, 115, 335 };
 	app->renderer->Blit(app->scene_intro->top, 434, 122, &rectTop);
 
+	SDL_Rect rectLower = { 0, 0, 462, 187 };
+	app->renderer->Blit(app->scene_intro->lower, 24, 750, &rectLower);
+
 	//Time bar
 	SDL_Rect bar = { 71, 865, app->scene_intro->time * 0.066666f, 60 };
 	app->renderer->DrawQuad(bar, 119 + (3600 - app->scene_intro->time) * 0.027777f, 40 + app->scene_intro->time * 0.045f, app->scene_intro->time * 0.066666f, 255, true);
@@ -228,7 +231,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		if (!app->scene_intro->ray_on && delayNewBall == -1)
 		{
 			app->audio->PlayFx(app->scene_intro->sfx_death);
-			delayNewBall = 120;
+			delayNewBall = 100;
 			app->scene_intro->sensorDeath_Sensed = true;
 		}
 		break;
