@@ -31,8 +31,6 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
   - TAB, F2: Turn the lights of the pinball ON/OFF
   - TAB, F3: Turn the music of the pinball ON/OFF
   - TAB, F5: Enable/Disable Frame Control: Q--> +FPS / E --> -FPS
-  - TAB, Control Gravity: W--> +gravity / S--> -gravity
-  - TAB, Control Ball Bounce: A--> +intensity / D--> -intensity
 - U: Change display of the UI
 - R: Resets ranking to default (Only after thegame has finished and the ranking is displayed)
 
