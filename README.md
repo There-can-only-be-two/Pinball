@@ -18,21 +18,17 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
 - ESC: Quit
 
 ### Debug
-- GRAVITY
-  - W
-  - S
-- BOUNCE
-  - A
-  - D
-- F: Go directly to the Ranking without having to finish the game
-- F1: Draw all shapes and allow to use a mouse joint
-- TAB: Displays information about colliders, lights and variables 
-  - TAB, V: Displays information about the position of the ball, the force of the spring, frames, 
-  - TAB, F2: Turn the lights of the pinball ON/OFF
-  - TAB, F3: Turn the music of the pinball ON/OFF
-  - TAB, F5: Enable/Disable Frame Control: Q--> +FPS / E --> -FPS
-- U: Change display of the UI
-- R: Resets ranking to default (Only after thegame has finished and the ranking is displayed)
+- TAB: Enables and displays the following debug functionality
+  - F1: Draws all colliders and allow to use a mouse joint
+  - F2: Turn the lights of the pinball ON/OFF
+  - F3: Turn the music of the pinball ON/OFF
+  - Frame Control: (Q-/E+)
+  - Gravity: (S-/W+)
+  - Bounce coef: (A-/D+)
+  - V: Displays the following variables - Ball(x, y), Spring force
+  - F: Finishes the game and displays rankings
+  - U: Change display of the UI
+  - R: Resets ranking to default (Only after the game has finished and the ranking is displayed)
 
 ## Information
 - AMOUNT OF BALLS PER GAME: 3 balls
