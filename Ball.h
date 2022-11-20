@@ -30,7 +30,8 @@ public:
 
 	int scorex10finished;
 	int delayNewBall;
-	int delaySaved;
+	int delaySaverLeft;
+	int delaySaverRight;
 
 private:
 };

@@ -59,8 +59,6 @@ bool ModuleScene::Start()
 	lower = App->textures->Load("pinball/lower.png");
 	timebar = App->textures->Load("pinball/Barra.png");
 
-	springY = 78;
-	springYpos = 826;
 
 	//Audio
 	Mix_Volume(-1, 32);
@@ -87,6 +85,8 @@ bool ModuleScene::Start()
 	ballsCounter = 3;
 	scoreMultiplier = 0;
 	time = 60*60;
+	springY = 78;
+	springYpos = 826;
 	
 
 	//Set Sensors
@@ -590,7 +590,7 @@ void ModuleScene::CreateColliders()
 	saverLeft->body->SetType(b2BodyType::b2_staticBody);
 	saverLeft->ctype = ColliderType::SAVER_LEFT;
 
-	saverRight = App->physics->CreateRectangleSensor(468, 650, 25, 10);
+	saverRight = App->physics->CreateRectangle(468, 650, 25, 10);
 	saverRight->body->SetType(b2BodyType::b2_staticBody);
 	saverRight->ctype = ColliderType::SAVER_RIGHT;
 

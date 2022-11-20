@@ -28,7 +28,10 @@ public:
 	// Textures
 	SDL_Texture* logo;
 
-
+	// Sound
+	uint sfx_saberON_1;
+	uint sfx_saberON_2;
+	
 	// Raycast
 	p2Point<int> ray;
 	bool ray_on;

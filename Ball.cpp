@@ -41,6 +41,8 @@ bool Ball::Start()
 	
 	scorex10finished = 0;
 	delayNewBall = -1;
+	delaySaverLeft = -1;
+	delaySaverRight = -1;
 
 	return true;
 }
@@ -131,23 +133,31 @@ bool Ball::Update()
 			app->audio->PlayFx(app->scene_intro->sfx_new_ball);
 	}
 
-	//Savers
-	if (app->scene_intro->saverLeftSensed)
+	//Delay Saver Left
+	if (delaySaverLeft > 0)
+		delaySaverLeft--;
+	else if (delaySaverLeft == 0)
 	{
-		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
-		app->scene_intro->saverLeftSensed = false;
+		ballBody->body->ApplyForceToCenter(b2Vec2(0, -420), true);
+		app->audio->PlayFx(app->scene_intro->sfx_spring);
 		delete app->scene_intro->saverLeft;
 		app->scene_intro->saverLeft = nullptr;
+		delaySaverLeft--;
 	}
 
-	if (app->scene_intro->saverRightSensed)
+	//Delay Saver Right
+	if (delaySaverRight > 0)
+		delaySaverRight--;
+	else if (delaySaverRight == 0)
 	{
-		ballBody->body->SetTransform(PIXEL_TO_METERS(p), 0);
-		app->scene_intro->saverRightSensed = false;
+		ballBody->body->ApplyForceToCenter(b2Vec2(0, -348), true);
+		app->audio->PlayFx(app->scene_intro->sfx_spring);
 		delete app->scene_intro->saverRight;
 		app->scene_intro->saverRight = nullptr;
+		delaySaverRight--;
 	}
 
+	
 	return true;
 }
 
@@ -299,11 +309,13 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		break;
 
 	case ColliderType::SAVER_LEFT:
+		delaySaverLeft = 100;
 		app->scene_intro->saverLeftSensed = true;
 
 		break;
 
 	case ColliderType::SAVER_RIGHT:
+		delaySaverRight = 100;
 		app->scene_intro->saverRightSensed = true;
 
 		break;

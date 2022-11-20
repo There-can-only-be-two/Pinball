@@ -35,6 +35,18 @@ bool ModuleTitle::Start()
 	// Load textures
 	logo = App->textures->Load("pinball/logo.png");
 
+	//Load sound
+	sfx_saberON_1 = App->audio->LoadFx("pinball/Audio/saberON_1.wav");
+	sfx_saberON_2 = App->audio->LoadFx("pinball/Audio/saberON_2.wav");
+	Mix_Volume(-1, 32);
+
+	//Logo sound
+	srand(time(NULL));
+	int randomInt = rand() % 2;
+	if (randomInt == 0)
+		App->audio->PlayFx(sfx_saberON_1);
+	else
+		App->audio->PlayFx(sfx_saberON_2);
 
 	return ret;
 }
@@ -53,7 +65,7 @@ update_status ModuleTitle::Update()
 	App->fonts->BlitText(430, 590, App->fonts->red, "BE TWO");
 
 	
-	//App->audio->PlayFx(App->scene_intro->sfx_bouncer_tri);
+
 
 	// Keep playing
 	return UPDATE_CONTINUE;
