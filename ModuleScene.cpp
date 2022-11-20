@@ -52,7 +52,7 @@ bool ModuleScene::Start()
 	
 	// Load textures
 	//img = App->textures->Load("pinball/pinball_composition.png");
-	img = App->textures->Load("pinball/backgroundHole.png");
+	img = App->textures->Load("pinball/backgroundHole_2.png");
 	top = App->textures->Load("pinball/top.png");
 	assets = App->textures->Load("pinball/assets.png");
 	balls = App->textures->Load("pinball/prova.png");
@@ -305,8 +305,36 @@ void ModuleScene::DrawUI_2()
 void ModuleScene::CreateColliders()
 {
 	//Map
-	int BG[112] =
+	int BG[120] =
 	{
+		273, 876,
+		273, 842,
+		449, 751,
+		484, 751,
+		484, 488,
+		469, 464,
+		473, 432,
+		461, 418,
+		432, 428,
+		420, 411,
+		418, 393,
+		430, 362,
+		445, 329,
+		450, 312,
+		452, 292,
+		450, 269,
+		444, 247,
+		431, 220,
+		407, 193,
+		370, 163,
+		361, 149,
+		363, 130,
+		379, 122,
+		402, 129,
+		427, 146,
+		447, 165,
+		472, 197,
+		483, 217,
 		491, 240,
 		496, 266,
 		497, 295,
@@ -335,34 +363,10 @@ void ModuleScene::CreateColliders()
 		40, 524,
 		24, 553,
 		24, 753,
+		24, 753,
 		62, 753,
-		253, 850,
-		449, 751,
-		484, 751,
-		484, 488,
-		469, 464,
-		473, 432,
-		461, 418,
-		432, 428,
-		420, 411,
-		418, 393,
-		430, 362,
-		445, 329,
-		450, 312,
-		452, 292,
-		450, 269,
-		444, 247,
-		431, 220,
-		407, 193,
-		370, 163,
-		361, 149,
-		363, 130,
-		379, 122,
-		402, 129,
-		427, 146,
-		447, 165,
-		472, 197,
-		483, 217
+		234, 841,
+		234, 875
 	};
 	int WALL_LEFT[64] =
 	{
@@ -435,7 +439,7 @@ void ModuleScene::CreateColliders()
 	};
 
 
-	bg = App->physics->CreateChain(0, 0, BG, 112);
+	bg = App->physics->CreateChain(0, 0, BG, 120);
 	bg->body->SetType(b2BodyType::b2_staticBody);
 
 	wallLeft = App->physics->CreateChain(0, 0, WALL_LEFT, 64);
@@ -620,9 +624,9 @@ void ModuleScene::CreateSensors()
 
 	int SENSOR_DEATH[6] =
 	{
-		214, 831,
-		296, 832,
-		253, 850
+		223+10, 877-5,
+		267+10, 877-5,
+		243+10, 894-5
 	};
 	sensorDeath = App->physics->CreateChainSensor(0, 0, SENSOR_DEATH, 6);
 	sensorDeath->body->SetType(b2_staticBody);
