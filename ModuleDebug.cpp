@@ -144,6 +144,9 @@ void ModuleDebug::DrawDebug()
 		else
 			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce);
 		App->fonts->BlitText(debugX, debugY + 200, fontId, string.c_str());
+		
+		string = std::string("GRAVITY.Y = ") + std::to_string((int)-App->physics->gravity);
+		App->fonts->BlitText(debugX, debugY + 220, fontId, string.c_str());
 	}	
 }
 

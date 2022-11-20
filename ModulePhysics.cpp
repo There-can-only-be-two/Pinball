@@ -33,8 +33,10 @@ bool ModulePhysics::Start()
 {
 	LOG("Creating Physics 2D environment");
 
+	gravity = -GRAVITY_Y;
+
 	// Create a new World
-	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
+	world = new b2World(b2Vec2(GRAVITY_X, gravity));
 
 	// Set this module as a listener for contacts
 	world->SetContactListener(this);
@@ -55,7 +57,7 @@ update_status ModulePhysics::PreUpdate()
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	world->Step(1.0f / 60.0f, 6, 2);
-
+	
 	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
 	// we have to manually search for collisions and "call" the equivalent to the ModulePhysics::BeginContact() ourselves...
 	for(b2Contact* c = world->GetContactList(); c; c = c->GetNext())

@@ -86,6 +86,15 @@ bool Ball::Update()
 	else
 		app->scene_intro->springForce = 0;
 
+	// Gravity
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		app->physics->gravity+=0.5;
+		app->physics->world->SetGravity(b2Vec2(GRAVITY_X, app->physics->gravity));
+	}
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		app->physics->gravity -= 0.5;
+		app->physics->world->SetGravity(b2Vec2(GRAVITY_X, app->physics->gravity));
+	}
 
 	//Right hole combo
 	if (app->scene_intro->sensorX10_Sensed)
