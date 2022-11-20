@@ -49,8 +49,8 @@ update_status ModuleDebug::Update()
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 			lightsON = !lightsON;
 
-		//F3: Change Frames ON/OFF
-		if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		//F: Change Frames ON/OFF
+		if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 			fps = !fps;
 	}
 	
@@ -112,9 +112,9 @@ void ModuleDebug::DrawDebug()
 
 	//Frames
 	if (fps)
-		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F3)   ON");
+		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F5)   ON");
 	else
-		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F3)   OFF");
+		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F5)   OFF");
 
 	//Variables
 	if (variables)
