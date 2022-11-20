@@ -14,6 +14,9 @@
 #include "ModuleDeath.h"
 #include "ModuleTitle.h"
 
+#include <chrono>
+using namespace std::chrono;
+
 #include <string>
 
 ModuleDebug::ModuleDebug(Application* app, bool start_enabled) : Module(app, start_enabled) { drawDebug = false; }
@@ -44,8 +47,20 @@ update_status ModuleDebug::Update()
 		//F2: Lights ON/OFF
 		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 			lightsON = !lightsON;
+
+		//F3: Change Frames ON/OFF
+		if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+			fps = !fps;
 	}
 	
+	 
+	if (fps == true)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && desiredFPS < 120)
+			desiredFPS += 1; LOG("%d", desiredFPS);
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && desiredFPS > 10)
+			desiredFPS -= 1;
+	}
 
 	//F3: Music ON/OFF
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -94,28 +109,41 @@ void ModuleDebug::DrawDebug()
 	else
 		App->fonts->BlitText(debugX, debugY + 40, fontId, "#LIGHTS     (F2)   OFF");
 
+	//Frames
+	if (fps)
+		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F3)   ON");
+	else
+		App->fonts->BlitText(debugX, debugY + 60, fontId, "#FRAMES     (F3)   OFF");
+
 	//Variables
 	if (variables)
-		App->fonts->BlitText(debugX, debugY + 60, fontId, "#VARIABLES  (V)    ON");
+		App->fonts->BlitText(debugX, debugY + 80, fontId, "#VARIABLES  (V)    ON");
 	else
-		App->fonts->BlitText(debugX, debugY + 60, fontId, "#VARIABLES  (V)    OFF");
+		App->fonts->BlitText(debugX, debugY + 80, fontId, "#VARIABLES  (V)    OFF");
 
+
+	if (fps)
+	{
+		//Frames
+		std::string string = std::string("FRAMES = ") + std::to_string(desiredFPS);
+		App->fonts->BlitText(debugX, debugY + 120, fontId, string.c_str());
+	}
 
 	if (variables)
 	{
 		//Ball x, y
 		std::string string = std::string("BALL.X = ") + std::to_string(App->scene_intro->ball->position.x);
-		App->fonts->BlitText(debugX, debugY + 100, fontId, string.c_str());
+		App->fonts->BlitText(debugX, debugY + 160, fontId, string.c_str());
 
 		string = std::string("BALL.Y = ") + std::to_string(App->scene_intro->ball->position.y);
-		App->fonts->BlitText(debugX, debugY + 120, fontId, string.c_str());
+		App->fonts->BlitText(debugX, debugY + 180, fontId, string.c_str());
 
 		//Spring force
 		if (App->scene_intro->springForce == 420)
 			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce) + "  X)";
 		else
 			string = std::string("SPRING.F = ") + std::to_string(App->scene_intro->springForce);
-		App->fonts->BlitText(debugX, debugY + 140, fontId, string.c_str());
+		App->fonts->BlitText(debugX, debugY + 200, fontId, string.c_str());
 	}	
 }
 

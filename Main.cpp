@@ -2,6 +2,11 @@
 #include "Application.h"
 #include "Globals.h"
 
+#include "ModuleDebug.h"
+#include <chrono>
+using namespace std::chrono;
+#include <thread>
+
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
@@ -25,6 +30,8 @@ int main(int argc, char ** argv)
 
 	while (state != MAIN_EXIT)
 	{
+		high_resolution_clock::time_point startTime = high_resolution_clock::now();
+
 		switch (state)
 		{
 		case MAIN_CREATION:
@@ -78,8 +85,26 @@ int main(int argc, char ** argv)
 			state = MAIN_EXIT;
 
 			break;
-
 		}
+
+		//FPS CONTROL
+
+		high_resolution_clock::time_point endTime = high_resolution_clock::now();
+		App->debug->timePerCycle = duration_cast<microseconds>(endTime - startTime);
+
+		//Frames per microseconds of the desiredFPS
+		App->debug->desiredFPSmic = (int)((1.0f / (float)App->debug->desiredFPS) * 1E6);
+
+		//Sleep if the time is less than the desiredFPSmic
+		if (App->debug->timePerCycle < std::chrono::microseconds(App->debug->desiredFPSmic))
+		{
+			std::this_thread::sleep_for(std::chrono::microseconds(std::chrono::microseconds(App->debug->desiredFPSmic) - App->debug->timePerCycle));
+		}
+
+		//Calculate the time with the delay
+		endTime = high_resolution_clock::now();
+		App->debug->elapsedFrame = duration_cast<microseconds>(endTime - startTime);
+
 	}
 
 	delete App;

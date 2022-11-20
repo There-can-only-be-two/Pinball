@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Module.h"
+#include <chrono>
+using namespace std::chrono;
 
 #define DEBUG_BOX 225
 
@@ -27,5 +29,11 @@ public:
 	bool musicON = false;
 	bool sfxON = false;
 	bool changeUI = false;
+	bool fps = false;
+
+	microseconds timePerCycle;
+	microseconds elapsedFrame;
+	int desiredFPSmic;
+	int desiredFPS = 60;
 
 };
