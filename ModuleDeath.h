@@ -38,7 +38,7 @@ public:
 public:
 
 	// Lists of physics objects
-	Scores ranking[5] = { {"XAVI", 1000}, {"HECTOR", 990}, {"JULS", 690}, {"JAN", 420}, {"YOU", score } };
+	Scores ranking[5];// = { {"XAVI", 1000000}, {"HECTOR", 99000}, {"JULS", 69000}, {"JAN", 42000}, {"YOU", score } };
 	int score;
 
 	// Textures
