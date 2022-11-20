@@ -277,6 +277,7 @@ void Ball::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			app->audio->PlayFx(app->scene_intro->sfx_death);
 			delayNewBall = 100;
 			app->scene_intro->sensorDeath_Sensed = true;
+			app->scene_intro->scoreMultiplier = 1;
 		}
 		break;
 	
