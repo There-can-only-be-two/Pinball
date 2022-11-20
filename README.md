@@ -1,4 +1,4 @@
-# Pinball
+# Awesome Pinball
 by There can only be two.
 
 Inspired by the 3D Pinball for Windows - Space Cadet https://alula.github.io/SpaceCadetPinball/
