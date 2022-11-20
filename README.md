@@ -45,3 +45,14 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
 - LIGHTS: Lights will turn on and off when ball bounces, parts of the pinball are activated, etc.
 - RANKING: When the game finishes, the ranking displays the TOP 5 scores of the game. Scores by player are displayed in yellow. Try to get to TOP 1!
 - UI: Highscore, Current Score, Multiplier, Previous Score, Time remaining, Balls remaining
+
+## Development
+During the development of the Pinball, we had some bugs with little details. For example, we had an issue at the end of the game, when displaying the ranking, as everytime that we clicked ESC in order to quit the game showed an execution. After revising our code, we saw that it was a little issue in the ModuleScene. Someone had written two time "sensorDeath = nullptr" and never "sensorTime = nullptr", and that created an interrumption in the code.
+
+Another moment that we dealt with similar circumstances was when we changed the collider of the map to make the ball fall. We started at first without any space for the ball to fall, but eventually we changed it in order to make it look more appealing and similar to a Pinball. However, when we changed the points for the chain in Vertex Box 2D, someone did two times the same point which created a big interrumption in the code when the .exe started, but after some revising we found it.
+
+We had to be very organized. With colliders and sensors, the CleanUp() is almost 75 lines, so we created lots of Modules, subdivisions, functions, etc. We even did a very organized Discord server to keep on track bugs, ideas, license of the assets, links and useful stuff.
+
+Sometimes one of us had another idea to write some code, and we can see that in some functions related to UI and how do you display the scores. And sometimes we had trouble at contacting as most of us do extracurricular activities of had other events during the afternoon. But we made sure everyone understood code of everything, that all of us did code and editing (related to the assets, the background, etc which can be boring sometimes) as each of us had different aproaches and we made sure to keep in mind and listen to everyone's opinion and ideas.
+
+Overall, even the bugs and issues we found eventually during development, we spent lots of hours coding, editing and testing in class and as a group we are very happy with the result. - There can only be two
