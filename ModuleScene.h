@@ -106,6 +106,7 @@ public:
 	SDL_Texture* assets;
 	SDL_Texture* lower;
 	SDL_Texture* timebar;
+	SDL_Texture* savers;
 
 	//Animations
 	Animation blueLight;
