@@ -55,4 +55,6 @@ We had to be very organized. With colliders and sensors, the CleanUp() is almost
 
 Sometimes one of us had another idea to write some code, and we can see that in some functions related to UI and how do you display the scores. And sometimes we had trouble at contacting as most of us do extracurricular activities of had other events during the afternoon. But we made sure everyone understood code of everything, that all of us did code and editing (related to the assets, the background, etc which can be boring sometimes) as each of us had different aproaches and we made sure to keep in mind and listen to everyone's opinion and ideas.
 
-Overall, even the bugs and issues we found eventually during development, we spent lots of hours coding, editing and testing in class and as a group we are very happy with the result. - There can only be two
+Overall, even the bugs and issues we found eventually during development, we spent lots of hours coding, editing and testing in class and as a group we are very happy with the result. 
+
+- There can only be two
