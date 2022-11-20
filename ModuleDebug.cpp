@@ -57,9 +57,9 @@ update_status ModuleDebug::Update()
 	 
 	if (fps == true)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && desiredFPS < 120)
-			desiredFPS += 1; LOG("%d", desiredFPS);
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && desiredFPS > 10)
+		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && desiredFPS < 120)
+			desiredFPS += 1;
+		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && desiredFPS > 10)
 			desiredFPS -= 1;
 	}
 
