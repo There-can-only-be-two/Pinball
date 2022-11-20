@@ -781,7 +781,7 @@ void ModuleScene::DeleteMap()
 	sensorComboB3 = nullptr;
 
 	delete sensorTime;
-	sensorDeath = nullptr;
+	sensorTime = nullptr;
 
 	delete blockerL;
 	blockerL = nullptr;
