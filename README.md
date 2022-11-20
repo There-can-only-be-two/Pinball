@@ -36,10 +36,10 @@ Link of the Github Repository: https://github.com/There-can-only-be-two/Pinball
   
 ## Combos and Feautures
 - EXTRA KIKCERS: Once activated, the kicker used disappears.
-- EXTRA TIME: Passing through the Time feauture rewards the player extra time. 
+- EXTRA TIME: Passing through the Time feauture rewards the player extra time. However, Extra Time cancels the X2 multiplier and equals it to 1.
 - MULTIPLIER: 
-  - X2: Activating the three parts in the upper right zone of the map will multiply the multiplier by 2.
-  - X10: 
+  - X2: Activating the three parts in the upper right zone of the map will sum 2 to the current value of the multiplier.
+  - X10: Activating the three parts in the upper right zone of the map will temporally sum 10 to the current value of the multiplier.
 - LIGHTS: Lights will turn on and off when ball bounces, parts of the pinball are activated, etc.
-- RANKING: When the game finishes, the ranking displays the TOP 5 scores of the game. The player' scores are displayed in yellow. Try to arrive to TOP 1!
+- RANKING: When the game finishes, the ranking displays the TOP 5 scores of the game. Scores by player are displayed in yellow. Try to get to TOP 1!
 - UI: Highscore, Current Score, Multiplier, Previous Score, Time remaining, Balls remaining
