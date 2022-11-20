@@ -109,6 +109,9 @@
     <ClInclude Include="Animation.h">
       <Filter>Source\Core Modules</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityManager.cpp">
@@ -174,5 +177,11 @@
     <ClCompile Include="ModuleLights.cpp">
       <Filter>Source\Game Modules</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Box2D - Tutorial.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game\pinball\icon.ico" />
   </ItemGroup>
 </Project>

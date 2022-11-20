@@ -148,7 +148,7 @@ update_status ModuleScene::Update()
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		springY = springY == 30 ? 30 : springY -= 0.5;
-		springYpos = springYpos == 874 ? 874 : springYpos += 1;
+		springYpos = springYpos == 895 ? 895 : springYpos += 1;
 		springRect = { 546, 109, 14, springY };
 		App->renderer->Blit(assets, 505, springYpos, &springRect);
 	}

@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
-
+#include "SDL_image/include/SDL_image.h"
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	window = NULL;
@@ -52,6 +52,8 @@ bool ModuleWindow::Init()
 		}
 
 		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		icon = IMG_Load("pinball/icon.png");
+		SDL_SetWindowIcon(window, icon);
 
 		if(window == NULL)
 		{
@@ -72,6 +74,7 @@ bool ModuleWindow::Init()
 bool ModuleWindow::CleanUp()
 {
 	LOG("Destroying SDL window and quitting all SDL systems");
+	SDL_FreeSurface(icon);
 
 	//Destroy window
 	if(window != NULL)
