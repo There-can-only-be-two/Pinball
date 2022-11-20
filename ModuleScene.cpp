@@ -160,9 +160,6 @@ update_status ModuleScene::Update()
 
 	//Draw map
 	App->renderer->Blit(img, 10, 0);
-	
-	SDL_Rect recBall = { 229, 106, 31, 31 };
-	App->renderer->Blit(balls, 360, 875 + 3);	
 
 	SDL_Rect frankLRect = { 9, 156, 50, 70 };
 	App->renderer->Blit(assets, 157, 330, &frankLRect);
@@ -180,16 +177,11 @@ update_status ModuleScene::Update()
 	if (time > 0)
 	{
 		if (time > 3600) { time = 3600; }
-		SDL_Rect bar = { 71, 865, time*0.066666f, 60 };
-		//App->renderer->DrawQuad(bar, 119, 202, 240, 255, true);
-		App->renderer->DrawQuad(bar, 119 + (3600-time)*0.027777f, 40+time*0.045f, time*0.066666f, 255, true);
-		SDL_Rect timerRect = { 0, 0, 282, 65 };
-		App->renderer->Blit(timebar, 50, 860, &timerRect);
 		time--;
 	}
-	else {
+	else
 		timeOut = true;
-	}	
+
 
 	RayCast();
 	
