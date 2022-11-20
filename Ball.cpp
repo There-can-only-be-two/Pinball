@@ -71,9 +71,9 @@ bool Ball::Update()
 
 	//Spring force
 	int springForce = app->scene_intro->springForce;
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && app->scene_intro->sensorSpring_Sensed)
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		app->scene_intro->springForce = springForce == 420 ? 420 : springForce += 3.0;
+		app->scene_intro->springForce = springForce == 420 ? 420 : springForce += 4.0;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && app->scene_intro->sensorSpring_Sensed && springForce > 60)
 	{

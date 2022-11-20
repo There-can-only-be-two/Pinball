@@ -143,11 +143,10 @@ update_status ModuleScene::Update()
 	//Draw spring
 	SDL_Rect springRect;
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && sensorSpring_Sensed && springForce != 420)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		springY = springY == 30 ? 30 : springY -= 0.5;
 		springYpos = springYpos == 874 ? 874 : springYpos += 1;
-		LOG("%d", springY);
 		springRect = { 546, 109, 14, springY };
 		App->renderer->Blit(spring, 505, springYpos, &springRect);
 	}
